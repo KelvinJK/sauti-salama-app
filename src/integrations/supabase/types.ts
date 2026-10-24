@@ -19,7 +19,9 @@ export type Database = {
           address: string
           created_at: string
           district: string
+          hours: string
           id: string
+          is_example: boolean
           name: string
           phone: string
           region: string
@@ -30,7 +32,9 @@ export type Database = {
           address?: string
           created_at?: string
           district: string
+          hours?: string
           id?: string
+          is_example?: boolean
           name: string
           phone?: string
           region: string
@@ -41,7 +45,9 @@ export type Database = {
           address?: string
           created_at?: string
           district?: string
+          hours?: string
           id?: string
+          is_example?: boolean
           name?: string
           phone?: string
           region?: string
