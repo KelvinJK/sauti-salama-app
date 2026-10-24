@@ -11,13 +11,13 @@
 - [ ] J — AI health information assistant
 - [ ] K — Staff/admin portals, testing, launch readiness
 
-## Current request — functional /app
 ## Uploaded fixes — guest privacy and app clarity
-- [ ] Encrypted device records, PIN lock, quick exit and loading retry
-- [ ] Mood check-ins, Monday calendar, symptom chips and Track views
-- [ ] Navigation, labels, urgent help and unfinished-module placeholders
-- [ ] Landing copy and care partnership invitation
-- [ ] Verify device saves, lock/unlock, navigation and safety flows
+- [x] Encrypted device records, PIN lock, quick exit and loading retry
+- [x] Mood check-ins, Monday calendar, symptom chips and Track views
+- [x] Navigation, labels, urgent help and unfinished-module placeholders
+- [x] Landing copy and care partnership invitation
+- [x] Verify device saves, lock/unlock, navigation and safety flows
+- Optional fingerprint/face unlock is not enabled; the six-digit PIN remains required.
 
 ## Earlier functional /app verification
 - [x] Welcome, language choice, guest dashboard, five-tab navigation
