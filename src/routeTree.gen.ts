@@ -28,8 +28,10 @@ import { Route as AppAdminFacilitiesRouteImport } from './routes/app.admin-facil
 import { Route as AppAntenatalRouteImport } from './routes/app.antenatal'
 import { Route as AppAssistantRouteImport } from './routes/app.assistant'
 import { Route as AppCareRouteImport } from './routes/app.care'
+import { Route as AppCheckInsRouteImport } from './routes/app.check-ins'
 import { Route as AppChildrenRouteImport } from './routes/app.children'
 import { Route as AppCycleRouteImport } from './routes/app.cycle'
+import { Route as AppFindCareRouteImport } from './routes/app.find-care'
 import { Route as AppGrowthRouteImport } from './routes/app.growth'
 import { Route as AppHomeRouteImport } from './routes/app.home'
 import { Route as AppJournalRouteImport } from './routes/app.journal'
@@ -138,6 +140,11 @@ const AppCareRoute = AppCareRouteImport.update({
   path: '/care',
   getParentRoute: () => AppRoute,
 } as any)
+const AppCheckInsRoute = AppCheckInsRouteImport.update({
+  id: '/check-ins',
+  path: '/check-ins',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppChildrenRoute = AppChildrenRouteImport.update({
   id: '/children',
   path: '/children',
@@ -146,6 +153,11 @@ const AppChildrenRoute = AppChildrenRouteImport.update({
 const AppCycleRoute = AppCycleRouteImport.update({
   id: '/cycle',
   path: '/cycle',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppFindCareRoute = AppFindCareRouteImport.update({
+  id: '/find-care',
+  path: '/find-care',
   getParentRoute: () => AppRoute,
 } as any)
 const AppGrowthRoute = AppGrowthRouteImport.update({
@@ -228,8 +240,10 @@ export interface FileRoutesByFullPath {
   '/app/antenatal': typeof AppAntenatalRoute
   '/app/assistant': typeof AppAssistantRoute
   '/app/care': typeof AppCareRoute
+  '/app/check-ins': typeof AppCheckInsRoute
   '/app/children': typeof AppChildrenRoute
   '/app/cycle': typeof AppCycleRoute
+  '/app/find-care': typeof AppFindCareRoute
   '/app/growth': typeof AppGrowthRoute
   '/app/home': typeof AppHomeRoute
   '/app/journal': typeof AppJournalRoute
@@ -262,8 +276,10 @@ export interface FileRoutesByTo {
   '/app/antenatal': typeof AppAntenatalRoute
   '/app/assistant': typeof AppAssistantRoute
   '/app/care': typeof AppCareRoute
+  '/app/check-ins': typeof AppCheckInsRoute
   '/app/children': typeof AppChildrenRoute
   '/app/cycle': typeof AppCycleRoute
+  '/app/find-care': typeof AppFindCareRoute
   '/app/growth': typeof AppGrowthRoute
   '/app/home': typeof AppHomeRoute
   '/app/journal': typeof AppJournalRoute
@@ -298,8 +314,10 @@ export interface FileRoutesById {
   '/app/antenatal': typeof AppAntenatalRoute
   '/app/assistant': typeof AppAssistantRoute
   '/app/care': typeof AppCareRoute
+  '/app/check-ins': typeof AppCheckInsRoute
   '/app/children': typeof AppChildrenRoute
   '/app/cycle': typeof AppCycleRoute
+  '/app/find-care': typeof AppFindCareRoute
   '/app/growth': typeof AppGrowthRoute
   '/app/home': typeof AppHomeRoute
   '/app/journal': typeof AppJournalRoute
@@ -335,8 +353,10 @@ export interface FileRouteTypes {
     | '/app/antenatal'
     | '/app/assistant'
     | '/app/care'
+    | '/app/check-ins'
     | '/app/children'
     | '/app/cycle'
+    | '/app/find-care'
     | '/app/growth'
     | '/app/home'
     | '/app/journal'
@@ -369,8 +389,10 @@ export interface FileRouteTypes {
     | '/app/antenatal'
     | '/app/assistant'
     | '/app/care'
+    | '/app/check-ins'
     | '/app/children'
     | '/app/cycle'
+    | '/app/find-care'
     | '/app/growth'
     | '/app/home'
     | '/app/journal'
@@ -404,8 +426,10 @@ export interface FileRouteTypes {
     | '/app/antenatal'
     | '/app/assistant'
     | '/app/care'
+    | '/app/check-ins'
     | '/app/children'
     | '/app/cycle'
+    | '/app/find-care'
     | '/app/growth'
     | '/app/home'
     | '/app/journal'
@@ -575,6 +599,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppCareRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/check-ins': {
+      id: '/app/check-ins'
+      path: '/check-ins'
+      fullPath: '/app/check-ins'
+      preLoaderRoute: typeof AppCheckInsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/children': {
       id: '/app/children'
       path: '/children'
@@ -587,6 +618,13 @@ declare module '@tanstack/react-router' {
       path: '/cycle'
       fullPath: '/app/cycle'
       preLoaderRoute: typeof AppCycleRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/find-care': {
+      id: '/app/find-care'
+      path: '/find-care'
+      fullPath: '/app/find-care'
+      preLoaderRoute: typeof AppFindCareRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/growth': {
@@ -681,8 +719,10 @@ interface AppRouteChildren {
   AppAntenatalRoute: typeof AppAntenatalRoute
   AppAssistantRoute: typeof AppAssistantRoute
   AppCareRoute: typeof AppCareRoute
+  AppCheckInsRoute: typeof AppCheckInsRoute
   AppChildrenRoute: typeof AppChildrenRoute
   AppCycleRoute: typeof AppCycleRoute
+  AppFindCareRoute: typeof AppFindCareRoute
   AppGrowthRoute: typeof AppGrowthRoute
   AppHomeRoute: typeof AppHomeRoute
   AppJournalRoute: typeof AppJournalRoute
@@ -701,8 +741,10 @@ const AppRouteChildren: AppRouteChildren = {
   AppAntenatalRoute: AppAntenatalRoute,
   AppAssistantRoute: AppAssistantRoute,
   AppCareRoute: AppCareRoute,
+  AppCheckInsRoute: AppCheckInsRoute,
   AppChildrenRoute: AppChildrenRoute,
   AppCycleRoute: AppCycleRoute,
+  AppFindCareRoute: AppFindCareRoute,
   AppGrowthRoute: AppGrowthRoute,
   AppHomeRoute: AppHomeRoute,
   AppJournalRoute: AppJournalRoute,
