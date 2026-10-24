@@ -1,0 +1,8 @@
+import { createFileRoute, Link } from '@tanstack/react-router';
+import { MapPin } from 'lucide-react';
+import { PageTitle } from '@/components/app/AppShell';
+import { Button } from '@/components/ui/button';
+import { useAppText } from '@/lib/app-copy';
+import { seo } from '@/lib/seo';
+export const Route = createFileRoute('/app/care')({ head: () => seo('Find care in Tanzania', 'Healthcare navigation with no unverified facility listings.'), component: Care });
+function Care(){ const text=useAppText(); return <><PageTitle title={text('Find care','Tafuta huduma')} sub={text('The right support, closer to you.','Msaada sahihi, karibu nawe.')} /><div className="border-y py-9"><MapPin className="mb-4 h-9 w-9 text-teal" /><h2 className="text-xl font-bold">{text('No verified facilities listed yet','Bado hakuna vituo vilivyothibitishwa')}</h2><p className="my-4 max-w-xl text-muted-foreground">{text('We will only publish services after their details have been verified. No referrals are sent from this app yet.','Tutachapisha huduma baada ya taarifa kuthibitishwa. Bado hakuna rufaa zinazotumwa kupitia programu hii.')}</p><Button asChild variant="outline"><Link to="/app/referrals">{text('My referrals','Rufaa zangu')}</Link></Button></div><p className="mt-8 font-semibold">{text('In an emergency, go to the nearest health facility.','Katika dharura, nenda kituo cha afya kilicho karibu.')}</p></>; }

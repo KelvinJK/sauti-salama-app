@@ -1,0 +1,8 @@
+import { createFileRoute, Link } from '@tanstack/react-router';
+import { UserRound, Baby, Sprout, Salad, NotebookPen, MessageCircle, Shield, ArrowRight, CalendarCheck } from 'lucide-react';
+import { PageTitle } from '@/components/app/AppShell';
+import { useAppText } from '@/lib/app-copy';
+import { seo } from '@/lib/seo';
+const items=[['/app/profile','Profile & settings','Wasifu na mipangilio',UserRound],['/app/pregnancy','Pregnancy & postnatal','Ujauzito na baada ya kujifungua',Baby],['/app/antenatal','Antenatal planner','Mpango wa kliniki',CalendarCheck],['/app/children','Child profiles','Wasifu wa watoto',Sprout],['/app/nutrition','Nutrition & recipes','Lishe na mapishi',Salad],['/app/journal','Private journal','Shajara binafsi',NotebookPen],['/app/assistant','Health questions','Maswali ya afya',MessageCircle],['/privacy','Privacy','Faragha',Shield]] as const;
+export const Route=createFileRoute('/app/menu')({head:()=>seo('App menu','All SautiSalama wellbeing tools and personal settings.'),component:Menu});
+function Menu(){const text=useAppText();return <><PageTitle title={text('Your SautiSalama','SautiSalama yako')} /><div className="max-w-2xl divide-y">{items.map(([to,en,sw,Icon])=><Link key={to} to={to} className="flex items-center gap-4 py-5 font-semibold"><Icon className="h-5 w-5 shrink-0 text-primary" /><span>{text(en,sw)}</span><ArrowRight className="ml-auto h-4 w-4 shrink-0" /></Link>)}</div></>;}

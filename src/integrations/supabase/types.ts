@@ -14,13 +14,92 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      health_records: {
+        Row: {
+          created_at: string
+          details: Json
+          id: string
+          kind: string
+          record_date: string
+          title: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          details?: Json
+          id?: string
+          kind: string
+          record_date: string
+          title: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          details?: Json
+          id?: string
+          kind?: string
+          record_date?: string
+          title?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "health_records_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          birth_date: string | null
+          created_at: string
+          display_name: string
+          id: string
+          language: string
+          terms_accepted_at: string | null
+        }
+        Insert: {
+          birth_date?: string | null
+          created_at?: string
+          display_name?: string
+          id: string
+          language?: string
+          terms_accepted_at?: string | null
+        }
+        Update: {
+          birth_date?: string | null
+          created_at?: string
+          display_name?: string
+          id?: string
+          language?: string
+          terms_accepted_at?: string | null
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          role: string
+          user_id: string
+        }
+        Insert: {
+          role?: string
+          user_id: string
+        }
+        Update: {
+          role?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      registered_adult: { Args: never; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
