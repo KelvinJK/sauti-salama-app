@@ -22,7 +22,7 @@ export function AppShell({ children }: { children: ReactNode }) {
   const { user } = useAppAuth();
   const { pathname } = useLocation();
   const welcome = pathname === '/app' || pathname === '/app/';
-  const tracking = ['/app/cycle', '/app/journal', '/app/check-ins'].includes(pathname);
+  const tracking = ['/app/cycle', '/app/journal', '/app/check-ins'].some(p => pathname.startsWith(p));
   const quickExit = tracking || pathname === '/app/assistant' || pathname === '/app/home';
   return <div className="min-h-screen bg-background">
     <a href="#app-main" className="sr-only focus:not-sr-only">{text('Skip to content', 'Ruka kwenda maudhui')}</a>
