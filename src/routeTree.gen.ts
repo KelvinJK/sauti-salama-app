@@ -21,6 +21,21 @@ import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppAntenatalRouteImport } from './routes/app.antenatal'
+import { Route as AppAssistantRouteImport } from './routes/app.assistant'
+import { Route as AppCareRouteImport } from './routes/app.care'
+import { Route as AppChildrenRouteImport } from './routes/app.children'
+import { Route as AppCycleRouteImport } from './routes/app.cycle'
+import { Route as AppGrowthRouteImport } from './routes/app.growth'
+import { Route as AppHomeRouteImport } from './routes/app.home'
+import { Route as AppJournalRouteImport } from './routes/app.journal'
+import { Route as AppLearnRouteImport } from './routes/app.learn'
+import { Route as AppMenuRouteImport } from './routes/app.menu'
+import { Route as AppNutritionRouteImport } from './routes/app.nutrition'
+import { Route as AppPostnatalRouteImport } from './routes/app.postnatal'
+import { Route as AppPregnancyRouteImport } from './routes/app.pregnancy'
+import { Route as AppReferralsRouteImport } from './routes/app.referrals'
 import { Route as LearnIndexRouteImport } from './routes/learn.index'
 import { Route as LearnSlugRouteImport } from './routes/learn.$slug'
 
@@ -84,6 +99,81 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAntenatalRoute = AppAntenatalRouteImport.update({
+  id: '/antenatal',
+  path: '/antenatal',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAssistantRoute = AppAssistantRouteImport.update({
+  id: '/assistant',
+  path: '/assistant',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCareRoute = AppCareRouteImport.update({
+  id: '/care',
+  path: '/care',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppChildrenRoute = AppChildrenRouteImport.update({
+  id: '/children',
+  path: '/children',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCycleRoute = AppCycleRouteImport.update({
+  id: '/cycle',
+  path: '/cycle',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppGrowthRoute = AppGrowthRouteImport.update({
+  id: '/growth',
+  path: '/growth',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppHomeRoute = AppHomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppJournalRoute = AppJournalRouteImport.update({
+  id: '/journal',
+  path: '/journal',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLearnRoute = AppLearnRouteImport.update({
+  id: '/learn',
+  path: '/learn',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMenuRoute = AppMenuRouteImport.update({
+  id: '/menu',
+  path: '/menu',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNutritionRoute = AppNutritionRouteImport.update({
+  id: '/nutrition',
+  path: '/nutrition',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPostnatalRoute = AppPostnatalRouteImport.update({
+  id: '/postnatal',
+  path: '/postnatal',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPregnancyRoute = AppPregnancyRouteImport.update({
+  id: '/pregnancy',
+  path: '/pregnancy',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppReferralsRoute = AppReferralsRouteImport.update({
+  id: '/referrals',
+  path: '/referrals',
+  getParentRoute: () => AppRoute,
+} as any)
 const LearnIndexRoute = LearnIndexRouteImport.update({
   id: '/learn/',
   path: '/learn/',
@@ -99,7 +189,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/accessibility': typeof AccessibilityRoute
-  '/app': typeof AppRoute
+  '/app': typeof AppRouteWithChildren
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/features': typeof FeaturesRoute
@@ -108,14 +198,28 @@ export interface FileRoutesByFullPath {
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/app/antenatal': typeof AppAntenatalRoute
+  '/app/assistant': typeof AppAssistantRoute
+  '/app/care': typeof AppCareRoute
+  '/app/children': typeof AppChildrenRoute
+  '/app/cycle': typeof AppCycleRoute
+  '/app/growth': typeof AppGrowthRoute
+  '/app/home': typeof AppHomeRoute
+  '/app/journal': typeof AppJournalRoute
+  '/app/learn': typeof AppLearnRoute
+  '/app/menu': typeof AppMenuRoute
+  '/app/nutrition': typeof AppNutritionRoute
+  '/app/postnatal': typeof AppPostnatalRoute
+  '/app/pregnancy': typeof AppPregnancyRoute
+  '/app/referrals': typeof AppReferralsRoute
   '/learn/$slug': typeof LearnSlugRoute
+  '/app/': typeof AppIndexRoute
   '/learn/': typeof LearnIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/accessibility': typeof AccessibilityRoute
-  '/app': typeof AppRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/features': typeof FeaturesRoute
@@ -124,7 +228,22 @@ export interface FileRoutesByTo {
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/app/antenatal': typeof AppAntenatalRoute
+  '/app/assistant': typeof AppAssistantRoute
+  '/app/care': typeof AppCareRoute
+  '/app/children': typeof AppChildrenRoute
+  '/app/cycle': typeof AppCycleRoute
+  '/app/growth': typeof AppGrowthRoute
+  '/app/home': typeof AppHomeRoute
+  '/app/journal': typeof AppJournalRoute
+  '/app/learn': typeof AppLearnRoute
+  '/app/menu': typeof AppMenuRoute
+  '/app/nutrition': typeof AppNutritionRoute
+  '/app/postnatal': typeof AppPostnatalRoute
+  '/app/pregnancy': typeof AppPregnancyRoute
+  '/app/referrals': typeof AppReferralsRoute
   '/learn/$slug': typeof LearnSlugRoute
+  '/app': typeof AppIndexRoute
   '/learn': typeof LearnIndexRoute
 }
 export interface FileRoutesById {
@@ -132,7 +251,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/accessibility': typeof AccessibilityRoute
-  '/app': typeof AppRoute
+  '/app': typeof AppRouteWithChildren
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/features': typeof FeaturesRoute
@@ -141,7 +260,22 @@ export interface FileRoutesById {
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/app/antenatal': typeof AppAntenatalRoute
+  '/app/assistant': typeof AppAssistantRoute
+  '/app/care': typeof AppCareRoute
+  '/app/children': typeof AppChildrenRoute
+  '/app/cycle': typeof AppCycleRoute
+  '/app/growth': typeof AppGrowthRoute
+  '/app/home': typeof AppHomeRoute
+  '/app/journal': typeof AppJournalRoute
+  '/app/learn': typeof AppLearnRoute
+  '/app/menu': typeof AppMenuRoute
+  '/app/nutrition': typeof AppNutritionRoute
+  '/app/postnatal': typeof AppPostnatalRoute
+  '/app/pregnancy': typeof AppPregnancyRoute
+  '/app/referrals': typeof AppReferralsRoute
   '/learn/$slug': typeof LearnSlugRoute
+  '/app/': typeof AppIndexRoute
   '/learn/': typeof LearnIndexRoute
 }
 export interface FileRouteTypes {
@@ -159,14 +293,28 @@ export interface FileRouteTypes {
     | '/partners'
     | '/privacy'
     | '/terms'
+    | '/app/antenatal'
+    | '/app/assistant'
+    | '/app/care'
+    | '/app/children'
+    | '/app/cycle'
+    | '/app/growth'
+    | '/app/home'
+    | '/app/journal'
+    | '/app/learn'
+    | '/app/menu'
+    | '/app/nutrition'
+    | '/app/postnatal'
+    | '/app/pregnancy'
+    | '/app/referrals'
     | '/learn/$slug'
+    | '/app/'
     | '/learn/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/accessibility'
-    | '/app'
     | '/contact'
     | '/faq'
     | '/features'
@@ -175,7 +323,22 @@ export interface FileRouteTypes {
     | '/partners'
     | '/privacy'
     | '/terms'
+    | '/app/antenatal'
+    | '/app/assistant'
+    | '/app/care'
+    | '/app/children'
+    | '/app/cycle'
+    | '/app/growth'
+    | '/app/home'
+    | '/app/journal'
+    | '/app/learn'
+    | '/app/menu'
+    | '/app/nutrition'
+    | '/app/postnatal'
+    | '/app/pregnancy'
+    | '/app/referrals'
     | '/learn/$slug'
+    | '/app'
     | '/learn'
   id:
     | '__root__'
@@ -191,7 +354,22 @@ export interface FileRouteTypes {
     | '/partners'
     | '/privacy'
     | '/terms'
+    | '/app/antenatal'
+    | '/app/assistant'
+    | '/app/care'
+    | '/app/children'
+    | '/app/cycle'
+    | '/app/growth'
+    | '/app/home'
+    | '/app/journal'
+    | '/app/learn'
+    | '/app/menu'
+    | '/app/nutrition'
+    | '/app/postnatal'
+    | '/app/pregnancy'
+    | '/app/referrals'
     | '/learn/$slug'
+    | '/app/'
     | '/learn/'
   fileRoutesById: FileRoutesById
 }
@@ -199,7 +377,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AccessibilityRoute: typeof AccessibilityRoute
-  AppRoute: typeof AppRoute
+  AppRoute: typeof AppRouteWithChildren
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   FeaturesRoute: typeof FeaturesRoute
@@ -298,6 +476,111 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/antenatal': {
+      id: '/app/antenatal'
+      path: '/antenatal'
+      fullPath: '/app/antenatal'
+      preLoaderRoute: typeof AppAntenatalRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/assistant': {
+      id: '/app/assistant'
+      path: '/assistant'
+      fullPath: '/app/assistant'
+      preLoaderRoute: typeof AppAssistantRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/care': {
+      id: '/app/care'
+      path: '/care'
+      fullPath: '/app/care'
+      preLoaderRoute: typeof AppCareRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/children': {
+      id: '/app/children'
+      path: '/children'
+      fullPath: '/app/children'
+      preLoaderRoute: typeof AppChildrenRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/cycle': {
+      id: '/app/cycle'
+      path: '/cycle'
+      fullPath: '/app/cycle'
+      preLoaderRoute: typeof AppCycleRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/growth': {
+      id: '/app/growth'
+      path: '/growth'
+      fullPath: '/app/growth'
+      preLoaderRoute: typeof AppGrowthRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/home': {
+      id: '/app/home'
+      path: '/home'
+      fullPath: '/app/home'
+      preLoaderRoute: typeof AppHomeRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/journal': {
+      id: '/app/journal'
+      path: '/journal'
+      fullPath: '/app/journal'
+      preLoaderRoute: typeof AppJournalRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/learn': {
+      id: '/app/learn'
+      path: '/learn'
+      fullPath: '/app/learn'
+      preLoaderRoute: typeof AppLearnRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/menu': {
+      id: '/app/menu'
+      path: '/menu'
+      fullPath: '/app/menu'
+      preLoaderRoute: typeof AppMenuRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/nutrition': {
+      id: '/app/nutrition'
+      path: '/nutrition'
+      fullPath: '/app/nutrition'
+      preLoaderRoute: typeof AppNutritionRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/postnatal': {
+      id: '/app/postnatal'
+      path: '/postnatal'
+      fullPath: '/app/postnatal'
+      preLoaderRoute: typeof AppPostnatalRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/pregnancy': {
+      id: '/app/pregnancy'
+      path: '/pregnancy'
+      fullPath: '/app/pregnancy'
+      preLoaderRoute: typeof AppPregnancyRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/referrals': {
+      id: '/app/referrals'
+      path: '/referrals'
+      fullPath: '/app/referrals'
+      preLoaderRoute: typeof AppReferralsRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/learn/': {
       id: '/learn/'
       path: '/learn'
@@ -315,11 +598,49 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AppRouteChildren {
+  AppAntenatalRoute: typeof AppAntenatalRoute
+  AppAssistantRoute: typeof AppAssistantRoute
+  AppCareRoute: typeof AppCareRoute
+  AppChildrenRoute: typeof AppChildrenRoute
+  AppCycleRoute: typeof AppCycleRoute
+  AppGrowthRoute: typeof AppGrowthRoute
+  AppHomeRoute: typeof AppHomeRoute
+  AppJournalRoute: typeof AppJournalRoute
+  AppLearnRoute: typeof AppLearnRoute
+  AppMenuRoute: typeof AppMenuRoute
+  AppNutritionRoute: typeof AppNutritionRoute
+  AppPostnatalRoute: typeof AppPostnatalRoute
+  AppPregnancyRoute: typeof AppPregnancyRoute
+  AppReferralsRoute: typeof AppReferralsRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppAntenatalRoute: AppAntenatalRoute,
+  AppAssistantRoute: AppAssistantRoute,
+  AppCareRoute: AppCareRoute,
+  AppChildrenRoute: AppChildrenRoute,
+  AppCycleRoute: AppCycleRoute,
+  AppGrowthRoute: AppGrowthRoute,
+  AppHomeRoute: AppHomeRoute,
+  AppJournalRoute: AppJournalRoute,
+  AppLearnRoute: AppLearnRoute,
+  AppMenuRoute: AppMenuRoute,
+  AppNutritionRoute: AppNutritionRoute,
+  AppPostnatalRoute: AppPostnatalRoute,
+  AppPregnancyRoute: AppPregnancyRoute,
+  AppReferralsRoute: AppReferralsRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AccessibilityRoute: AccessibilityRoute,
-  AppRoute: AppRoute,
+  AppRoute: AppRouteWithChildren,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   FeaturesRoute: FeaturesRoute,
