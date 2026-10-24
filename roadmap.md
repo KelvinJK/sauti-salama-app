@@ -28,10 +28,10 @@
 - [ ] Verify signed-in record, export and deletion round trips — blocked: no registered auth user; signup test's reserved email was rejected. Needs a real account created via signup or social sign-in.
 
 ## Follow-up fixes (7)
-- [ ] PIN lock polish + optional fingerprint/face unlock (WebAuthn, device must support secure key derivation)
-- [ ] Care hub sections with icon rows
-- [ ] Six labelled example facilities behind a feature flag (hours, verification tag, search)
-- [ ] Journal list first, form at /app/journal/new
-- [ ] Illustrated mood faces, wrapping/scrolling mood row
-- [ ] Home tiles: chevrons, dimmed Coming soon tiles, light assistant card
-- [ ] Bleeding as single-select chips
+- [x] PIN lock polish + optional fingerprint/face unlock (WebAuthn, device must support secure key derivation)
+- [x] Care hub sections with icon rows
+- [x] Six labelled example facilities behind a feature flag (hours, verification tag, search)
+- [x] Journal list first, form at /app/journal/new
+- [x] Illustrated mood faces, wrapping/scrolling mood row
+- [x] Home tiles: chevrons, dimmed Coming soon tiles, light assistant card
+- [x] Bleeding as single-select chips
