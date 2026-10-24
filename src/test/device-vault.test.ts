@@ -1,9 +1,10 @@
-// @vitest-environment node
-import { describe, expect, it } from 'vitest';
+import { webcrypto } from 'node:crypto';
+import { describe, expect, it, vi } from 'vitest';
 import { attemptState, shouldLock, validPin, deriveKey, encrypt, decrypt, EMERGENCY_NUMBER, PRIVATE_LOAD_TIMEOUT_MS } from '@/lib/device-vault';
 import { moods, symptomOptions } from '@/lib/moods';
 
 describe('Device privacy rules', () => {
+  vi.stubGlobal('crypto', webcrypto);
   it('requires exactly six numeric PIN digits', () => { expect(validPin('123456')).toBe(true); expect(validPin('12345')).toBe(false); expect(validPin('1234567')).toBe(false); expect(validPin('abcdef')).toBe(false); });
   it('imposes a 30-second wait on the fifth wrong attempt', () => { expect(attemptState(3,1000)).toEqual({ attempts:4,retryAt:0 }); expect(attemptState(4,1000)).toEqual({ attempts:0,retryAt:31000 }); });
   it('locks at five minutes in the background', () => { expect(shouldLock(1000,300999)).toBe(false); expect(shouldLock(1000,301000)).toBe(true); });
