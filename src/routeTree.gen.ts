@@ -19,10 +19,12 @@ import { Route as FaqRouteImport } from './routes/faq'
 import { Route as FeaturesRouteImport } from './routes/features'
 import { Route as FindCareRouteImport } from './routes/find-care'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AppAdminFacilitiesRouteImport } from './routes/app.admin-facilities'
 import { Route as AppAntenatalRouteImport } from './routes/app.antenatal'
@@ -96,6 +98,11 @@ const HowItWorksRoute = HowItWorksRouteImport.update({
   path: '/how-it-works',
   getParentRoute: () => rootRouteImport,
 } as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PartnersRoute = PartnersRouteImport.update({
   id: '/partners',
   path: '/partners',
@@ -116,6 +123,12 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const Char91DotwellKnownChar93OauthProtectedResourceRoute =
+  Char91DotwellKnownChar93OauthProtectedResourceRouteImport.update({
+    id: '/.well-known/oauth-protected-resource',
+    path: '/.well-known/oauth-protected-resource',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -238,10 +251,12 @@ export interface FileRoutesByFullPath {
   '/features': typeof FeaturesRoute
   '/find-care': typeof FindCareRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/mcp': typeof McpRoute
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
   '/terms': typeof TermsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/app/admin-facilities': typeof AppAdminFacilitiesRoute
   '/app/antenatal': typeof AppAntenatalRoute
   '/app/assistant': typeof AppAssistantRoute
@@ -275,10 +290,12 @@ export interface FileRoutesByTo {
   '/features': typeof FeaturesRoute
   '/find-care': typeof FindCareRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/mcp': typeof McpRoute
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
   '/terms': typeof TermsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/app/admin-facilities': typeof AppAdminFacilitiesRoute
   '/app/antenatal': typeof AppAntenatalRoute
   '/app/assistant': typeof AppAssistantRoute
@@ -314,10 +331,12 @@ export interface FileRoutesById {
   '/features': typeof FeaturesRoute
   '/find-care': typeof FindCareRoute
   '/how-it-works': typeof HowItWorksRoute
+  '/mcp': typeof McpRoute
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
   '/terms': typeof TermsRoute
+  '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/app/admin-facilities': typeof AppAdminFacilitiesRoute
   '/app/antenatal': typeof AppAntenatalRoute
   '/app/assistant': typeof AppAssistantRoute
@@ -354,10 +373,12 @@ export interface FileRouteTypes {
     | '/features'
     | '/find-care'
     | '/how-it-works'
+    | '/mcp'
     | '/partners'
     | '/privacy'
     | '/reset-password'
     | '/terms'
+    | '/.well-known/oauth-protected-resource'
     | '/app/admin-facilities'
     | '/app/antenatal'
     | '/app/assistant'
@@ -391,10 +412,12 @@ export interface FileRouteTypes {
     | '/features'
     | '/find-care'
     | '/how-it-works'
+    | '/mcp'
     | '/partners'
     | '/privacy'
     | '/reset-password'
     | '/terms'
+    | '/.well-known/oauth-protected-resource'
     | '/app/admin-facilities'
     | '/app/antenatal'
     | '/app/assistant'
@@ -429,10 +452,12 @@ export interface FileRouteTypes {
     | '/features'
     | '/find-care'
     | '/how-it-works'
+    | '/mcp'
     | '/partners'
     | '/privacy'
     | '/reset-password'
     | '/terms'
+    | '/.well-known/oauth-protected-resource'
     | '/app/admin-facilities'
     | '/app/antenatal'
     | '/app/assistant'
@@ -468,10 +493,12 @@ export interface RootRouteChildren {
   FeaturesRoute: typeof FeaturesRoute
   FindCareRoute: typeof FindCareRoute
   HowItWorksRoute: typeof HowItWorksRoute
+  McpRoute: typeof McpRoute
   PartnersRoute: typeof PartnersRoute
   PrivacyRoute: typeof PrivacyRoute
   ResetPasswordRoute: typeof ResetPasswordRoute
   TermsRoute: typeof TermsRoute
+  Char91DotwellKnownChar93OauthProtectedResourceRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   LearnSlugRoute: typeof LearnSlugRoute
   LearnIndexRoute: typeof LearnIndexRoute
   DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
@@ -549,6 +576,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof HowItWorksRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/partners': {
       id: '/partners'
       path: '/partners'
@@ -575,6 +609,13 @@ declare module '@tanstack/react-router' {
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/.well-known/oauth-protected-resource': {
+      id: '/.well-known/oauth-protected-resource'
+      path: '/.well-known/oauth-protected-resource'
+      fullPath: '/.well-known/oauth-protected-resource'
+      preLoaderRoute: typeof Char91DotwellKnownChar93OauthProtectedResourceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/app/': {
@@ -791,10 +832,13 @@ const rootRouteChildren: RootRouteChildren = {
   FeaturesRoute: FeaturesRoute,
   FindCareRoute: FindCareRoute,
   HowItWorksRoute: HowItWorksRoute,
+  McpRoute: McpRoute,
   PartnersRoute: PartnersRoute,
   PrivacyRoute: PrivacyRoute,
   ResetPasswordRoute: ResetPasswordRoute,
   TermsRoute: TermsRoute,
+  Char91DotwellKnownChar93OauthProtectedResourceRoute:
+    Char91DotwellKnownChar93OauthProtectedResourceRoute,
   LearnSlugRoute: LearnSlugRoute,
   LearnIndexRoute: LearnIndexRoute,
   DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
