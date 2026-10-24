@@ -46,6 +46,8 @@ import { Route as AppReferralsRouteImport } from './routes/app.referrals'
 import { Route as LearnIndexRouteImport } from './routes/learn.index'
 import { Route as LearnSlugRouteImport } from './routes/learn.$slug'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
+import { Route as AppJournalIndexRouteImport } from './routes/app.journal.index'
+import { Route as AppJournalNewRouteImport } from './routes/app.journal.new'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -233,6 +235,16 @@ const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
   path: '/.lovable/oauth/consent',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppJournalIndexRoute = AppJournalIndexRouteImport.update({
+  id: '/journal/',
+  path: '/journal/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppJournalNewRoute = AppJournalNewRouteImport.update({
+  id: '/journal/new',
+  path: '/journal/new',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -272,6 +284,8 @@ export interface FileRoutesByFullPath {
   '/app/': typeof AppIndexRoute
   '/learn/': typeof LearnIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/app/journal/new': typeof AppJournalNewRoute
+  '/app/journal/': typeof AppJournalIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -310,6 +324,8 @@ export interface FileRoutesByTo {
   '/app': typeof AppIndexRoute
   '/learn': typeof LearnIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/app/journal/new': typeof AppJournalNewRoute
+  '/app/journal': typeof AppJournalIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -350,6 +366,8 @@ export interface FileRoutesById {
   '/app/': typeof AppIndexRoute
   '/learn/': typeof LearnIndexRoute
   '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
+  '/app/journal/new': typeof AppJournalNewRoute
+  '/app/journal/': typeof AppJournalIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -391,6 +409,8 @@ export interface FileRouteTypes {
     | '/app/'
     | '/learn/'
     | '/.lovable/oauth/consent'
+    | '/app/journal/new'
+    | '/app/journal/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -429,6 +449,8 @@ export interface FileRouteTypes {
     | '/app'
     | '/learn'
     | '/.lovable/oauth/consent'
+    | '/app/journal/new'
+    | '/app/journal'
   id:
     | '__root__'
     | '/'
@@ -468,6 +490,8 @@ export interface FileRouteTypes {
     | '/app/'
     | '/learn/'
     | '/.lovable/oauth/consent'
+    | '/app/journal/new'
+    | '/app/journal/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -753,6 +777,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DotlovableOauthConsentRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/app/journal/': {
+      id: '/app/journal/'
+      path: '/journal'
+      fullPath: '/app/journal/'
+      preLoaderRoute: typeof AppJournalIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/journal/new': {
+      id: '/app/journal/new'
+      path: '/journal/new'
+      fullPath: '/app/journal/new'
+      preLoaderRoute: typeof AppJournalNewRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
@@ -775,6 +813,8 @@ interface AppRouteChildren {
   AppProfileRoute: typeof AppProfileRoute
   AppReferralsRoute: typeof AppReferralsRoute
   AppIndexRoute: typeof AppIndexRoute
+  AppJournalNewRoute: typeof AppJournalNewRoute
+  AppJournalIndexRoute: typeof AppJournalIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
@@ -796,6 +836,8 @@ const AppRouteChildren: AppRouteChildren = {
   AppProfileRoute: AppProfileRoute,
   AppReferralsRoute: AppReferralsRoute,
   AppIndexRoute: AppIndexRoute,
+  AppJournalNewRoute: AppJournalNewRoute,
+  AppJournalIndexRoute: AppJournalIndexRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
