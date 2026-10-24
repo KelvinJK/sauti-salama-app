@@ -24,6 +24,7 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppAdminFacilitiesRouteImport } from './routes/app.admin-facilities'
 import { Route as AppAntenatalRouteImport } from './routes/app.antenatal'
 import { Route as AppAssistantRouteImport } from './routes/app.assistant'
 import { Route as AppCareRouteImport } from './routes/app.care'
@@ -115,6 +116,11 @@ const TermsRoute = TermsRouteImport.update({
 const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAdminFacilitiesRoute = AppAdminFacilitiesRouteImport.update({
+  id: '/admin-facilities',
+  path: '/admin-facilities',
   getParentRoute: () => AppRoute,
 } as any)
 const AppAntenatalRoute = AppAntenatalRouteImport.update({
@@ -218,6 +224,7 @@ export interface FileRoutesByFullPath {
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
   '/terms': typeof TermsRoute
+  '/app/admin-facilities': typeof AppAdminFacilitiesRoute
   '/app/antenatal': typeof AppAntenatalRoute
   '/app/assistant': typeof AppAssistantRoute
   '/app/care': typeof AppCareRoute
@@ -251,6 +258,7 @@ export interface FileRoutesByTo {
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
   '/terms': typeof TermsRoute
+  '/app/admin-facilities': typeof AppAdminFacilitiesRoute
   '/app/antenatal': typeof AppAntenatalRoute
   '/app/assistant': typeof AppAssistantRoute
   '/app/care': typeof AppCareRoute
@@ -286,6 +294,7 @@ export interface FileRoutesById {
   '/privacy': typeof PrivacyRoute
   '/reset-password': typeof ResetPasswordRoute
   '/terms': typeof TermsRoute
+  '/app/admin-facilities': typeof AppAdminFacilitiesRoute
   '/app/antenatal': typeof AppAntenatalRoute
   '/app/assistant': typeof AppAssistantRoute
   '/app/care': typeof AppCareRoute
@@ -322,6 +331,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/reset-password'
     | '/terms'
+    | '/app/admin-facilities'
     | '/app/antenatal'
     | '/app/assistant'
     | '/app/care'
@@ -355,6 +365,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/reset-password'
     | '/terms'
+    | '/app/admin-facilities'
     | '/app/antenatal'
     | '/app/assistant'
     | '/app/care'
@@ -389,6 +400,7 @@ export interface FileRouteTypes {
     | '/privacy'
     | '/reset-password'
     | '/terms'
+    | '/app/admin-facilities'
     | '/app/antenatal'
     | '/app/assistant'
     | '/app/care'
@@ -535,6 +547,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/admin-facilities': {
+      id: '/app/admin-facilities'
+      path: '/admin-facilities'
+      fullPath: '/app/admin-facilities'
+      preLoaderRoute: typeof AppAdminFacilitiesRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/antenatal': {
       id: '/app/antenatal'
       path: '/antenatal'
@@ -658,6 +677,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteChildren {
+  AppAdminFacilitiesRoute: typeof AppAdminFacilitiesRoute
   AppAntenatalRoute: typeof AppAntenatalRoute
   AppAssistantRoute: typeof AppAssistantRoute
   AppCareRoute: typeof AppCareRoute
@@ -677,6 +697,7 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppAdminFacilitiesRoute: AppAdminFacilitiesRoute,
   AppAntenatalRoute: AppAntenatalRoute,
   AppAssistantRoute: AppAssistantRoute,
   AppCareRoute: AppCareRoute,
