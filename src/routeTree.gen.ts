@@ -36,7 +36,6 @@ import { Route as AppCycleRouteImport } from './routes/app.cycle'
 import { Route as AppFindCareRouteImport } from './routes/app.find-care'
 import { Route as AppGrowthRouteImport } from './routes/app.growth'
 import { Route as AppHomeRouteImport } from './routes/app.home'
-import { Route as AppJournalRouteImport } from './routes/app.journal'
 import { Route as AppLearnRouteImport } from './routes/app.learn'
 import { Route as AppMenuRouteImport } from './routes/app.menu'
 import { Route as AppNutritionRouteImport } from './routes/app.nutrition'
@@ -184,11 +183,6 @@ const AppHomeRoute = AppHomeRouteImport.update({
   path: '/home',
   getParentRoute: () => AppRoute,
 } as any)
-const AppJournalRoute = AppJournalRouteImport.update({
-  id: '/journal',
-  path: '/journal',
-  getParentRoute: () => AppRoute,
-} as any)
 const AppLearnRoute = AppLearnRouteImport.update({
   id: '/learn',
   path: '/learn',
@@ -267,7 +261,6 @@ export interface FileRoutesByFullPath {
   '/app/find-care': typeof AppFindCareRoute
   '/app/growth': typeof AppGrowthRoute
   '/app/home': typeof AppHomeRoute
-  '/app/journal': typeof AppJournalRoute
   '/app/learn': typeof AppLearnRoute
   '/app/menu': typeof AppMenuRoute
   '/app/nutrition': typeof AppNutritionRoute
@@ -306,7 +299,6 @@ export interface FileRoutesByTo {
   '/app/find-care': typeof AppFindCareRoute
   '/app/growth': typeof AppGrowthRoute
   '/app/home': typeof AppHomeRoute
-  '/app/journal': typeof AppJournalRoute
   '/app/learn': typeof AppLearnRoute
   '/app/menu': typeof AppMenuRoute
   '/app/nutrition': typeof AppNutritionRoute
@@ -347,7 +339,6 @@ export interface FileRoutesById {
   '/app/find-care': typeof AppFindCareRoute
   '/app/growth': typeof AppGrowthRoute
   '/app/home': typeof AppHomeRoute
-  '/app/journal': typeof AppJournalRoute
   '/app/learn': typeof AppLearnRoute
   '/app/menu': typeof AppMenuRoute
   '/app/nutrition': typeof AppNutritionRoute
@@ -389,7 +380,6 @@ export interface FileRouteTypes {
     | '/app/find-care'
     | '/app/growth'
     | '/app/home'
-    | '/app/journal'
     | '/app/learn'
     | '/app/menu'
     | '/app/nutrition'
@@ -428,7 +418,6 @@ export interface FileRouteTypes {
     | '/app/find-care'
     | '/app/growth'
     | '/app/home'
-    | '/app/journal'
     | '/app/learn'
     | '/app/menu'
     | '/app/nutrition'
@@ -468,7 +457,6 @@ export interface FileRouteTypes {
     | '/app/find-care'
     | '/app/growth'
     | '/app/home'
-    | '/app/journal'
     | '/app/learn'
     | '/app/menu'
     | '/app/nutrition'
@@ -695,13 +683,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppHomeRouteImport
       parentRoute: typeof AppRoute
     }
-    '/app/journal': {
-      id: '/app/journal'
-      path: '/journal'
-      fullPath: '/app/journal'
-      preLoaderRoute: typeof AppJournalRouteImport
-      parentRoute: typeof AppRoute
-    }
     '/app/learn': {
       id: '/app/learn'
       path: '/learn'
@@ -786,7 +767,6 @@ interface AppRouteChildren {
   AppFindCareRoute: typeof AppFindCareRoute
   AppGrowthRoute: typeof AppGrowthRoute
   AppHomeRoute: typeof AppHomeRoute
-  AppJournalRoute: typeof AppJournalRoute
   AppLearnRoute: typeof AppLearnRoute
   AppMenuRoute: typeof AppMenuRoute
   AppNutritionRoute: typeof AppNutritionRoute
@@ -808,7 +788,6 @@ const AppRouteChildren: AppRouteChildren = {
   AppFindCareRoute: AppFindCareRoute,
   AppGrowthRoute: AppGrowthRoute,
   AppHomeRoute: AppHomeRoute,
-  AppJournalRoute: AppJournalRoute,
   AppLearnRoute: AppLearnRoute,
   AppMenuRoute: AppMenuRoute,
   AppNutritionRoute: AppNutritionRoute,
