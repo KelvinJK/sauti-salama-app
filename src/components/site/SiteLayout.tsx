@@ -135,7 +135,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
   );
 }
 
-export function PageHero({ title, sub }: { title: string; sub?: string }) {
+export function PageHero({ title, sub }: { title: string; sub?: string | undefined }) {
   return (
     <section className="bg-gradient-soft">
       <div className="container-page py-16 md:py-20">
