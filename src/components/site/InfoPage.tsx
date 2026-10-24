@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { SiteLayout, PageHero } from "./SiteLayout";
 
-export function InfoPage({ title, sub, children }: { title: string; sub?: string; children: ReactNode }) {
+export function InfoPage({ title, sub, children }: { title: string; sub?: string | undefined; children: ReactNode }) {
   return (
     <SiteLayout>
       <PageHero title={title} sub={sub} />

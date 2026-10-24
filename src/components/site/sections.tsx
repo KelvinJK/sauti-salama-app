@@ -76,7 +76,7 @@ export function FaqList() {
   );
 }
 
-export function SectionHead({ title, sub }: { title: string; sub?: string }) {
+export function SectionHead({ title, sub }: { title: string; sub?: string | undefined }) {
   return (
     <div className="mb-10 max-w-2xl">
       <h2 className="text-3xl font-extrabold text-plum dark:text-foreground md:text-4xl">{title}</h2>
