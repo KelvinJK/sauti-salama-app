@@ -15,7 +15,7 @@ export const Route = createFileRoute("/.lovable/oauth/consent")({
   ssr: false,
   head: () => ({ meta: [{ title: "Connect an app to SautiSalama" }, { name: "robots", content: "noindex" }] }),
   validateSearch: (s: Record<string, unknown>) => ({
-    authorization_id: typeof s.authorization_id === "string" ? s.authorization_id : "",
+    authorization_id: typeof s["authorization_id"] === "string" ? s["authorization_id"] : "",
   }),
   beforeLoad: async ({ search, location }) => {
     if (!search.authorization_id) throw new Error("This connection link is missing or has expired.");
