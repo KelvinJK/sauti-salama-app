@@ -1,0 +1,4 @@
+import { createFileRoute } from '@tanstack/react-router';
+import { RecordPage } from '@/components/app/RecordPage';
+import { seo } from '@/lib/seo';
+export const Route = createFileRoute('/app/pregnancy')({ head: () => seo('Pregnancy journey', 'Record your pregnancy journey and questions for your care provider.'), component: () => <RecordPage kind="pregnancy" title={['Pregnancy & postnatal','Ujauzito na baada ya kujifungua']} subtitle={['Your journey, notes and questions for your health worker.','Safari yako, maelezo na maswali kwa mhudumu wa afya.']} /> });
