@@ -7,7 +7,7 @@ export const BACKGROUND_LOCK_MS = 5 * 60_000;
 export const PRIVATE_LOAD_TIMEOUT_MS = 5_000;
 export const EMERGENCY_NUMBER = '112';
 export const CHECK_IN_TITLE = 'Daily mood check-in';
-export type DeviceRecord = { id: string; kind: RecordKind; record_date: string; title: string; details: Record<string, unknown> };
+export type DeviceRecord = { id: string; kind: RecordKind; record_date: string; title: string; details: Record<string, unknown>; created_at?: string };
 type Cipher = { iv: Uint8Array; ciphertext: ArrayBuffer };
 type VaultMeta = { salt: Uint8Array; verifier: Cipher; attempts: number; retryAt: number };
 
@@ -89,5 +89,5 @@ export function mutateDeviceRecords(owner: string, key: CryptoKey, transform: (r
   return task;
 }
 export function makeDeviceRecord(input: unknown): DeviceRecord {
-  return { ...recordSchema.parse(input), id: crypto.randomUUID() };
+  return { ...recordSchema.parse(input), id: crypto.randomUUID(), created_at: new Date().toISOString() };
 }

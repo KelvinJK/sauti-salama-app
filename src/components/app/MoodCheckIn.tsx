@@ -13,7 +13,7 @@ export function MoodCheckIn({ history = false }: { history?: boolean }) {
   const text = useAppText(); const records = usePrivateRecords('journal');
   const [changing, setChanging] = useState(false), [thanks, setThanks] = useState(''), [busy, setBusy] = useState(false);
   const today = format(new Date(), 'yyyy-MM-dd');
-  const checks = records.rows.filter(r => r.title === CHECK_IN_TITLE).sort((a,b) => b.record_date.localeCompare(a.record_date));
+  const checks = records.rows.filter(r => r.title === CHECK_IN_TITLE).sort((a,b) => b.record_date.localeCompare(a.record_date) || (b.created_at ?? '').localeCompare(a.created_at ?? ''));
   const current = checks.find(r => r.record_date === today);
   const moodName = (id: string) => { const found = moods.find(m => m[0] === id); return found ? `${found[1]} ${text(found[2],found[3])}` : id; };
   async function select(mood: string) {

@@ -37,7 +37,10 @@ export function usePrivateRecords(kind: RecordKind) {
     else {
       if (!key) throw new Error('Unlock your device first.');
       const row = makeDeviceRecord(input);
-      await mutateDeviceRecords(vault.owner, key, rows => [row, ...rows]); vault.changed();
+      await mutateDeviceRecords(vault.owner, key, rows => {
+        if (row.kind === 'growth' && !rows.some(child => child.kind === 'child' && child.id === row.details['child_id'])) throw new Error('Choose a child profile on this device.');
+        return [row, ...rows];
+      }); vault.changed();
     }
   }
   async function deleteOne(id: string) {

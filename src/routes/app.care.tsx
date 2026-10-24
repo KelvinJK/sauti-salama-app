@@ -47,14 +47,14 @@ export function CareDirectory() {
       <div className="mb-6 grid gap-3 sm:grid-cols-2">
         <label className="grid gap-1 text-sm font-semibold">
           {text('District', 'Wilaya')}
-          <select value={district} onChange={(e) => setDistrict(e.target.value)} className="h-11 rounded-lg border border-input bg-background px-3 text-sm font-normal">
+          <select aria-label={text('District', 'Wilaya')} value={district} onChange={(e) => setDistrict(e.target.value)} className="h-11 rounded-lg border border-input bg-background px-3 text-sm font-normal">
             <option value={ALL}>{text('All districts', 'Wilaya zote')}</option>
             {districts.map((d) => <option key={d} value={d}>{d}</option>)}
           </select>
         </label>
         <label className="grid gap-1 text-sm font-semibold">
           {text('Service', 'Huduma')}
-          <select value={service} onChange={(e) => setService(e.target.value as FacilityService | typeof ALL)} className="h-11 rounded-lg border border-input bg-background px-3 text-sm font-normal">
+          <select aria-label={text('Service', 'Huduma')} value={service} onChange={(e) => setService(e.target.value as FacilityService | typeof ALL)} className="h-11 rounded-lg border border-input bg-background px-3 text-sm font-normal">
             <option value={ALL}>{text('All services', 'Huduma zote')}</option>
             {facilityServices.map((s) => <option key={s} value={s}>{text(facilityServiceCopy[s].en, facilityServiceCopy[s].sw)}</option>)}
           </select>
