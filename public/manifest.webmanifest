@@ -1,0 +1,13 @@
+{
+  "name": "SautiSalama",
+  "short_name": "SautiSalama",
+  "description": "Your health. Your voice. Your choice.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FDFBFF",
+  "theme_color": "#7139E8",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
