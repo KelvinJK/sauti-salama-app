@@ -10,7 +10,8 @@ export const hasRole = createServerFn({ method: 'GET' })
   })
   .middleware([requireSupabaseAuth])
   .handler(async ({ data, context }) => {
-    const { data: allowed, error } = await context.supabase.rpc('has_role', { _user_id: context.userId, _role: data.role });
+    // Reads the caller's own row in the protected user_roles table (owner-read policy).
+    const { data: row, error } = await context.supabase.from('user_roles').select('role').eq('user_id', context.userId).eq('role', data.role).maybeSingle();
     if (error) throw new Error('Could not check permissions.');
-    return { allowed: Boolean(allowed) };
+    return { allowed: Boolean(row) };
   });

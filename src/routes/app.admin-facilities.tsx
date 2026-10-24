@@ -6,7 +6,7 @@ import { PageTitle } from '@/components/app/AppShell';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useAppText } from '@/lib/app-copy';
-import { useAuth } from '@/components/app/AuthProvider';
+import { useAppAuth } from '@/components/app/AuthProvider';
 import { seo } from '@/lib/seo';
 import { supabase } from '@/integrations/supabase/client';
 import { hasRole } from '@/lib/admin.functions';
