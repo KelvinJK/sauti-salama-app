@@ -7,7 +7,7 @@
 - [ ] F — Child profiles & growth
 - [ ] G — Nutrition & recipes
 - [ ] H — Private journal
-- [ ] I — Facility directory & consented referrals (needs verified facility data)
+- [~] I — Facility directory built (public verified-only listings, district/service filters, admin verification page at /app/admin-facilities); consented referrals still pending; no facilities listed until real ones are verified
 - [ ] J — AI health information assistant
 - [ ] K — Staff/admin portals, testing, launch readiness
 
