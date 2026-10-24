@@ -44,6 +44,7 @@ import { Route as AppProfileRouteImport } from './routes/app.profile'
 import { Route as AppReferralsRouteImport } from './routes/app.referrals'
 import { Route as LearnIndexRouteImport } from './routes/learn.index'
 import { Route as LearnSlugRouteImport } from './routes/learn.$slug'
+import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -220,6 +221,11 @@ const LearnSlugRoute = LearnSlugRouteImport.update({
   path: '/learn/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DotlovableOauthConsentRoute = DotlovableOauthConsentRouteImport.update({
+  id: '/.lovable/oauth/consent',
+  path: '/.lovable/oauth/consent',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -257,6 +263,7 @@ export interface FileRoutesByFullPath {
   '/learn/$slug': typeof LearnSlugRoute
   '/app/': typeof AppIndexRoute
   '/learn/': typeof LearnIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -293,6 +300,7 @@ export interface FileRoutesByTo {
   '/learn/$slug': typeof LearnSlugRoute
   '/app': typeof AppIndexRoute
   '/learn': typeof LearnIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -331,6 +339,7 @@ export interface FileRoutesById {
   '/learn/$slug': typeof LearnSlugRoute
   '/app/': typeof AppIndexRoute
   '/learn/': typeof LearnIndexRoute
+  '/.lovable/oauth/consent': typeof DotlovableOauthConsentRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -370,6 +379,7 @@ export interface FileRouteTypes {
     | '/learn/$slug'
     | '/app/'
     | '/learn/'
+    | '/.lovable/oauth/consent'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -406,6 +416,7 @@ export interface FileRouteTypes {
     | '/learn/$slug'
     | '/app'
     | '/learn'
+    | '/.lovable/oauth/consent'
   id:
     | '__root__'
     | '/'
@@ -443,6 +454,7 @@ export interface FileRouteTypes {
     | '/learn/$slug'
     | '/app/'
     | '/learn/'
+    | '/.lovable/oauth/consent'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -462,6 +474,7 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   LearnSlugRoute: typeof LearnSlugRoute
   LearnIndexRoute: typeof LearnIndexRoute
+  DotlovableOauthConsentRoute: typeof DotlovableOauthConsentRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -711,6 +724,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LearnSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/.lovable/oauth/consent': {
+      id: '/.lovable/oauth/consent'
+      path: '/.lovable/oauth/consent'
+      fullPath: '/.lovable/oauth/consent'
+      preLoaderRoute: typeof DotlovableOauthConsentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -777,6 +797,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   LearnSlugRoute: LearnSlugRoute,
   LearnIndexRoute: LearnIndexRoute,
+  DotlovableOauthConsentRoute: DotlovableOauthConsentRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
