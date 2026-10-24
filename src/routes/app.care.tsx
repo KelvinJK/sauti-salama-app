@@ -8,15 +8,20 @@ import { useAppText } from '@/lib/app-copy';
 import { seo } from '@/lib/seo';
 import { supabase } from '@/integrations/supabase/client';
 import { facilityServices, facilityServiceCopy, formatPhoneHref, type Facility, type FacilityService } from '@/lib/facilities';
+import { UrgentHelpBanner } from '@/components/app/Safety';
 
 export const Route = createFileRoute('/app/care')({
   head: () => seo('Find care in Tanzania', 'Browse verified health facilities and filter by district and services.'),
-  component: Care,
+  component: CareHub,
 });
 
 const ALL = 'all';
 
-function Care() {
+function CareHub() {
+  const text = useAppText();
+  return <><UrgentHelpBanner /><PageTitle title={text('Care', 'Huduma')} /><div className="flex flex-wrap gap-3"><Button asChild><Link to="/app/find-care"><MapPin />{text('Find care','Tafuta huduma')}</Link></Button><Button asChild variant="outline"><Link to="/app/referrals">{text('My referrals','Rufaa zangu')}</Link></Button></div></>;
+}
+export function CareDirectory() {
   const text = useAppText();
   const [district, setDistrict] = useState(ALL);
   const [service, setService] = useState<FacilityService | typeof ALL>(ALL);
@@ -42,14 +47,14 @@ function Care() {
       <div className="mb-6 grid gap-3 sm:grid-cols-2">
         <label className="grid gap-1 text-sm font-semibold">
           {text('District', 'Wilaya')}
-          <select value={district} onChange={(e) => setDistrict(e.target.value)} className="h-11 rounded-lg border border-input bg-background px-3 text-sm font-normal">
+          <select aria-label={text('District', 'Wilaya')} value={district} onChange={(e) => setDistrict(e.target.value)} className="h-11 rounded-lg border border-input bg-background px-3 text-sm font-normal">
             <option value={ALL}>{text('All districts', 'Wilaya zote')}</option>
             {districts.map((d) => <option key={d} value={d}>{d}</option>)}
           </select>
         </label>
         <label className="grid gap-1 text-sm font-semibold">
           {text('Service', 'Huduma')}
-          <select value={service} onChange={(e) => setService(e.target.value as FacilityService | typeof ALL)} className="h-11 rounded-lg border border-input bg-background px-3 text-sm font-normal">
+          <select aria-label={text('Service', 'Huduma')} value={service} onChange={(e) => setService(e.target.value as FacilityService | typeof ALL)} className="h-11 rounded-lg border border-input bg-background px-3 text-sm font-normal">
             <option value={ALL}>{text('All services', 'Huduma zote')}</option>
             {facilityServices.map((s) => <option key={s} value={s}>{text(facilityServiceCopy[s].en, facilityServiceCopy[s].sw)}</option>)}
           </select>

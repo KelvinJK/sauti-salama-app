@@ -4,6 +4,7 @@ import mascot from "@/assets/mascot.png";
 import { SiteLayout, Logo } from "@/components/site/SiteLayout";
 import { Features, HowSteps, PrivacyPoints, FaqList, SectionHead } from "@/components/site/sections";
 import { useI18n } from "@/lib/i18n";
+import { Button } from '@/components/ui/button';
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -40,7 +41,7 @@ function PhonePreview() {
 }
 
 function Home() {
-  const { t } = useI18n();
+  const { t, lang } = useI18n();
   return (
     <SiteLayout>
       <section className="relative overflow-hidden bg-gradient-soft">
@@ -100,7 +101,7 @@ function Home() {
 
       <section className="container-page py-20">
         <SectionHead title={t("partners_title")} sub={t("partners_sub")} />
-        <Link to="/partners" className="btn-secondary">Partners</Link>
+        <Button asChild variant="outline"><Link to="/contact" search={{ topic: 'partnership' }}>{lang === 'en' ? 'Partner with us' : 'Shirikiana nasi'}</Link></Button>
       </section>
 
       <section id="faq" className="container-page max-w-3xl pb-8">

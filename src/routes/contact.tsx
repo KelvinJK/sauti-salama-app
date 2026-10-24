@@ -3,6 +3,7 @@ import { InfoPage } from "@/components/site/InfoPage";
 import { seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/contact")({
+  validateSearch: (search: Record<string, unknown>): { topic?: string } => search['topic'] === 'partnership' ? { topic: 'partnership' } : {},
   head: () => seo("Contact", "Get in touch with the SautiSalama team."),
   component: () => (
     <InfoPage title="Contact" sub="Get in touch with the SautiSalama team.">
