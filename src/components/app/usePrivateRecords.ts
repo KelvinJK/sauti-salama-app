@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useServerFn } from '@tanstack/react-start';
 import { listRecords, saveRecord, deleteRecord, readProfile } from '@/lib/app.functions';
-import type { RecordKind } from '@/lib/app-model';
+import { recordSchema, type RecordKind } from '@/lib/app-model';
 import { makeDeviceRecord, mutateDeviceRecords, readDeviceRecords, PRIVATE_LOAD_TIMEOUT_MS, type DeviceRecord } from '@/lib/device-vault';
 import { useAppAuth } from './AuthProvider';
 import { useVault } from './VaultProvider';
@@ -33,7 +33,7 @@ export function usePrivateRecords(kind: RecordKind) {
   const rows: DeviceRecord[] = !unlocked ? [] : user ? (cloud.data ?? []) as DeviceRecord[] : local?.key === vault.key ? local.rows.filter(r => r.kind === kind) : [];
   async function saveOne(input: unknown) {
     const key = needsPin ? await vault.ensureKey() : null;
-    if (user) { if (!registered) throw new Error('Complete adult registration first.'); await save({ data: input as Parameters<typeof save>[0]['data'] }); await cloud.refetch(); }
+    if (user) { if (!registered) throw new Error('Complete adult registration first.'); await save({ data: recordSchema.parse(input) }); await cloud.refetch(); }
     else {
       if (!key) throw new Error('Unlock your device first.');
       const row = makeDeviceRecord(input);
