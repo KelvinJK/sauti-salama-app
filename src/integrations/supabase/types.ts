@@ -14,6 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
+      facilities: {
+        Row: {
+          address: string
+          created_at: string
+          district: string
+          id: string
+          name: string
+          phone: string
+          region: string
+          services: string[]
+          verified: boolean
+        }
+        Insert: {
+          address?: string
+          created_at?: string
+          district: string
+          id?: string
+          name: string
+          phone?: string
+          region: string
+          services?: string[]
+          verified?: boolean
+        }
+        Update: {
+          address?: string
+          created_at?: string
+          district?: string
+          id?: string
+          name?: string
+          phone?: string
+          region?: string
+          services?: string[]
+          verified?: boolean
+        }
+        Relationships: []
+      }
       health_records: {
         Row: {
           created_at: string
@@ -99,6 +135,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      has_role: { Args: { _role: string; _user_id: string }; Returns: boolean }
       registered_adult: { Args: never; Returns: boolean }
     }
     Enums: {
