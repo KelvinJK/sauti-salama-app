@@ -8,15 +8,20 @@ import { useAppText } from '@/lib/app-copy';
 import { seo } from '@/lib/seo';
 import { supabase } from '@/integrations/supabase/client';
 import { facilityServices, facilityServiceCopy, formatPhoneHref, type Facility, type FacilityService } from '@/lib/facilities';
+import { UrgentHelpBanner } from '@/components/app/Safety';
 
 export const Route = createFileRoute('/app/care')({
   head: () => seo('Find care in Tanzania', 'Browse verified health facilities and filter by district and services.'),
-  component: Care,
+  component: CareHub,
 });
 
 const ALL = 'all';
 
-function Care() {
+function CareHub() {
+  const text = useAppText();
+  return <><UrgentHelpBanner /><PageTitle title={text('Care', 'Huduma')} /><div className="flex flex-wrap gap-3"><Button asChild><Link to="/app/find-care"><MapPin />{text('Find care','Tafuta huduma')}</Link></Button><Button asChild variant="outline"><Link to="/app/referrals">{text('My referrals','Rufaa zangu')}</Link></Button></div></>;
+}
+export function CareDirectory() {
   const text = useAppText();
   const [district, setDistrict] = useState(ALL);
   const [service, setService] = useState<FacilityService | typeof ALL>(ALL);
