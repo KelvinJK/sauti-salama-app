@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useWebMCP } from 'use-webmcp-tool';
+import { runWebMCPTool } from '@/lib/webmcp-telemetry';
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { useQuery } from '@tanstack/react-query';
 import { MapPin, Phone, ShieldCheck } from 'lucide-react';
@@ -39,6 +41,34 @@ export function CareDirectory() {
   const visible = (facilities ?? []).filter(
     (f) => (district === ALL || f.district === district) && (service === ALL || f.services.includes(service)),
   );
+
+  useWebMCP({
+    name: 'list_shown_facilities',
+    description: 'List the verified facilities currently shown in the care directory, respecting active filters.',
+    annotations: { readOnlyHint: true, untrustedContentHint: true },
+    enabled: !isLoading && !isError,
+    execute: () => runWebMCPTool('list_shown_facilities', () =>
+      visible.length === 0 ? 'No verified facilities shown.' : visible.map((f) => `${f.name} — ${f.district}, ${f.region}; services: ${f.services.join(', ')}; phone: ${f.phone ?? 'n/a'}`).join('\n')),
+  });
+  useWebMCP({
+    name: 'filter_facilities',
+    description: 'Change the care directory filters by district and/or service. Use "all" to clear a filter.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        district: { type: 'string', description: `District name, or "all". Available: ${districts.join(', ') || 'none yet'}.` },
+        service: { type: 'string', enum: [ALL, ...facilityServices], description: 'Service key, or "all".' },
+      },
+    },
+    enabled: !isLoading && !isError,
+    execute: (args: { district?: unknown; service?: unknown }) => runWebMCPTool('filter_facilities', () => {
+      if (args.district !== undefined && (typeof args.district !== 'string' || (args.district !== ALL && !districts.includes(args.district)))) throw new Error(`Unknown district; expected all or one of: ${districts.join(', ')}`);
+      if (args.service !== undefined && (typeof args.service !== 'string' || (args.service !== ALL && !(facilityServices as readonly string[]).includes(args.service)))) throw new Error(`Unknown service; expected all or one of: ${facilityServices.join(', ')}`);
+      if (typeof args.district === 'string') setDistrict(args.district);
+      if (typeof args.service === 'string') setService(args.service as FacilityService | typeof ALL);
+      return 'Filters updated.';
+    }),
+  });
 
   return (
     <>

@@ -15,3 +15,4 @@
 - Use a shared typed record validator for personal logs and owner-linked growth measurements; never report saves before storage confirms them.
 - Device-only records use an IndexedDB AES-GCM vault with a PBKDF2-derived, memory-only key; a shared provider owns locking across app navigation so plaintext never enters persistent browser storage.
 - Mood check-ins are journal records with a stable reserved title, sharing the existing authenticated record boundary and encrypted guest storage without adding another private-data path.
+- App MCP server lives in src/lib/mcp (one tool per file); it validates managed OAuth tokens and queries as the caller so RLS still applies.
