@@ -12,8 +12,9 @@
 - [ ] K — Staff/admin portals, testing, launch readiness
 
 ## Current request — functional /app
-- [ ] Welcome, language choice, guest dashboard, five-tab navigation
-- [ ] Secure accounts, adult registration, profile, export and deletion
-- [ ] Openable education, cycle, maternal, children, nutrition, journal and care pages
-- [ ] Confirmed private record saving and honest unavailable-service states
-- [ ] Verify guest navigation, both languages and signed-in record round trips
+- [x] Welcome, language choice, guest dashboard, five-tab navigation
+- [x] Secure account forms, adult registration, profile, export and deletion controls
+- [x] Openable education, cycle, maternal, children, nutrition, journal and care pages
+- [x] Storage-connected private record forms and honest unavailable-service states
+- [x] Verify guest navigation and both languages
+- [ ] Verify signed-in record, export and deletion round trips — blocked: no registered auth user; signup test's reserved email was rejected. Needs a real account created via signup or social sign-in.
