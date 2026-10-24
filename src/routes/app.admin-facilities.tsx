@@ -21,7 +21,7 @@ const emptyForm = { name: '', district: '', region: '', address: '', phone: '', 
 
 function AdminFacilities() {
   const text = useAppText();
-  const { user, loading: authLoading } = useAuth();
+  const { user, loading: authLoading } = useAppAuth();
   const queryClient = useQueryClient();
   const [form, setForm] = useState(emptyForm);
   const [formError, setFormError] = useState('');
