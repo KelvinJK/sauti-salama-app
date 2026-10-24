@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AccessibilityRouteImport } from './routes/accessibility'
 import { Route as AppRouteImport } from './routes/app'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as FeaturesRouteImport } from './routes/features'
@@ -20,6 +21,7 @@ import { Route as FindCareRouteImport } from './routes/find-care'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as PartnersRouteImport } from './routes/partners'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AppAntenatalRouteImport } from './routes/app.antenatal'
@@ -35,6 +37,7 @@ import { Route as AppMenuRouteImport } from './routes/app.menu'
 import { Route as AppNutritionRouteImport } from './routes/app.nutrition'
 import { Route as AppPostnatalRouteImport } from './routes/app.postnatal'
 import { Route as AppPregnancyRouteImport } from './routes/app.pregnancy'
+import { Route as AppProfileRouteImport } from './routes/app.profile'
 import { Route as AppReferralsRouteImport } from './routes/app.referrals'
 import { Route as LearnIndexRouteImport } from './routes/learn.index'
 import { Route as LearnSlugRouteImport } from './routes/learn.$slug'
@@ -57,6 +60,11 @@ const AccessibilityRoute = AccessibilityRouteImport.update({
 const AppRoute = AppRouteImport.update({
   id: '/app',
   path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -92,6 +100,11 @@ const PartnersRoute = PartnersRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermsRoute = TermsRouteImport.update({
@@ -169,6 +182,11 @@ const AppPregnancyRoute = AppPregnancyRouteImport.update({
   path: '/pregnancy',
   getParentRoute: () => AppRoute,
 } as any)
+const AppProfileRoute = AppProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppReferralsRoute = AppReferralsRouteImport.update({
   id: '/referrals',
   path: '/referrals',
@@ -190,6 +208,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/accessibility': typeof AccessibilityRoute
   '/app': typeof AppRouteWithChildren
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/features': typeof FeaturesRoute
@@ -197,6 +216,7 @@ export interface FileRoutesByFullPath {
   '/how-it-works': typeof HowItWorksRoute
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/terms': typeof TermsRoute
   '/app/antenatal': typeof AppAntenatalRoute
   '/app/assistant': typeof AppAssistantRoute
@@ -211,6 +231,7 @@ export interface FileRoutesByFullPath {
   '/app/nutrition': typeof AppNutritionRoute
   '/app/postnatal': typeof AppPostnatalRoute
   '/app/pregnancy': typeof AppPregnancyRoute
+  '/app/profile': typeof AppProfileRoute
   '/app/referrals': typeof AppReferralsRoute
   '/learn/$slug': typeof LearnSlugRoute
   '/app/': typeof AppIndexRoute
@@ -220,6 +241,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/accessibility': typeof AccessibilityRoute
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/features': typeof FeaturesRoute
@@ -227,6 +249,7 @@ export interface FileRoutesByTo {
   '/how-it-works': typeof HowItWorksRoute
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/terms': typeof TermsRoute
   '/app/antenatal': typeof AppAntenatalRoute
   '/app/assistant': typeof AppAssistantRoute
@@ -241,6 +264,7 @@ export interface FileRoutesByTo {
   '/app/nutrition': typeof AppNutritionRoute
   '/app/postnatal': typeof AppPostnatalRoute
   '/app/pregnancy': typeof AppPregnancyRoute
+  '/app/profile': typeof AppProfileRoute
   '/app/referrals': typeof AppReferralsRoute
   '/learn/$slug': typeof LearnSlugRoute
   '/app': typeof AppIndexRoute
@@ -252,6 +276,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/accessibility': typeof AccessibilityRoute
   '/app': typeof AppRouteWithChildren
+  '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
   '/features': typeof FeaturesRoute
@@ -259,6 +284,7 @@ export interface FileRoutesById {
   '/how-it-works': typeof HowItWorksRoute
   '/partners': typeof PartnersRoute
   '/privacy': typeof PrivacyRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/terms': typeof TermsRoute
   '/app/antenatal': typeof AppAntenatalRoute
   '/app/assistant': typeof AppAssistantRoute
@@ -273,6 +299,7 @@ export interface FileRoutesById {
   '/app/nutrition': typeof AppNutritionRoute
   '/app/postnatal': typeof AppPostnatalRoute
   '/app/pregnancy': typeof AppPregnancyRoute
+  '/app/profile': typeof AppProfileRoute
   '/app/referrals': typeof AppReferralsRoute
   '/learn/$slug': typeof LearnSlugRoute
   '/app/': typeof AppIndexRoute
@@ -285,6 +312,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/accessibility'
     | '/app'
+    | '/auth'
     | '/contact'
     | '/faq'
     | '/features'
@@ -292,6 +320,7 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/partners'
     | '/privacy'
+    | '/reset-password'
     | '/terms'
     | '/app/antenatal'
     | '/app/assistant'
@@ -306,6 +335,7 @@ export interface FileRouteTypes {
     | '/app/nutrition'
     | '/app/postnatal'
     | '/app/pregnancy'
+    | '/app/profile'
     | '/app/referrals'
     | '/learn/$slug'
     | '/app/'
@@ -315,6 +345,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/accessibility'
+    | '/auth'
     | '/contact'
     | '/faq'
     | '/features'
@@ -322,6 +353,7 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/partners'
     | '/privacy'
+    | '/reset-password'
     | '/terms'
     | '/app/antenatal'
     | '/app/assistant'
@@ -336,6 +368,7 @@ export interface FileRouteTypes {
     | '/app/nutrition'
     | '/app/postnatal'
     | '/app/pregnancy'
+    | '/app/profile'
     | '/app/referrals'
     | '/learn/$slug'
     | '/app'
@@ -346,6 +379,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/accessibility'
     | '/app'
+    | '/auth'
     | '/contact'
     | '/faq'
     | '/features'
@@ -353,6 +387,7 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/partners'
     | '/privacy'
+    | '/reset-password'
     | '/terms'
     | '/app/antenatal'
     | '/app/assistant'
@@ -367,6 +402,7 @@ export interface FileRouteTypes {
     | '/app/nutrition'
     | '/app/postnatal'
     | '/app/pregnancy'
+    | '/app/profile'
     | '/app/referrals'
     | '/learn/$slug'
     | '/app/'
@@ -378,6 +414,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AccessibilityRoute: typeof AccessibilityRoute
   AppRoute: typeof AppRouteWithChildren
+  AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
   FeaturesRoute: typeof FeaturesRoute
@@ -385,6 +422,7 @@ export interface RootRouteChildren {
   HowItWorksRoute: typeof HowItWorksRoute
   PartnersRoute: typeof PartnersRoute
   PrivacyRoute: typeof PrivacyRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   TermsRoute: typeof TermsRoute
   LearnSlugRoute: typeof LearnSlugRoute
   LearnIndexRoute: typeof LearnIndexRoute
@@ -418,6 +456,13 @@ declare module '@tanstack/react-router' {
       path: '/app'
       fullPath: '/app'
       preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -467,6 +512,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terms': {
@@ -574,6 +626,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppPregnancyRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/profile': {
+      id: '/app/profile'
+      path: '/profile'
+      fullPath: '/app/profile'
+      preLoaderRoute: typeof AppProfileRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/referrals': {
       id: '/app/referrals'
       path: '/referrals'
@@ -612,6 +671,7 @@ interface AppRouteChildren {
   AppNutritionRoute: typeof AppNutritionRoute
   AppPostnatalRoute: typeof AppPostnatalRoute
   AppPregnancyRoute: typeof AppPregnancyRoute
+  AppProfileRoute: typeof AppProfileRoute
   AppReferralsRoute: typeof AppReferralsRoute
   AppIndexRoute: typeof AppIndexRoute
 }
@@ -630,6 +690,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppNutritionRoute: AppNutritionRoute,
   AppPostnatalRoute: AppPostnatalRoute,
   AppPregnancyRoute: AppPregnancyRoute,
+  AppProfileRoute: AppProfileRoute,
   AppReferralsRoute: AppReferralsRoute,
   AppIndexRoute: AppIndexRoute,
 }
@@ -641,6 +702,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AccessibilityRoute: AccessibilityRoute,
   AppRoute: AppRouteWithChildren,
+  AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
   FeaturesRoute: FeaturesRoute,
@@ -648,6 +710,7 @@ const rootRouteChildren: RootRouteChildren = {
   HowItWorksRoute: HowItWorksRoute,
   PartnersRoute: PartnersRoute,
   PrivacyRoute: PrivacyRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   TermsRoute: TermsRoute,
   LearnSlugRoute: LearnSlugRoute,
   LearnIndexRoute: LearnIndexRoute,
