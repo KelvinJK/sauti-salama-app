@@ -3,7 +3,9 @@ import { useWebMCP } from 'use-webmcp-tool';
 import { runWebMCPTool } from '@/lib/webmcp-telemetry';
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { useQuery } from '@tanstack/react-query';
-import { MapPin, Phone, ShieldCheck } from 'lucide-react';
+import { MapPin, Phone, ShieldCheck, Clock, FlaskConical, Baby, CalendarCheck, HeartHandshake, Sprout, Salad, Send, MessageCircle, ChevronRight, type LucideIcon } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { SHOW_EXAMPLE_FACILITIES } from '@/lib/feature-flags';
 import { PageTitle } from '@/components/app/AppShell';
 import { Button } from '@/components/ui/button';
 import { useAppText } from '@/lib/app-copy';
@@ -19,27 +21,47 @@ export const Route = createFileRoute('/app/care')({
 
 const ALL = 'all';
 
+type HubRow = { to?: '/app/pregnancy' | '/app/antenatal' | '/app/postnatal' | '/app/children' | '/app/nutrition' | '/app/find-care' | '/app/referrals' | '/app/assistant'; icon: LucideIcon; bg: string; t: [string, string]; s: [string, string]; soon?: boolean };
+const hubSections: Array<{ t: [string, string]; rows: HubRow[] }> = [
+  { t: ['Maternal care', 'Huduma ya mama'], rows: [
+    { to: '/app/pregnancy', icon: Baby, bg: 'bg-peach', t: ['Pregnancy journey', 'Safari ya ujauzito'], s: ['Week-by-week information for you and baby', 'Taarifa za kila wiki kwako na mtoto'], soon: true },
+    { to: '/app/antenatal', icon: CalendarCheck, bg: 'bg-lavender', t: ['Antenatal planner', 'Mpango wa kliniki'], s: ['Plan and remember clinic visits', 'Panga na kumbuka mahudhurio ya kliniki'], soon: true },
+    { to: '/app/postnatal', icon: HeartHandshake, bg: 'bg-pink', t: ['Postnatal support', 'Msaada baada ya kujifungua'], s: ['Care for you after birth', 'Huduma kwako baada ya kujifungua'], soon: true },
+  ] },
+  { t: ['Child health', 'Afya ya mtoto'], rows: [
+    { to: '/app/children', icon: Sprout, bg: 'bg-mint', t: ['Child profiles', 'Wasifu wa watoto'], s: ['Private profiles and growth measurements', 'Wasifu binafsi na vipimo vya ukuaji'] },
+    { to: '/app/nutrition', icon: Salad, bg: 'bg-peach', t: ['Nutrition library', 'Maktaba ya lishe'], s: ['Healthy meals for the family', 'Milo bora kwa familia'], soon: true },
+  ] },
+  { t: ['Get support', 'Pata msaada'], rows: [
+    { to: '/app/find-care', icon: MapPin, bg: 'bg-mint', t: ['Find care', 'Tafuta huduma'], s: ['Search facilities by district and service', 'Tafuta vituo kwa wilaya na huduma'] },
+    { to: '/app/referrals', icon: Send, bg: 'bg-lavender', t: ['My referrals', 'Rufaa zangu'], s: ['Share details only with your consent', 'Shiriki taarifa kwa idhini yako tu'], soon: true },
+    { to: '/app/assistant', icon: MessageCircle, bg: 'bg-pink', t: ['Private assistant', 'Msaidizi binafsi'], s: ['Ask health questions privately', 'Uliza maswali ya afya kwa faragha'], soon: true },
+  ] },
+];
 function CareHub() {
   const text = useAppText();
-  return <><UrgentHelpBanner /><PageTitle title={text('Care', 'Huduma')} /><div className="flex flex-wrap gap-3"><Button asChild><Link to="/app/find-care"><MapPin />{text('Find care','Tafuta huduma')}</Link></Button><Button asChild variant="outline"><Link to="/app/referrals">{text('My referrals','Rufaa zangu')}</Link></Button></div></>;
+  return <><UrgentHelpBanner /><PageTitle title={text('Care', 'Huduma')} />{hubSections.map((section) => <section key={section.t[0]} className="mb-8"><h2 className="mb-3 text-lg font-bold">{text(...section.t)}</h2><ul className="divide-y overflow-hidden rounded-lg border bg-card">{section.rows.map((row) => { const Icon = row.icon; const inner = <><span className={`grid h-11 w-11 shrink-0 place-items-center rounded-xl ${row.bg}`}><Icon className="h-5 w-5 text-primary" /></span><span className="min-w-0 flex-1"><span className="block font-bold">{text(...row.t)}</span><span className="block truncate text-sm text-muted-foreground">{text(...row.s)}</span>{row.soon && <span className="mt-1 inline-block rounded-full bg-peach px-2 py-0.5 text-xs font-bold text-secondary">{text('Coming soon', 'Inakuja hivi karibuni')}</span>}</span><ChevronRight className="h-5 w-5 shrink-0 text-muted-foreground" /></>; return <li key={row.t[0]}>{row.soon || !row.to ? <div aria-disabled="true" className="flex min-h-16 cursor-not-allowed items-center gap-4 p-4 opacity-60">{inner}</div> : <Link to={row.to} className="flex min-h-16 items-center gap-4 p-4 transition-colors hover:bg-muted">{inner}</Link>}</li>; })}</ul></section>)}</>;
 }
 export function CareDirectory() {
   const text = useAppText();
   const [district, setDistrict] = useState(ALL);
   const [service, setService] = useState<FacilityService | typeof ALL>(ALL);
+  const [query, setQuery] = useState('');
 
   const { data: facilities, isLoading, isError, refetch } = useQuery({
     queryKey: ['facilities'],
     queryFn: async () => {
-      const { data, error } = await supabase.from('facilities').select('*').order('district').order('name');
+      let q = supabase.from('facilities').select('*').order('district').order('name');
+      if (!SHOW_EXAMPLE_FACILITIES) q = q.eq('is_example', false);
+      const { data, error } = await q;
       if (error) throw error;
-      return data as Facility[];
+      return data as unknown as Array<Facility & { hours: string; is_example: boolean }>;
     },
   });
 
   const districts = [...new Set((facilities ?? []).map((f) => f.district))].sort();
   const visible = (facilities ?? []).filter(
-    (f) => (district === ALL || f.district === district) && (service === ALL || f.services.includes(service)),
+    (f) => (district === ALL || f.district === district) && (service === ALL || f.services.includes(service)) && (!query.trim() || `${f.name} ${f.district} ${f.region} ${f.address}`.toLowerCase().includes(query.trim().toLowerCase())),
   );
 
   useWebMCP({
@@ -74,6 +96,7 @@ export function CareDirectory() {
     <>
       <PageTitle title={text('Find care', 'Tafuta huduma')} sub={text('Verified facilities, filtered by where you are and what you need.', 'Vituo vilivyothibitishwa, kulingana na mahali ulipo na huduma unayohitaji.')} />
 
+      <label className="mb-3 grid gap-1 text-sm font-semibold">{text('Search', 'Tafuta')}<Input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder={text('Name, district or area', 'Jina, wilaya au eneo')} className="h-11 font-normal" /></label>
       <div className="mb-6 grid gap-3 sm:grid-cols-2">
         <label className="grid gap-1 text-sm font-semibold">
           {text('District', 'Wilaya')}
@@ -116,9 +139,10 @@ export function CareDirectory() {
           <li key={f.id} className="rounded-2xl border p-5">
             <div className="flex flex-wrap items-center gap-2">
               <h2 className="text-lg font-bold">{f.name}</h2>
-              <span className="inline-flex items-center gap-1 rounded-full bg-mint px-2.5 py-0.5 text-xs font-semibold"><ShieldCheck className="h-3.5 w-3.5" />{text('Verified', 'Imethibitishwa')}</span>
+              {f.is_example ? <span className="inline-flex items-center gap-1 rounded-full bg-peach px-2.5 py-0.5 text-xs font-semibold"><FlaskConical className="h-3.5 w-3.5" />{text('Example facility (pilot)', 'Kituo cha mfano (majaribio)')}</span> : <span className="inline-flex items-center gap-1 rounded-full bg-mint px-2.5 py-0.5 text-xs font-semibold"><ShieldCheck className="h-3.5 w-3.5" />{text('Verified', 'Imethibitishwa')}</span>}
             </div>
             <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground"><MapPin className="h-4 w-4 shrink-0" />{f.district}, {f.region}{f.address ? ` — ${f.address}` : ''}</p>
+            {f.hours && <p className="mt-1 flex items-center gap-1.5 text-sm text-muted-foreground"><Clock className="h-4 w-4 shrink-0" />{f.hours}</p>}
             <div className="mt-3 flex flex-wrap gap-1.5">
               {f.services.map((s) => (
                 <span key={s} className="rounded-full border px-2.5 py-0.5 text-xs">{text(facilityServiceCopy[s as FacilityService]?.en ?? s, facilityServiceCopy[s as FacilityService]?.sw ?? s)}</span>

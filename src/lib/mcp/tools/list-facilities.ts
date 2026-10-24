@@ -1,6 +1,7 @@
 import { defineTool, ToolError } from "@lovable.dev/mcp-js";
 import { z } from "zod";
 import { supabaseForUser } from "../supabase";
+import { SHOW_EXAMPLE_FACILITIES } from "../../feature-flags";
 
 export default defineTool({
   name: "list_facilities",
@@ -14,6 +15,7 @@ export default defineTool({
   handler: async ({ district, service }, ctx) => {
     if (!ctx.isAuthenticated()) throw new ToolError("Not signed in.");
     let q = supabaseForUser(ctx).from("facilities").select("id, name, district, region, address, phone, services").eq("verified", true).limit(100);
+    if (!SHOW_EXAMPLE_FACILITIES) q = q.eq("is_example", false);
     if (district) q = q.ilike("district", district);
     if (service) q = q.contains("services", [service]);
     const { data, error } = await q;

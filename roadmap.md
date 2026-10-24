@@ -17,7 +17,7 @@
 - [x] Navigation, labels, urgent help and unfinished-module placeholders
 - [x] Landing copy and care partnership invitation
 - [x] Verify device saves, lock/unlock, navigation and safety flows
-- Optional fingerprint/face unlock is not enabled; the six-digit PIN remains required.
+- Optional fingerprint/face unlock was added later on request; the six-digit PIN stays required and is the fallback.
 
 ## Earlier functional /app verification
 - [x] Welcome, language choice, guest dashboard, five-tab navigation
@@ -26,3 +26,12 @@
 - [x] Storage-connected private record forms and honest unavailable-service states
 - [x] Verify guest navigation and both languages
 - [ ] Verify signed-in record, export and deletion round trips — blocked: no registered auth user; signup test's reserved email was rejected. Needs a real account created via signup or social sign-in.
+
+## Follow-up fixes (7)
+- [x] PIN lock polish + optional fingerprint/face unlock (WebAuthn, device must support secure key derivation)
+- [x] Care hub sections with icon rows
+- [x] Six labelled example facilities behind a feature flag (hours, verification tag, search)
+- [x] Journal list first, form at /app/journal/new
+- [x] Illustrated mood faces, wrapping/scrolling mood row
+- [x] Home tiles: chevrons, dimmed Coming soon tiles, light assistant card
+- [x] Bleeding as single-select chips

@@ -91,3 +91,47 @@ export function mutateDeviceRecords(owner: string, key: CryptoKey, transform: (r
 export function makeDeviceRecord(input: unknown): DeviceRecord {
   return { ...recordSchema.parse(input), id: crypto.randomUUID(), created_at: new Date().toISOString() };
 }
+// Optional fingerprint/face unlock. The PIN stays required: it is wrapped with a key derived from the
+// authenticator's PRF output, so nothing usable is stored unless the device can derive that secret.
+type BioMeta = { credentialId: Uint8Array; salt: Uint8Array; wrapped: Cipher };
+type PrfOutputs = { prf?: { enabled?: boolean; results?: { first?: ArrayBuffer } } };
+export async function biometricSupported() {
+  try {
+    return typeof window !== 'undefined' && !!window.PublicKeyCredential && window.isSecureContext
+      && await PublicKeyCredential.isUserVerifyingPlatformAuthenticatorAvailable();
+  } catch { return false; }
+}
+export async function biometricEnrolled(owner: string) { return !!(await storage<BioMeta>(`${owner}:bio`)); }
+async function prfKey(credentialId: Uint8Array, salt: Uint8Array) {
+  const assertion = await navigator.credentials.get({ publicKey: {
+    challenge: crypto.getRandomValues(new Uint8Array(32)),
+    allowCredentials: [{ type: 'public-key', id: new Uint8Array(credentialId) }],
+    userVerification: 'required',
+    extensions: { prf: { eval: { first: new Uint8Array(salt) } } } as AuthenticationExtensionsClientInputs,
+  } }) as PublicKeyCredential | null;
+  const secret = (assertion?.getClientExtensionResults() as PrfOutputs | undefined)?.prf?.results?.first;
+  if (!secret) throw new Error('This device cannot use fingerprint or face unlock. Use your PIN.');
+  const material = await crypto.subtle.importKey('raw', secret, 'HKDF', false, ['deriveKey']);
+  return crypto.subtle.deriveKey({ name: 'HKDF', hash: 'SHA-256', salt: new Uint8Array(16), info: new TextEncoder().encode('sautisalama-bio') }, material, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+}
+export async function enrollBiometric(owner: string, pin: string) {
+  if (!validPin(pin)) throw new Error('Use six digits.');
+  const credential = await navigator.credentials.create({ publicKey: {
+    rp: { name: 'SautiSalama' },
+    user: { id: crypto.getRandomValues(new Uint8Array(16)), name: 'SautiSalama private space', displayName: 'SautiSalama' },
+    challenge: crypto.getRandomValues(new Uint8Array(32)),
+    pubKeyCredParams: [{ type: 'public-key', alg: -7 }, { type: 'public-key', alg: -257 }],
+    authenticatorSelection: { authenticatorAttachment: 'platform', userVerification: 'required', residentKey: 'discouraged' },
+    extensions: { prf: {} } as AuthenticationExtensionsClientInputs,
+  } }) as PublicKeyCredential | null;
+  if (!credential || !(credential.getClientExtensionResults() as PrfOutputs).prf?.enabled) throw new Error('This device cannot use fingerprint or face unlock. Use your PIN.');
+  const credentialId = new Uint8Array(credential.rawId), salt = crypto.getRandomValues(new Uint8Array(32));
+  const key = await prfKey(credentialId, salt);
+  await storage<BioMeta>(`${owner}:bio`, { value: { credentialId, salt, wrapped: await encrypt(key, pin) } });
+}
+export async function unlockWithBiometric(owner: string) {
+  const bio = await storage<BioMeta>(`${owner}:bio`);
+  if (!bio) throw new Error('Fingerprint or face unlock is not set up.');
+  const pin = await decrypt<string>(await prfKey(bio.credentialId, bio.salt), bio.wrapped);
+  return unlockVault(owner, pin);
+}

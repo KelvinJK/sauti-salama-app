@@ -19,6 +19,6 @@ describe('Device privacy rules', () => {
     expect(await decrypt(key,cipher)).toEqual(entry);
     await expect(decrypt(wrong,cipher)).rejects.toThrow();
   });
-  it('shares all twelve requested moods', () => { expect(moods.map(m => m[2])).toEqual(['Joyful','Calm','Grateful','Energized','Sensitive','Confused','Tired','Stressed','Angry','Insecure','Hurt','Hopeful']); });
+  it('shares all twelve requested moods', () => { expect(moods.map(m => m[1])).toEqual(['Joyful','Calm','Grateful','Energized','Sensitive','Confused','Tired','Stressed','Angry','Insecure','Hurt','Hopeful']); });
   it('includes all seven requested symptoms', () => { expect(symptomOptions.map(s => s[1])).toEqual(['Cramps','Headache','Fatigue','Bloating','Nausea','Spotting','Mood changes']); });
 });
