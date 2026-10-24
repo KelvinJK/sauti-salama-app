@@ -15,9 +15,9 @@ const faces: Record<string, Face> = {
   hopeful: { fill: '#FFE3C9', mouth: 'M23 39 Q32 46 41 39', eyes: 'dot', blush: true },
 };
 const ink = '#35106F';
-export function MoodFace({ mood, className = 'h-10 w-10' }: { mood: string; className?: string }) {
+export function MoodFace({ mood, className = "", size = 40 }: { mood: string; className?: string; size?: number }) {
   const f = faces[mood] ?? faces['calm']!;
-  return <svg viewBox="0 0 64 64" className={className} aria-hidden="true">
+  return <svg viewBox="0 0 64 64" className={className} style={{ width: size, height: size }} aria-hidden="true">
     <circle cx="32" cy="32" r="29" fill={f.fill} stroke="#7139E8" strokeOpacity="0.25" strokeWidth="2" />
     {f.blush && <><circle cx="18" cy="36" r="4" fill="#FF5A0B" opacity="0.18" /><circle cx="46" cy="36" r="4" fill="#FF5A0B" opacity="0.18" /></>}
     {f.eyes === 'closed' ? <><path d="M19 27 Q23 30 27 27" stroke={ink} strokeWidth="2.5" fill="none" strokeLinecap="round" /><path d="M37 27 Q41 30 45 27" stroke={ink} strokeWidth="2.5" fill="none" strokeLinecap="round" /></>
