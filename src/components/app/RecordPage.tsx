@@ -42,7 +42,7 @@ export function RecordPage({ kind, title, subtitle }: { kind: RecordKind; title:
     if (!date || (kind !== 'cycle' && !entryTitle.trim())) { setError(text('Complete the date and title.', 'Jaza tarehe na kichwa.')); return; }
     setBusy(true);
     try {
-      await save({ data: { kind, record_date: date, title: kind === 'cycle' ? 'Daily cycle log' : entryTitle, details: { notes, ...(kind === 'cycle' ? { mood, bleeding, symptoms } : {}), ...(kind === 'growth' ? { child_id: childId, weight: Number(weight), height: Number(height) } : {}) } });
+      await save({ data: { kind, record_date: date, title: kind === 'cycle' ? 'Daily cycle log' : entryTitle, details: { notes, ...(kind === 'cycle' ? { mood, bleeding, symptoms } : {}), ...(kind === 'growth' ? { child_id: childId, weight: Number(weight), height: Number(height) } : {}) } } });
       await records.refetch(); setEntryTitle(''); setNotes('');
       toast.success(text('Saved privately', 'Imehifadhiwa kwa faragha'));
     } catch { setError(text('Not saved. Check your details and try again.', 'Haijahifadhiwa. Hakiki taarifa na ujaribu tena.')); }
