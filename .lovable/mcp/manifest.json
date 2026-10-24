@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "sdk_version": "3.3.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "oauth",
+    "issuer": "https://fnilxsxzvspfjsxpvyak.supabase.co/auth/v1",
+    "accepted_audiences": [
+      "authenticated"
+    ]
+  },
+  "mcp": {
+    "server": {
+      "name": "sauti-salama-app",
+      "version": "0.1.0",
+      "title": "Sauti Salama App"
+    },
+    "tools": [
+      {
+        "name": "list_records",
+        "title": "List my health records",
+        "description": "List the signed-in user's own saved records of one kind (cycle, journal, pregnancy, antenatal, postnatal, child, growth), newest first.",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "enum": [
+                "cycle",
+                "pregnancy",
+                "antenatal",
+                "postnatal",
+                "child",
+                "growth",
+                "journal"
+              ],
+              "description": "Which kind of record to list."
+            },
+            "limit": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 30,
+              "description": "Maximum records to return."
+            }
+          },
+          "required": [
+            "kind"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "add_journal_entry",
+        "title": "Add a private journal entry",
+        "description": "Save a private journal entry for the signed-in user. Requires a completed adult profile in the app.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "record_date": {
+              "type": "string",
+              "description": "Date of the entry, YYYY-MM-DD."
+            },
+            "title": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 160,
+              "description": "Short title."
+            },
+            "notes": {
+              "type": "string",
+              "maxLength": 10000,
+              "default": "",
+              "description": "Entry text."
+            },
+            "mood": {
+              "type": "string",
+              "maxLength": 40,
+              "description": "Optional mood, e.g. calm, tired, hopeful."
+            }
+          },
+          "required": [
+            "record_date",
+            "title"
+          ],
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_facilities",
+        "title": "Find verified care facilities",
+        "description": "List verified health facilities, optionally filtered by district and a service such as maternity or antenatal.",
+        "annotations": {
+          "readOnlyHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "district": {
+              "type": "string",
+              "maxLength": 80,
+              "description": "District name to filter by."
+            },
+            "service": {
+              "type": "string",
+              "maxLength": 40,
+              "description": "Service key, e.g. maternity, antenatal, family_planning, child_health."
+            }
+          },
+          "additionalProperties": false,
+          "$schema": "http://json-schema.org/draft-07/schema#"
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}

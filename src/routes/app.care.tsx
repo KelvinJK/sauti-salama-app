@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useWebMCP } from 'use-webmcp-tool';
+import { runWebMCPTool } from '@/lib/webmcp-telemetry';
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { useQuery } from '@tanstack/react-query';
 import { MapPin, Phone, ShieldCheck } from 'lucide-react';
