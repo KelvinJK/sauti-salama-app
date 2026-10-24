@@ -7,8 +7,8 @@ export const moods = [
   ['hurt', 'Hurt', 'Kuumizwa'], ['hopeful', 'Hopeful', 'Matumaini'],
 ] as const;
 export const symptomOptions = [
-  ['cramps', 'Maumivu ya tumbo'], ['headache', 'Maumivu ya kichwa'],
-  ['fatigue', 'Uchovu'], ['bloating', 'Kuvimba tumbo'],
-  ['nausea', 'Kichefuchefu'], ['spotting', 'Matone ya damu'],
-  ['mood_changes', 'Mabadiliko ya hisia'],
+  ['cramps', 'Cramps', 'Maumivu ya tumbo'], ['headache', 'Headache', 'Maumivu ya kichwa'],
+  ['fatigue', 'Fatigue', 'Uchovu'], ['bloating', 'Bloating', 'Kuvimba tumbo'],
+  ['nausea', 'Nausea', 'Kichefuchefu'], ['spotting', 'Spotting', 'Matone ya damu'],
+  ['mood_changes', 'Mood changes', 'Mabadiliko ya hisia'],
 ] as const;
