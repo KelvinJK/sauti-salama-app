@@ -114,8 +114,8 @@ function Footer() {
   return (
     <footer className="site-footer relative isolate mt-20 overflow-hidden bg-footer text-footer-foreground">
       <img src={logo} alt="" aria-hidden="true" className="footer-watermark pointer-events-none absolute -right-12 bottom-16 -z-10 w-[420px] max-w-none select-none sm:w-[580px]" />
-      <div className="container-page grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
-        <div className="space-y-5">
+      <div className="container-page grid grid-cols-2 gap-x-6 gap-y-10 py-14 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
+        <div className="col-span-2 space-y-5 md:col-span-1">
           <Link to="/" className="inline-flex items-center gap-3" aria-label={label('Sauti Salama home', 'Sauti Salama mwanzo')}>
             <span className="grid h-12 w-16 place-items-center rounded-lg bg-logo-surface"><img src={logo} alt="" width={52} height={32} className="w-12" /></span>
             <span className="text-xl font-extrabold">Sauti <span className="text-footer-accent">Salama</span></span>
@@ -127,7 +127,7 @@ function Footer() {
           <SocialIcons />
         </div>
         {cols.map((c, i) => (
-          <div key={i}>
+          <div key={i} className={i === 2 ? 'col-span-2 md:col-span-1' : ''}>
           <h2 className="mb-5 text-sm font-bold">{[label('Sauti Salama', 'Sauti Salama'), label('Explore', 'Gundua'), label('Policies & trust', 'Sera na uaminifu')][i]}</h2>
           <ul className="space-y-3 text-sm">
             {c.map((l) => (
