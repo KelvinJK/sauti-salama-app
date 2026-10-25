@@ -1,4 +1,10 @@
 # SautiSalama roadmap
+## Production domain split
+- [ ] Host redirects and production-aware website/app/legal links
+- [ ] App-only manifest scope and public-only SEO, sitemap and robots
+- [ ] Verify redirects, navigation and search metadata
+- [ ] Auth Site URL and redirect allow-list — user-editable Cloud settings; awaiting owner update
+
 - [x] A — Foundation, design system, landing page, EN/SW, public pages, install manifest
 - [ ] B — Accounts (18+), profiles, roles, privacy controls (Cloud connected)
 - [ ] C — Education library management + clinical review workflow
