@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { InfoPage } from "@/components/site/InfoPage";
 import { seo } from "@/lib/seo";
 import { MapPin, ArrowUpRight } from 'lucide-react';
+import { OFFICE_MAP_URL } from "@/lib/office";
 
 export const Route = createFileRoute("/contact")({ staticData: { sitemap: true },
   validateSearch: (search: Record<string, unknown>): { topic?: string } => search['topic'] === 'partnership' ? { topic: 'partnership' } : {},

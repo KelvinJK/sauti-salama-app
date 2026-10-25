@@ -7,6 +7,7 @@ import { ThemeToggle } from '@/components/ThemeProvider';
 import { DomainLink } from '@/components/DomainLink';
 import { Button } from '@/components/ui/button';
 import { SocialIcons } from './SocialIcons';
+import { OFFICE_MAP_URL } from '@/lib/office';
 
 export function Logo() {
   return (
