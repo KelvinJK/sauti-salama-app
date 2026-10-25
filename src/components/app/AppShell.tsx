@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { useI18n } from '@/lib/i18n';
 import { useAppText } from '@/lib/app-copy';
 import { useAppAuth } from './AuthProvider';
+import { ThemeToggle } from '@/components/ThemeProvider';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 import { QuickExit } from './Safety';
 
@@ -29,7 +30,7 @@ export function AppShell({ children }: { children: ReactNode }) {
     <a href="#app-main" className="sr-only focus:not-sr-only">{text('Skip to content', 'Ruka kwenda maudhui')}</a>
     <header className="sticky top-0 z-30 flex min-h-20 flex-wrap items-center justify-between gap-2 border-b bg-card px-5 py-3 md:px-8">
       <Link to="/app/home" className="flex items-center gap-2"><img src={logo} alt="" className="h-11 w-11 object-contain" /><span className="font-display text-xl font-extrabold text-primary">SautiSalama</span></Link>
-      <div className="flex flex-wrap items-center gap-2">{!welcome && quickExit && <QuickExit />}<div role="group" aria-label={text('Switch language', 'Badilisha lugha')} className="flex items-center rounded-lg border p-0.5">{(['sw','en'] as const).map(value => <Button key={value} variant={lang === value ? 'default' : 'ghost'} className="min-h-11 px-3" aria-label={text('Switch language', 'Badilisha lugha')} aria-pressed={lang === value} onClick={() => setLang(value)}>{value.toUpperCase()}</Button>)}</div>{!welcome && <TooltipProvider><Tooltip><TooltipTrigger asChild><Button asChild variant="outline" size="icon" className="min-h-11 min-w-11"><Link to="/app/profile" aria-label={text('Profile', 'Wasifu')}><UserRound /></Link></Button></TooltipTrigger><TooltipContent>{text('Profile', 'Wasifu')}</TooltipContent></Tooltip></TooltipProvider>}</div>
+      <div className="flex flex-wrap items-center gap-2">{!welcome && quickExit && <QuickExit />}<ThemeToggle className="min-h-11 min-w-11 rounded-lg" aria-label={undefined} />{!welcome && <TooltipProvider><Tooltip><TooltipTrigger asChild><Button asChild variant="outline" size="icon" className="min-h-11 min-w-11"><Link to="/app/profile" aria-label={text('Profile', 'Wasifu')}><UserRound /></Link></Button></TooltipTrigger><TooltipContent>{text('Profile', 'Wasifu')}</TooltipContent></Tooltip></TooltipProvider>}</div>
     </header>
     {!welcome && <aside className="fixed bottom-0 left-0 top-20 hidden w-60 flex-col border-r bg-card p-5 md:flex">
       <p className="mb-5 px-3 text-xs font-bold uppercase text-muted-foreground">{text('My wellbeing', 'Ustawi wangu')}</p>
