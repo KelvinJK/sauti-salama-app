@@ -2,6 +2,7 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { appSeo } from '@/lib/seo';
 
 type OAuthResult = { data: { redirect_url?: string; redirect_to?: string; client?: { name?: string; client_name?: string }; redirect_uri?: string; scope?: string; user?: { email?: string } } | null; error: { message: string } | null };
 type OAuthApi = {
@@ -13,7 +14,7 @@ const oauth = () => (supabase.auth as unknown as { oauth: OAuthApi }).oauth;
 
 export const Route = createFileRoute("/.lovable/oauth/consent")({ staticData: { sitemap: false },
   ssr: false,
-  head: () => ({ meta: [{ title: "Connect an app to SautiSalama" }, { name: "robots", content: "noindex" }] }),
+  head: () => appSeo('Connect an app', 'Review and approve an agent connection to your SautiSalama account.'),
   validateSearch: (s: Record<string, unknown>) => ({
     authorization_id: typeof s["authorization_id"] === "string" ? s["authorization_id"] : "",
   }),
