@@ -13,7 +13,6 @@ function Privacy() {
   const { lang } = useI18n();
   const text = (en: string, sw: string) => lang === 'en' ? en : sw;
   return <InfoPage title={text('Privacy policy', 'Sera ya faragha')} sub={text('How Sauti Salama handles your information.', 'Jinsi Sauti Salama inavyoshughulikia taarifa zako.')}>
-    <p className="rounded-lg bg-peach p-4 text-base font-semibold">{text("Draft — pending legal review under Tanzania’s Personal Data Protection Act.", 'Rasimu — inasubiri ukaguzi wa kisheria chini ya Sheria ya Ulinzi wa Taarifa Binafsi ya Tanzania.')}</p>
     <h2>{text('What you choose to provide', 'Taarifa unazochagua kutoa')}</h2>
     <p>{text('You can read the public health library without an account. If you register, you provide account and profile information. Personal tools store the health notes, cycle logs and child measurements you choose to enter.', 'Unaweza kusoma maktaba ya afya bila akaunti. Ukijisajili, unatoa taarifa za akaunti na wasifu. Zana binafsi huhifadhi maelezo ya afya, rekodi za mzunguko na vipimo vya mtoto unavyochagua kuingiza.')}</p>
     <h2>{text('Where records are stored', 'Mahali kumbukumbu zinapohifadhiwa')}</h2>

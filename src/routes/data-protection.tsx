@@ -13,7 +13,6 @@ function DataProtection() {
   const { lang } = useI18n();
   const text = (en: string, sw: string) => lang === 'en' ? en : sw;
   return <InfoPage title={text('Data protection policy', 'Sera ya ulinzi wa data')} sub={text('Safeguarding your personal health records.', 'Kulinda kumbukumbu zako binafsi za afya.')}>
-    <p className="rounded-lg bg-peach p-4 text-base font-semibold">{text("Draft — pending legal review under Tanzania’s Personal Data Protection Act. This is not a certification of compliance.", 'Rasimu — inasubiri ukaguzi wa kisheria chini ya Sheria ya Ulinzi wa Taarifa Binafsi ya Tanzania. Huu si uthibitisho wa uzingatiaji wa sheria.')}</p>
     <h2>{text('Device-only records', 'Kumbukumbu kwenye kifaa pekee')}</h2>
     <p>{text('Guest personal records are encrypted on your device and protected by a six-digit PIN. The unlock key is kept in memory, not persistent browser storage. If you forget your PIN, these local records cannot be recovered.', 'Kumbukumbu binafsi za mgeni husimbwa kwenye kifaa chako na kulindwa kwa PIN ya tarakimu sita. Ufunguo wa kufungua huhifadhiwa kwenye kumbukumbu ya muda, si hifadhi ya kudumu ya kivinjari. Ukisahau PIN, kumbukumbu hizi haziwezi kurejeshwa.')}</p>
     <h2>{text('Account records and access', 'Kumbukumbu za akaunti na ufikiaji')}</h2>

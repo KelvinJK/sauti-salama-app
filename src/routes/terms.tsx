@@ -13,7 +13,6 @@ function Terms() {
   const { lang } = useI18n();
   const text = (en: string, sw: string) => lang === 'en' ? en : sw;
   return <InfoPage title={text('Terms and conditions', 'Vigezo na masharti')} sub={text('Using Sauti Salama responsibly.', 'Kutumia Sauti Salama kwa uwajibikaji.')}>
-    <p className="rounded-lg bg-peach p-4 text-base font-semibold">{text('Draft — pending legal review. These terms must be finalized before launch.', 'Rasimu — inasubiri ukaguzi wa kisheria. Masharti haya lazima yakamilishwe kabla ya uzinduzi.')}</p>
     <h2>{text('Information, not medical treatment', 'Taarifa, si matibabu')}</h2>
     <p>{text('Sauti Salama provides health information and care navigation only. It does not diagnose, treat or prescribe, and is not a substitute for a qualified health professional. Draft articles remain marked clinical review pending.', 'Sauti Salama inatoa taarifa za afya na mwongozo wa huduma pekee. Haitambui, haitibu wala kuagiza dawa, na si mbadala wa mtaalamu wa afya. Makala za rasimu zinaendelea kuonyeshwa kuwa zinasubiri ukaguzi wa kitabibu.')}</p>
     <h2>{text('Who can use personal accounts', 'Wanaoweza kutumia akaunti binafsi')}</h2>
