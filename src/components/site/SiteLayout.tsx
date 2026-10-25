@@ -3,6 +3,7 @@ import { useState, type ReactNode } from "react";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo-mark.png";
 import { useI18n, type Lang } from "@/lib/i18n";
+import { ThemeToggle } from '@/components/ThemeProvider';
 import { DomainLink } from '@/components/DomainLink';
 
 export function Logo() {
@@ -60,7 +61,7 @@ function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-3">
-          <LangToggle />
+          <ThemeToggle className="size-10 rounded-full !px-0" />
           <DomainLink destination="app" to="/app" className="btn-primary hidden !py-2.5 text-sm sm:inline-flex">{t("open_app")}</DomainLink>
           <button className="lg:hidden" onClick={() => setOpen(!open)} aria-label="Menu" aria-expanded={open}>
             {open ? <X /> : <Menu />}
@@ -75,6 +76,10 @@ function Header() {
             </Link>
           ))}
           <DomainLink destination="app" to="/app" onClick={() => setOpen(false)} className="btn-primary mt-2">{t("open_app")}</DomainLink>
+          <div className="mt-2 flex items-center justify-between px-3">
+            <LangToggle />
+            <ThemeToggle className="size-10 rounded-full !px-0" />
+          </div>
         </nav>
       )}
     </header>
@@ -117,9 +122,12 @@ function Footer() {
           </ul>
         ))}
       </div>
-      <div className="container-page border-t border-plum-foreground/15 py-6 text-xs opacity-75">
-        <p>{t("disclaimer")}</p>
-        <p className="mt-2">© {new Date().getFullYear()} SautiSalama. {t("footer_rights")}</p>
+      <div className="container-page flex flex-wrap items-center justify-between gap-4 border-t border-plum-foreground/15 py-6 text-xs opacity-75">
+        <div>
+          <p>{t("disclaimer")}</p>
+          <p className="mt-2">© {new Date().getFullYear()} SautiSalama. {t("footer_rights")}</p>
+        </div>
+        <LangToggle />
       </div>
     </footer>
   );
