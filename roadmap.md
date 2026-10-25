@@ -1,4 +1,9 @@
 # Sauti Salama roadmap
+## Public design and footer
+- [ ] Refine public page colors, feature surfaces and section hierarchy
+- [ ] Add branded footer, social placeholders and Dar es Salaam map
+- [ ] Publish privacy, terms and data protection draft pages and verify navigation
+
 ## Production domain split
 - [x] Host redirects and production-aware website/app/legal links
 - [x] App-only manifest scope and public-only SEO, sitemap and robots
