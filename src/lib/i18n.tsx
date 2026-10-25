@@ -6,6 +6,7 @@ const dict = {
   en: {
     nav_features: "Features", nav_how: "How it works", nav_families: "For families", nav_care: "Find care", nav_faq: "FAQ", nav_learn: "Learn",
     open_app: "Open the app",
+    theme_dark: "Switch to dark mode", theme_light: "Switch to light mode",
     hero_l1: "Your health.", hero_l2: "Your voice.", hero_l3: "Your choice.",
     hero_sub: "Understand your health, document your journey and find the support you need — in Kiswahili or English.",
     hero_cta: "Explore SautiSalama", hero_cta2: "See how it works",
@@ -43,6 +44,7 @@ const dict = {
   sw: {
     nav_features: "Vipengele", nav_how: "Jinsi inavyofanya kazi", nav_families: "Kwa familia", nav_care: "Tafuta huduma", nav_faq: "Maswali", nav_learn: "Jifunze",
     open_app: "Fungua programu",
+    theme_dark: "Badilisha hali ya giza", theme_light: "Badilisha hali ya mwanga",
     hero_l1: "Afya yako.", hero_l2: "Sauti yako.", hero_l3: "Chaguo lako.",
     hero_sub: "Elewa afya yako, andika safari yako na upate msaada unaohitaji — kwa Kiswahili au Kiingereza.",
     hero_cta: "Gundua SautiSalama", hero_cta2: "Tazama inavyofanya kazi",
