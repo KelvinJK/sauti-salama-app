@@ -1,12 +1,18 @@
 import { describe, expect, it } from "vitest";
-import { OFFICE_LAT, OFFICE_LNG, OFFICE_MAP_URL } from "@/lib/office";
+import {
+  OFFICE_ADDRESS,
+  OFFICE_LAT,
+  OFFICE_LNG,
+  OFFICE_MAP_URL,
+} from "@/lib/office";
 
 describe("office map link", () => {
-  it("points at the Dar es Salaam pin the team provided", () => {
-    expect(OFFICE_LAT).toBe(-6.772382);
-    expect(OFFICE_LNG).toBe(39.244204);
+  it("points at 114 Rose Garden Road, Dar es Salaam", () => {
+    expect(OFFICE_ADDRESS).toBe("114 Rose Garden Road, Dar es Salaam, Tanzania");
+    expect(OFFICE_LAT).toBeCloseTo(-6.765818, 5);
+    expect(OFFICE_LNG).toBeCloseTo(39.2481242, 5);
     expect(OFFICE_MAP_URL).toBe(
-      "https://www.google.com/maps/search/?api=1&query=-6.772382,39.244204",
+      "https://www.google.com/maps/search/?api=1&query=114%20Rose%20Garden%20Rd%2C%20Dar%20es%20Salaam%2C%20Tanzania",
     );
   });
 
