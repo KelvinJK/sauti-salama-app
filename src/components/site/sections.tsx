@@ -36,7 +36,7 @@ export function HowSteps() {
     <ol className="grid gap-5 md:grid-cols-3">
       {steps.map(([h, d], i) => (
         <li key={h} className="card-soft p-6">
-          <span className="grid h-10 w-10 place-items-center rounded-full bg-gradient-brand font-extrabold text-primary-foreground">{i + 1}</span>
+          <span className="grid h-10 w-10 place-items-center rounded-full bg-primary font-extrabold text-primary-foreground shadow-emboss">{i + 1}</span>
           <h3 className="mt-4 text-lg font-bold">{t(h)}</h3>
           <p className="mt-2 text-sm text-muted-foreground">{t(d)}</p>
         </li>
