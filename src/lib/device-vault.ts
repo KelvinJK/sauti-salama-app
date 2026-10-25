@@ -29,6 +29,8 @@ export async function encrypt(key: CryptoKey, value: unknown): Promise<Cipher> {
 export async function decrypt<T>(key: CryptoKey, value: Cipher): Promise<T> {
   return JSON.parse(new TextDecoder().decode(await crypto.subtle.decrypt({ name: 'AES-GCM', iv: new Uint8Array(value.iv) }, key, value.ciphertext))) as T;
 }
+// Stored inside every encrypted vault — never change this value, or PINs people already set stop working.
+const VAULT_VERIFIER = 'SautiSalama vault';
 async function db() {
   return new Promise<IDBDatabase>((resolve, reject) => {
     const request = indexedDB.open('sautisalama-private-vault', 1);
