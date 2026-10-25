@@ -16,7 +16,7 @@
 - Device-only records use an IndexedDB AES-GCM vault with a PBKDF2-derived, memory-only key; a shared provider owns locking across app navigation so plaintext never enters persistent browser storage.
 - Mood check-ins are journal records with a stable reserved title, sharing the existing authenticated record boundary and encrypted guest storage without adding another private-data path.
 - App MCP server lives in src/lib/mcp (one tool per file); it validates managed OAuth tokens and queries as the caller so RLS still applies.
-- Preserve SDK ownership banners and generated MCP transport routes; sitemap inclusion is opt-in, so generated endpoints remain excluded without editing their route options.
+- Preserve SDK ownership banners and generated MCP transport routes; keep sitemap typing optional for SDK compatibility and inclusion strictly opt-in so generated endpoints stay excluded.
 - Production host redirects use request middleware and fixed destinations; cross-domain links hydrate through DomainLink so previews retain relative routing.
 - Public canonical metadata and router-derived sitemap decisions live on leaf routes; appSeo excludes every personal app page from indexing.
 - Home-screen support remains manifest-only, scoped to the app; do not introduce offline app-shell caching without an explicit offline request.
