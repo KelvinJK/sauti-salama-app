@@ -15,6 +15,7 @@ import { Route as AccessibilityRouteImport } from './routes/accessibility'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as DataProtectionRouteImport } from './routes/data-protection'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as FeaturesRouteImport } from './routes/features'
 import { Route as FindCareRouteImport } from './routes/find-care'
@@ -78,6 +79,11 @@ const AuthRoute = AuthRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DataProtectionRoute = DataProtectionRouteImport.update({
+  id: '/data-protection',
+  path: '/data-protection',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqRoute = FaqRouteImport.update({
@@ -259,6 +265,7 @@ export interface FileRoutesByFullPath {
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/data-protection': typeof DataProtectionRoute
   '/faq': typeof FaqRoute
   '/features': typeof FeaturesRoute
   '/find-care': typeof FindCareRoute
@@ -300,6 +307,7 @@ export interface FileRoutesByTo {
   '/accessibility': typeof AccessibilityRoute
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/data-protection': typeof DataProtectionRoute
   '/faq': typeof FaqRoute
   '/features': typeof FeaturesRoute
   '/find-care': typeof FindCareRoute
@@ -343,6 +351,7 @@ export interface FileRoutesById {
   '/app': typeof AppRouteWithChildren
   '/auth': typeof AuthRoute
   '/contact': typeof ContactRoute
+  '/data-protection': typeof DataProtectionRoute
   '/faq': typeof FaqRoute
   '/features': typeof FeaturesRoute
   '/find-care': typeof FindCareRoute
@@ -387,6 +396,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/auth'
     | '/contact'
+    | '/data-protection'
     | '/faq'
     | '/features'
     | '/find-care'
@@ -428,6 +438,7 @@ export interface FileRouteTypes {
     | '/accessibility'
     | '/auth'
     | '/contact'
+    | '/data-protection'
     | '/faq'
     | '/features'
     | '/find-care'
@@ -470,6 +481,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/auth'
     | '/contact'
+    | '/data-protection'
     | '/faq'
     | '/features'
     | '/find-care'
@@ -513,6 +525,7 @@ export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
   AuthRoute: typeof AuthRoute
   ContactRoute: typeof ContactRoute
+  DataProtectionRoute: typeof DataProtectionRoute
   FaqRoute: typeof FaqRoute
   FeaturesRoute: typeof FeaturesRoute
   FindCareRoute: typeof FindCareRoute
@@ -571,6 +584,13 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/data-protection': {
+      id: '/data-protection'
+      path: '/data-protection'
+      fullPath: '/data-protection'
+      preLoaderRoute: typeof DataProtectionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faq': {
@@ -869,6 +889,7 @@ const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
   AuthRoute: AuthRoute,
   ContactRoute: ContactRoute,
+  DataProtectionRoute: DataProtectionRoute,
   FaqRoute: FaqRoute,
   FeaturesRoute: FeaturesRoute,
   FindCareRoute: FindCareRoute,

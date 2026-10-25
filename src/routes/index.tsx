@@ -81,13 +81,13 @@ function Home() {
       </section>
 
       <section className="container-page grid gap-8 py-20 md:grid-cols-2">
-        <div className="card-soft bg-mint p-8">
+        <div className="border-t-2 border-teal bg-mint p-8">
           <MapPin className="h-8 w-8 text-teal" />
           <h2 className="mt-4 text-2xl font-extrabold">{t("care_title")}</h2>
           <p className="mt-2 text-muted-foreground">{t("care_sub")}</p>
           <Link to="/find-care" className="btn-secondary mt-6">{t("nav_care")}</Link>
         </div>
-        <div className="card-soft bg-lavender p-8">
+        <div className="border-t-2 border-primary bg-lavender p-8">
           <Languages className="h-8 w-8 text-primary" />
           <h2 className="mt-4 text-2xl font-extrabold">{t("lang_title")}</h2>
           <p className="mt-2 text-muted-foreground">{t("lang_sub")}</p>
@@ -113,8 +113,8 @@ function Home() {
         <FaqList />
       </section>
 
-      <section className="container-page pt-16">
-        <div className="relative overflow-hidden rounded-[2rem] bg-gradient-brand p-10 text-primary-foreground md:p-14">
+      <section className="mt-16 bg-primary text-primary-foreground">
+        <div className="container-page relative overflow-hidden py-12 md:py-16">
           <h2 className="max-w-xl text-3xl font-extrabold md:text-4xl">{t("cta_title")}</h2>
           <p className="mt-3 max-w-lg opacity-90">{t("cta_sub")}</p>
           <div className="mt-6 flex flex-wrap gap-3">

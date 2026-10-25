@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { BookOpen, CalendarHeart, Baby, Sprout, Salad, NotebookPen, ShieldCheck, Lock, Download, ChevronDown } from "lucide-react";
+import { BookOpen, CalendarHeart, Baby, Sprout, Salad, NotebookPen, ShieldCheck, Lock, Download, ChevronDown, ChevronRight } from "lucide-react";
 import { useI18n, type TKey } from "@/lib/i18n";
 import { faqs } from "@/lib/content";
 
@@ -17,11 +17,11 @@ export function Features() {
   return (
     <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {featureList.map(({ k, d, icon: Icon, bg, to }) => (
-        <Link key={k} to={to} className="card-soft group p-6 transition hover:-translate-y-1 hover:shadow-soft">
-          <span className={`grid h-14 w-14 place-items-center rounded-2xl ${bg} shadow-emboss`}>
+        <Link key={k} to={to} data-tone={bg.replace('bg-', '')} className="card-soft feature-card group flex flex-col p-6">
+          <span className={`grid h-12 w-12 place-items-center rounded-lg ${bg}`}>
             <Icon className="h-7 w-7 text-primary" />
           </span>
-          <h3 className="mt-5 text-lg font-bold">{t(k)}</h3>
+          <div className="mt-5 flex items-start justify-between gap-3"><h3 className="text-lg font-bold">{t(k)}</h3><ChevronRight className="feature-chevron mt-1 size-5 shrink-0 text-primary" /></div>
           <p className="mt-2 text-sm text-muted-foreground">{t(d)}</p>
         </Link>
       ))}
@@ -35,7 +35,7 @@ export function HowSteps() {
   return (
     <ol className="grid gap-5 md:grid-cols-3">
       {steps.map(([h, d], i) => (
-        <li key={h} className="card-soft p-6">
+        <li key={h} className="step-item py-6 pr-6">
           <span className="grid h-10 w-10 place-items-center rounded-full bg-primary font-extrabold text-primary-foreground shadow-emboss">{i + 1}</span>
           <h3 className="mt-4 text-lg font-bold">{t(h)}</h3>
           <p className="mt-2 text-sm text-muted-foreground">{t(d)}</p>

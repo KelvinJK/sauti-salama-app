@@ -18,7 +18,7 @@ function Learn() {
       <PageHero title={t("learn_title")} sub={t("learn_sub")} />
       <section className="container-page grid gap-5 py-14 sm:grid-cols-2 lg:grid-cols-3">
         {articles.map((a) => (
-          <Link key={a.slug} to="/learn/$slug" params={{ slug: a.slug }} className="card-soft overflow-hidden transition hover:-translate-y-1">
+          <Link key={a.slug} to="/learn/$slug" params={{ slug: a.slug }} className="card-soft overflow-hidden transition-colors hover:border-primary">
             <div className={`h-3 ${tone[a.topic]}`} />
             <div className="p-6">
               <p className="text-xs font-bold uppercase tracking-wider text-secondary">{a.topic}</p>

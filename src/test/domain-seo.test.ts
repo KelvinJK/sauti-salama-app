@@ -20,7 +20,7 @@ describe('Domain visibility and install scope', () => {
   });
   it('includes public pages and excludes all personal and auth pages from the sitemap', () => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
-    expect(sitemapStaticPaths(router)).toEqual(['/', '/about', '/accessibility', '/contact', '/faq', '/features', '/find-care', '/how-it-works', '/learn', '/partners', '/privacy', '/terms']);
+    expect(sitemapStaticPaths(router)).toEqual(['/', '/about', '/accessibility', '/contact', '/data-protection', '/faq', '/features', '/find-care', '/how-it-works', '/learn', '/partners', '/privacy', '/terms']);
     for (const route of Object.values(router.routesById)) {
       if (route.fullPath.startsWith('/app') || ['/auth', '/reset-password'].includes(route.fullPath)) {
         expect(isSitemapRouteIncluded(route)).toBe(false);
