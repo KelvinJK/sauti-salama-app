@@ -1,4 +1,4 @@
-# SautiSalama roadmap
+# Sauti Salama roadmap
 ## Production domain split
 - [x] Host redirects and production-aware website/app/legal links
 - [x] App-only manifest scope and public-only SEO, sitemap and robots

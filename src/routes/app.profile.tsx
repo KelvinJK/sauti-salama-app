@@ -15,7 +15,7 @@ import { useAppText } from '@/lib/app-copy';
 import { readProfile, saveProfile, exportAccount, deleteAccount } from '@/lib/app.functions';
 import { isAdult } from '@/lib/app-model';
 import { appSeo as seo } from '@/lib/seo';
-export const Route = createFileRoute('/app/profile')({ staticData: { sitemap: false }, head: () => seo('My profile & privacy settings', 'Manage your SautiSalama profile, download your records or delete your account.'), component: Profile });
+export const Route = createFileRoute('/app/profile')({ staticData: { sitemap: false }, head: () => seo('My profile & privacy settings', 'Manage your Sauti Salama profile, download your records or delete your account.'), component: Profile });
 function Profile(){
 const text=useAppText();const {lang,setLang}=useI18n();const {user,loading}=useAppAuth();const navigate=useNavigate();const queryClient=useQueryClient();
 const read=useServerFn(readProfile),save=useServerFn(saveProfile),download=useServerFn(exportAccount),remove=useServerFn(deleteAccount);

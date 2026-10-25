@@ -13,7 +13,7 @@ import { useAppAuth } from '@/components/app/AuthProvider';
 import { isAdult } from '@/lib/app-model';
 import { AppShell, PageTitle } from '@/components/app/AppShell';
 import { appSeo as seo } from '@/lib/seo';
-export const Route = createFileRoute('/auth')({ staticData: { sitemap: false }, validateSearch: (s: Record<string, unknown>): { next?: string } => typeof s['next'] === 'string' ? { next: s['next'] } : {}, head: () => seo('Sign in or create an account', 'Secure SautiSalama accounts for adults aged 18 and older.'), component: Auth });
+export const Route = createFileRoute('/auth')({ staticData: { sitemap: false }, validateSearch: (s: Record<string, unknown>): { next?: string } => typeof s['next'] === 'string' ? { next: s['next'] } : {}, head: () => seo('Sign in or create an account', 'Secure Sauti Salama accounts for adults aged 18 and older.'), component: Auth });
 function Auth() {
   const text = useAppText(); const navigate = useNavigate(); const { user } = useAppAuth();
   const { next: rawNext } = Route.useSearch();

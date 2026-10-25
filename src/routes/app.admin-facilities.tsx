@@ -79,7 +79,7 @@ function AdminFacilities() {
 
   if (authLoading || (user && roleLoading)) return <p className="py-8 text-muted-foreground">{text('Loading…', 'Inapakia…')}</p>;
   if (!user) return <><PageTitle title={text('Manage facilities', 'Dhibiti vituo')} /><p className="py-8 text-muted-foreground">{text('Sign in to continue.', 'Ingia ili kuendelea.')}</p></>;
-  if (role !== true) return <><PageTitle title={text('Manage facilities', 'Dhibiti vituo')} /><p className="py-8 text-muted-foreground">{text('This area is only for the SautiSalama review team.', 'Sehemu hii ni kwa timu ya ukaguzi ya SautiSalama tu.')}</p></>;
+  if (role !== true) return <><PageTitle title={text('Manage facilities', 'Dhibiti vituo')} /><p className="py-8 text-muted-foreground">{text('This area is only for the Sauti Salama review team.', 'Sehemu hii ni kwa timu ya ukaguzi ya Sauti Salama tu.')}</p></>;
 
   return (
     <>

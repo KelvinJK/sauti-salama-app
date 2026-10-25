@@ -83,7 +83,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "SautiSalama" },
+      { title: "Sauti Salama" },
       { name: "description", content: "Women's health, motherhood and family wellbeing in Kiswahili and English." },
       { name: "theme-color", content: "#7139E8" },
       { property: "og:type", content: "website" },

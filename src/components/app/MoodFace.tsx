@@ -1,4 +1,4 @@
-// Soft illustrated round faces in the SautiSalama palette (no emoji).
+// Soft illustrated round faces in the Sauti Salama palette (no emoji).
 type Face = { fill: string; mouth: string; eyes?: 'dot' | 'closed' | 'happy' | 'wide'; brows?: 'angry' | 'worried' | 'none'; tear?: boolean; blush?: boolean };
 const faces: Record<string, Face> = {
   joyful: { fill: 'var(--color-peach, #FFD9C2)', mouth: 'M20 37 Q32 50 44 37 Z', eyes: 'happy', blush: true },

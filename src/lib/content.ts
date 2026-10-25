@@ -104,8 +104,8 @@ export const articles: Article[] = [
 ];
 
 export const faqs: { q: Record<Lang, string>; a: Record<Lang, string> }[] = [
-  { q: { en: "Is SautiSalama free?", sw: "Je, SautiSalama ni bure?" }, a: { en: "Educational content is free to read without an account.", sw: "Maudhui ya elimu ni bure kusoma bila akaunti." } },
-  { q: { en: "Does SautiSalama replace my doctor?", sw: "Je, SautiSalama inachukua nafasi ya daktari?" }, a: { en: "No. It provides information and helps you find care. It does not diagnose, treat or prescribe.", sw: "Hapana. Inatoa taarifa na kukusaidia kupata huduma. Haitambui, haitibu wala kuandika dawa." } },
+  { q: { en: "Is Sauti Salama free?", sw: "Je, Sauti Salama ni bure?" }, a: { en: "Educational content is free to read without an account.", sw: "Maudhui ya elimu ni bure kusoma bila akaunti." } },
+  { q: { en: "Does Sauti Salama replace my doctor?", sw: "Je, Sauti Salama inachukua nafasi ya daktari?" }, a: { en: "No. It provides information and helps you find care. It does not diagnose, treat or prescribe.", sw: "Hapana. Inatoa taarifa na kukusaidia kupata huduma. Haitambui, haitibu wala kuandika dawa." } },
   { q: { en: "Who can create an account?", sw: "Nani anaweza kufungua akaunti?" }, a: { en: "During the pilot, accounts are for adults aged 18 and older.", sw: "Katika majaribio, akaunti ni kwa watu wazima wenye miaka 18 na zaidi." } },
   { q: { en: "Who can see my information?", sw: "Nani anaweza kuona taarifa zangu?" }, a: { en: "Only you, unless you explicitly consent to share specific information with a facility.", sw: "Wewe tu, isipokuwa ukitoa idhini ya kushiriki taarifa maalum na kituo." } },
   { q: { en: "Can I use it in Kiswahili?", sw: "Naweza kuitumia kwa Kiswahili?" }, a: { en: "Yes. Switch between Kiswahili and English anytime from the menu.", sw: "Ndiyo. Badilisha kati ya Kiswahili na Kiingereza wakati wowote kwenye menyu." } },

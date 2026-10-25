@@ -2,9 +2,9 @@ import { SITE_URL } from './domains';
 
 export const seo = (title: string, description: string, path?: string) => ({
   meta: [
-    { title: `${title} | SautiSalama` },
+    { title: `${title} | Sauti Salama` },
     { name: "description", content: description },
-    { property: "og:title", content: `${title} | SautiSalama` },
+    { property: "og:title", content: `${title} | Sauti Salama` },
     { property: "og:description", content: description },
     { property: "og:type", content: "website" },
     { name: "twitter:card", content: "summary_large_image" },

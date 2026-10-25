@@ -14,7 +14,7 @@ const oauth = () => (supabase.auth as unknown as { oauth: OAuthApi }).oauth;
 
 export const Route = createFileRoute("/.lovable/oauth/consent")({ staticData: { sitemap: false },
   ssr: false,
-  head: () => appSeo('Connect an app', 'Review and approve an agent connection to your SautiSalama account.'),
+  head: () => appSeo('Connect an app', 'Review and approve an agent connection to your Sauti Salama account.'),
   validateSearch: (s: Record<string, unknown>) => ({
     authorization_id: typeof s["authorization_id"] === "string" ? s["authorization_id"] : "",
   }),
@@ -60,9 +60,9 @@ function Consent() {
   return (
     <main className="mx-auto flex min-h-screen max-w-md flex-col justify-center p-6">
       <div className="rounded-2xl border bg-card p-6 shadow-sm">
-        <h1 className="text-2xl font-bold">Connect {name} to SautiSalama</h1>
+        <h1 className="text-2xl font-bold">Connect {name} to Sauti Salama</h1>
         {details?.email && <p className="mt-2 text-sm text-muted-foreground">Signed in as {details.email}</p>}
-        <p className="mt-4">This lets {name} use SautiSalama as you: read your saved records, add journal entries and find verified facilities.</p>
+        <p className="mt-4">This lets {name} use Sauti Salama as you: read your saved records, add journal entries and find verified facilities.</p>
         {details?.redirect_uri && <p className="mt-2 break-all text-xs text-muted-foreground">Returns to: {details.redirect_uri}</p>}
         <p className="mt-4 text-sm text-muted-foreground">This does not bypass this app's permissions. Only your own records are accessible.</p>
         {error && <p role="alert" className="mt-4 text-sm text-destructive">{error}</p>}
