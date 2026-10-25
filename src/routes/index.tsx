@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { MapPin, Languages, CalendarHeart, Droplet, Smile } from "lucide-react";
+import { MapPin, Languages, CalendarHeart, Droplet, Smile, Home as HomeIcon, BookOpen, Activity, HeartHandshake, Menu as MenuIcon } from "lucide-react";
 import mascot from "@/assets/mascot.png";
 import { SiteLayout, Logo } from "@/components/site/SiteLayout";
 import { Features, HowSteps, PrivacyPoints, FaqList, SectionHead } from "@/components/site/sections";
@@ -39,7 +39,14 @@ function PhonePreview() {
         ))}
       </div>
       <div className="mt-3 rounded-2xl bg-peach p-3 text-xs font-semibold">Antenatal visit · reminder</div>
-      <p className="mt-3 text-center text-[10px] text-muted-foreground">Illustrative sample data</p>
+      <div className="mt-4 flex items-start justify-between border-t border-border pt-3">
+        {[{ i: HomeIcon, l: "Home" }, { i: BookOpen, l: "Learn" }, { i: Activity, l: "Track" }, { i: HeartHandshake, l: "Care" }, { i: MenuIcon, l: "Menu" }].map(({ i: I, l }, k) => (
+          <div key={l} className="flex flex-1 flex-col items-center gap-1">
+            <I className={`h-4 w-4 ${k === 0 ? "text-primary" : "text-muted-foreground"}`} />
+            <span className={`text-[9px] font-bold ${k === 0 ? "text-primary" : "text-muted-foreground"}`}>{l}</span>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
