@@ -89,6 +89,7 @@ function Header() {
 function Footer() {
   const { t } = useI18n();
   const cols = [
+    [
       { to: "/about", l: "About" },
       { to: "/features", l: t("nav_features") },
       { to: "/how-it-works", l: t("nav_how") },
