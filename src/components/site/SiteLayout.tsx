@@ -3,6 +3,7 @@ import { useState, type ReactNode } from "react";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/logo-mark.png";
 import { useI18n, type Lang } from "@/lib/i18n";
+import { DomainLink } from '@/components/DomainLink';
 
 export function Logo() {
   return (
@@ -60,7 +61,7 @@ function Header() {
         </nav>
         <div className="flex items-center gap-3">
           <LangToggle />
-          <Link to="/app" className="btn-primary hidden !py-2.5 text-sm sm:inline-flex">{t("open_app")}</Link>
+          <DomainLink destination="app" to="/app" className="btn-primary hidden !py-2.5 text-sm sm:inline-flex">{t("open_app")}</DomainLink>
           <button className="lg:hidden" onClick={() => setOpen(!open)} aria-label="Menu" aria-expanded={open}>
             {open ? <X /> : <Menu />}
           </button>
@@ -73,7 +74,7 @@ function Header() {
               {l.l}
             </Link>
           ))}
-          <Link to="/app" onClick={() => setOpen(false)} className="btn-primary mt-2">{t("open_app")}</Link>
+          <DomainLink destination="app" to="/app" onClick={() => setOpen(false)} className="btn-primary mt-2">{t("open_app")}</DomainLink>
         </nav>
       )}
     </header>

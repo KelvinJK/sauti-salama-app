@@ -4,8 +4,8 @@ import { FaqList } from "@/components/site/sections";
 import { useI18n } from "@/lib/i18n";
 import { seo } from "@/lib/seo";
 
-export const Route = createFileRoute("/faq")({
-  head: () => seo("FAQ", "Answers to common questions about SautiSalama, privacy and accounts."),
+export const Route = createFileRoute("/faq")({ staticData: { sitemap: true },
+  head: () => seo("FAQ", "Answers to common questions about SautiSalama, privacy and accounts.", "/faq"),
   component: () => {
     const { t } = useI18n();
     return (

@@ -4,15 +4,19 @@ import mascot from "@/assets/mascot.png";
 import { SiteLayout, Logo } from "@/components/site/SiteLayout";
 import { Features, HowSteps, PrivacyPoints, FaqList, SectionHead } from "@/components/site/sections";
 import { useI18n } from "@/lib/i18n";
+import { SITE_URL } from '@/lib/domains';
+import { DomainLink } from '@/components/DomainLink';
 import { Button } from '@/components/ui/button';
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/")({ staticData: { sitemap: true },
   head: () => ({
+    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
     meta: [
       { title: "SautiSalama — Your health. Your voice. Your choice." },
       { name: "description", content: "Women's health, motherhood and family wellbeing in Kiswahili and English. Learn, track and find care in Tanzania." },
       { property: "og:title", content: "SautiSalama — Your health. Your voice. Your choice." },
       { property: "og:description", content: "Women's health, motherhood and family wellbeing in Kiswahili and English." },
+      { property: "og:url", content: `${SITE_URL}/` },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -53,7 +57,7 @@ function Home() {
             </h1>
             <p className="mt-6 max-w-lg text-lg text-muted-foreground">{t("hero_sub")}</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link to="/app" className="btn-primary">{t("hero_cta")}</Link>
+              <DomainLink destination="app" to="/app" className="btn-primary">{t("hero_cta")}</DomainLink>
               <Link to="/how-it-works" className="btn-secondary">{t("hero_cta2")}</Link>
             </div>
           </div>
@@ -115,7 +119,7 @@ function Home() {
           <p className="mt-3 max-w-lg opacity-90">{t("cta_sub")}</p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link to="/learn" className="btn-secondary">{t("browse_learn")}</Link>
-            <Link to="/app" className="btn-secondary">{t("open_app")}</Link>
+            <DomainLink destination="app" to="/app" className="btn-secondary">{t("open_app")}</DomainLink>
           </div>
           <img src={mascot} alt="" loading="lazy" width={1024} height={1024} className="absolute -bottom-6 right-4 hidden w-40 md:block" />
         </div>

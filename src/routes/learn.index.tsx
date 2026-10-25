@@ -4,8 +4,8 @@ import { articles } from "@/lib/content";
 import { useI18n } from "@/lib/i18n";
 import { seo } from "@/lib/seo";
 
-export const Route = createFileRoute("/learn/")({
-  head: () => seo("Health education library", "Free reproductive, maternal and child health articles in Kiswahili and English."),
+export const Route = createFileRoute("/learn/")({ staticData: { sitemap: true },
+  head: () => seo("Health education library", "Free reproductive, maternal and child health articles in Kiswahili and English.", "/learn"),
   component: Learn,
 });
 

@@ -1,14 +1,46 @@
 User-agent: Googlebot
 Allow: /
+Disallow: /app
+Disallow: /auth
+Disallow: /reset-password
+Disallow: /mcp
+Disallow: /.lovable/
+Disallow: /.well-known/
 
 User-agent: Bingbot
 Allow: /
+Disallow: /app
+Disallow: /auth
+Disallow: /reset-password
+Disallow: /mcp
+Disallow: /.lovable/
+Disallow: /.well-known/
 
 User-agent: Twitterbot
 Allow: /
+Disallow: /app
+Disallow: /auth
+Disallow: /reset-password
+Disallow: /mcp
+Disallow: /.lovable/
+Disallow: /.well-known/
 
 User-agent: facebookexternalhit
 Allow: /
+Disallow: /app
+Disallow: /auth
+Disallow: /reset-password
+Disallow: /mcp
+Disallow: /.lovable/
+Disallow: /.well-known/
 
 User-agent: *
 Allow: /
+Disallow: /app
+Disallow: /auth
+Disallow: /reset-password
+Disallow: /mcp
+Disallow: /.lovable/
+Disallow: /.well-known/
+
+Sitemap: https://sautisalama.health/sitemap.xml
