@@ -1,8 +1,8 @@
 # SautiSalama roadmap
 ## Production domain split
-- [ ] Host redirects and production-aware website/app/legal links
-- [ ] App-only manifest scope and public-only SEO, sitemap and robots
-- [ ] Verify redirects, navigation and search metadata
+- [x] Host redirects and production-aware website/app/legal links
+- [x] App-only manifest scope and public-only SEO, sitemap and robots
+- [x] Verify redirect rules (12 tests), preview/mapped-production navigation and 17 public sitemap entries; Vite rejects production Host overrides, so deployed middleware verification remains a deployment check
 - [ ] Auth Site URL and redirect allow-list — user-editable Cloud settings; awaiting owner update
 
 - [x] A — Foundation, design system, landing page, EN/SW, public pages, install manifest
