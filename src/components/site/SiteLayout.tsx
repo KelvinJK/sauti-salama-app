@@ -121,9 +121,12 @@ function Footer() {
           </ul>
         ))}
       </div>
-      <div className="container-page border-t border-plum-foreground/15 py-6 text-xs opacity-75">
-        <p>{t("disclaimer")}</p>
-        <p className="mt-2">© {new Date().getFullYear()} SautiSalama. {t("footer_rights")}</p>
+      <div className="container-page flex flex-wrap items-center justify-between gap-4 border-t border-plum-foreground/15 py-6 text-xs opacity-75">
+        <div>
+          <p>{t("disclaimer")}</p>
+          <p className="mt-2">© {new Date().getFullYear()} SautiSalama. {t("footer_rights")}</p>
+        </div>
+        <LangToggle />
       </div>
     </footer>
   );
