@@ -11,7 +11,7 @@ export function Logo() {
     <Link to="/" className="flex items-center gap-2" aria-label="Sauti Salama home">
       <img src={logo} alt="" width={40} height={24} className="h-6 w-auto" />
       <span className="text-lg font-extrabold tracking-tight text-plum dark:text-foreground">
-        Sauti<span className="text-secondary">Salama</span>
+        Sauti{" "}<span className="text-secondary">Salama</span>
       </span>
     </Link>
   );
