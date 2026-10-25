@@ -57,14 +57,14 @@ export async function unlockVault(owner: string, pin: string, confirm?: string) 
     if (pin !== confirm || !validPin(pin)) throw new Error('The six-digit PINs must match.');
     const salt = crypto.getRandomValues(new Uint8Array(16));
     const key = await deriveKey(pin, salt);
-    meta = { salt, verifier: await encrypt(key, 'SautiSalama vault'), attempts: 0, retryAt: 0 };
+    meta = { salt, verifier: await encrypt(key, 'Sauti Salama vault'), attempts: 0, retryAt: 0 };
     await storage(`${owner}:meta`, { value: meta });
     return key;
   }
   if (Date.now() < meta.retryAt) throw new Error(`Wait ${Math.ceil((meta.retryAt - Date.now()) / 1000)} seconds before trying again.`);
   const key = await deriveKey(pin, meta.salt);
   try {
-    if (await decrypt(key, meta.verifier) !== 'SautiSalama vault') throw new Error('Incorrect PIN');
+    if (await decrypt(key, meta.verifier) !== 'Sauti Salama vault') throw new Error('Incorrect PIN');
   } catch {
     const next = attemptState(meta.attempts, Date.now());
     await storage(`${owner}:meta`, { value: { ...meta, ...next } });
@@ -117,8 +117,8 @@ async function prfKey(credentialId: Uint8Array, salt: Uint8Array) {
 export async function enrollBiometric(owner: string, pin: string) {
   if (!validPin(pin)) throw new Error('Use six digits.');
   const credential = await navigator.credentials.create({ publicKey: {
-    rp: { name: 'SautiSalama' },
-    user: { id: crypto.getRandomValues(new Uint8Array(16)), name: 'SautiSalama private space', displayName: 'SautiSalama' },
+    rp: { name: 'Sauti Salama' },
+    user: { id: crypto.getRandomValues(new Uint8Array(16)), name: 'Sauti Salama private space', displayName: 'Sauti Salama' },
     challenge: crypto.getRandomValues(new Uint8Array(32)),
     pubKeyCredParams: [{ type: 'public-key', alg: -7 }, { type: 'public-key', alg: -257 }],
     authenticatorSelection: { authenticatorAttachment: 'platform', userVerification: 'required', residentKey: 'discouraged' },

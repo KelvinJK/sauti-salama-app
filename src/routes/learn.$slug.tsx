@@ -12,7 +12,7 @@ export const Route = createFileRoute("/learn/$slug")({ staticData: { sitemap: tr
     return { article };
   },
   head: ({ loaderData }) =>
-    loaderData ? seo(loaderData.article.title.en, loaderData.article.summary.en, `/learn/${loaderData.article.slug}`) : { meta: [{ title: "Article | SautiSalama" }, { name: "robots", content: "noindex" }] },
+    loaderData ? seo(loaderData.article.title.en, loaderData.article.summary.en, `/learn/${loaderData.article.slug}`) : { meta: [{ title: "Article | Sauti Salama" }, { name: "robots", content: "noindex" }] },
   component: ArticlePage,
 });
 

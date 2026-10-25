@@ -8,7 +8,7 @@ import { DomainLink } from '@/components/DomainLink';
 
 export function Logo() {
   return (
-    <Link to="/" className="flex items-center gap-2" aria-label="SautiSalama home">
+    <Link to="/" className="flex items-center gap-2" aria-label="Sauti Salama home">
       <img src={logo} alt="" width={40} height={24} className="h-6 w-auto" />
       <span className="text-lg font-extrabold tracking-tight text-plum dark:text-foreground">
         Sauti<span className="text-secondary">Salama</span>
@@ -111,7 +111,7 @@ function Footer() {
     <footer className="mt-24 bg-plum text-plum-foreground">
       <div className="container-page grid gap-10 py-14 md:grid-cols-4">
         <div>
-          <p className="text-xl font-extrabold">SautiSalama</p>
+          <p className="text-xl font-extrabold">Sauti Salama</p>
           <p className="mt-2 text-sm opacity-80">{t("positioning")}</p>
         </div>
         {cols.map((c, i) => (
@@ -125,7 +125,7 @@ function Footer() {
       <div className="container-page flex flex-wrap items-center justify-between gap-4 border-t border-plum-foreground/15 py-6 text-xs opacity-75">
         <div>
           <p>{t("disclaimer")}</p>
-          <p className="mt-2">© {new Date().getFullYear()} SautiSalama. {t("footer_rights")}</p>
+          <p className="mt-2">© {new Date().getFullYear()} Sauti Salama. {t("footer_rights")}</p>
         </div>
         <LangToggle />
       </div>

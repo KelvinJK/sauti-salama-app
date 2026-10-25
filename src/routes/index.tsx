@@ -12,9 +12,9 @@ export const Route = createFileRoute("/")({ staticData: { sitemap: true },
   head: () => ({
     links: [{ rel: "canonical", href: `${SITE_URL}/` }],
     meta: [
-      { title: "SautiSalama — Your health. Your voice. Your choice." },
+      { title: "Sauti Salama — Your health. Your voice. Your choice." },
       { name: "description", content: "Women's health, motherhood and family wellbeing in Kiswahili and English. Learn, track and find care in Tanzania." },
-      { property: "og:title", content: "SautiSalama — Your health. Your voice. Your choice." },
+      { property: "og:title", content: "Sauti Salama — Your health. Your voice. Your choice." },
       { property: "og:description", content: "Women's health, motherhood and family wellbeing in Kiswahili and English." },
       { property: "og:url", content: `${SITE_URL}/` },
       { property: "og:type", content: "website" },
@@ -63,7 +63,7 @@ function Home() {
           </div>
           <div className="relative">
             <PhonePreview />
-            <img src={mascot} alt="SautiSalama companion" width={1024} height={1024} className="absolute -bottom-6 -left-2 w-32 md:w-40" />
+            <img src={mascot} alt="Sauti Salama companion" width={1024} height={1024} className="absolute -bottom-6 -left-2 w-32 md:w-40" />
           </div>
         </div>
       </section>
