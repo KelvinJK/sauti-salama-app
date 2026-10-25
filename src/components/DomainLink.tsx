@@ -1,8 +1,12 @@
 import { Link } from '@tanstack/react-router';
-import { useEffect, useState, type AnchorHTMLAttributes } from 'react';
+import { useEffect, useState, type ReactNode, type MouseEventHandler } from 'react';
 import { domainHref } from '@/lib/domains';
 
-type Props = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, 'href'> & {
+type Props = {
+  children?: ReactNode;
+  className?: string;
+  onClick?: MouseEventHandler<HTMLAnchorElement>;
+  'aria-label'?: string;
   to: '/' | '/app' | '/privacy' | '/terms' | '/learn';
   destination: 'site' | 'app';
 };
