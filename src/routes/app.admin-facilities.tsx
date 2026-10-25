@@ -7,12 +7,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useAppText } from '@/lib/app-copy';
 import { useAppAuth } from '@/components/app/AuthProvider';
-import { seo } from '@/lib/seo';
+import { appSeo as seo } from '@/lib/seo';
 import { supabase } from '@/integrations/supabase/client';
 import { hasRole } from '@/lib/admin.functions';
 import { facilitySchema, facilityServices, facilityServiceCopy, type Facility, type FacilityService } from '@/lib/facilities';
 
-export const Route = createFileRoute('/app/admin-facilities')({
+export const Route = createFileRoute('/app/admin-facilities')({ staticData: { sitemap: false },
   head: () => seo('Manage facilities', 'Admin review and verification of care directory listings.'),
   component: AdminFacilities,
 });

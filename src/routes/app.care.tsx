@@ -9,12 +9,12 @@ import { SHOW_EXAMPLE_FACILITIES } from '@/lib/feature-flags';
 import { PageTitle } from '@/components/app/AppShell';
 import { Button } from '@/components/ui/button';
 import { useAppText } from '@/lib/app-copy';
-import { seo } from '@/lib/seo';
+import { appSeo as seo } from '@/lib/seo';
 import { supabase } from '@/integrations/supabase/client';
 import { facilityServices, facilityServiceCopy, formatPhoneHref, type Facility, type FacilityService } from '@/lib/facilities';
 import { UrgentHelpBanner } from '@/components/app/Safety';
 
-export const Route = createFileRoute('/app/care')({
+export const Route = createFileRoute('/app/care')({ staticData: { sitemap: false },
   head: () => seo('Find care in Tanzania', 'Browse verified health facilities and filter by district and services.'),
   component: CareHub,
 });

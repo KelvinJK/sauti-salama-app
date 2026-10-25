@@ -4,8 +4,8 @@ import { HowSteps } from "@/components/site/sections";
 import { useI18n } from "@/lib/i18n";
 import { seo } from "@/lib/seo";
 
-export const Route = createFileRoute("/how-it-works")({
-  head: () => seo("How it works", "Learn freely, create a private space and find the right care with SautiSalama."),
+export const Route = createFileRoute("/how-it-works")({ staticData: { sitemap: true },
+  head: () => seo("How it works", "Learn freely, create a private space and find the right care with SautiSalama.", "/how-it-works"),
   component: () => {
     const { t } = useI18n();
     return (

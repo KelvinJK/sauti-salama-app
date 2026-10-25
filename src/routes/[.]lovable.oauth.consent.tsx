@@ -11,7 +11,7 @@ type OAuthApi = {
 };
 const oauth = () => (supabase.auth as unknown as { oauth: OAuthApi }).oauth;
 
-export const Route = createFileRoute("/.lovable/oauth/consent")({
+export const Route = createFileRoute("/.lovable/oauth/consent")({ staticData: { sitemap: false },
   ssr: false,
   head: () => ({ meta: [{ title: "Connect an app to SautiSalama" }, { name: "robots", content: "noindex" }] }),
   validateSearch: (s: Record<string, unknown>) => ({

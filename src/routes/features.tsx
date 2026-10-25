@@ -4,8 +4,8 @@ import { Features } from "@/components/site/sections";
 import { useI18n } from "@/lib/i18n";
 import { seo } from "@/lib/seo";
 
-export const Route = createFileRoute("/features")({
-  head: () => seo("Features", "Reproductive health, cycle tracking, maternal care, child growth, nutrition and a private journal."),
+export const Route = createFileRoute("/features")({ staticData: { sitemap: true },
+  head: () => seo("Features", "Reproductive health, cycle tracking, maternal care, child growth, nutrition and a private journal.", "/features"),
   component: () => {
     const { t } = useI18n();
     return (

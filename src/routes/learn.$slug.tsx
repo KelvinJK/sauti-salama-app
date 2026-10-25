@@ -5,14 +5,14 @@ import { articles } from "@/lib/content";
 import { useI18n } from "@/lib/i18n";
 import { seo } from "@/lib/seo";
 
-export const Route = createFileRoute("/learn/$slug")({
+export const Route = createFileRoute("/learn/$slug")({ staticData: { sitemap: true },
   loader: ({ params }) => {
     const article = articles.find((a) => a.slug === params.slug);
     if (!article) throw notFound();
     return { article };
   },
   head: ({ loaderData }) =>
-    loaderData ? seo(loaderData.article.title.en, loaderData.article.summary.en) : { meta: [{ title: "Article | SautiSalama" }, { name: "robots", content: "noindex" }] },
+    loaderData ? seo(loaderData.article.title.en, loaderData.article.summary.en, `/learn/${loaderData.article.slug}`) : { meta: [{ title: "Article | SautiSalama" }, { name: "robots", content: "noindex" }] },
   component: ArticlePage,
 });
 
