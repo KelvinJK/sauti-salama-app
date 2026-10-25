@@ -88,9 +88,7 @@ function Header() {
 
 function Footer() {
   const { t } = useI18n();
-  return (
-  <footer className="mt-24 bg-plum text-plum-foreground">
-    [
+  const cols = [
       { to: "/about", l: "About" },
       { to: "/features", l: t("nav_features") },
       { to: "/how-it-works", l: t("nav_how") },
