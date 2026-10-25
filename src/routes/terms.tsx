@@ -23,8 +23,8 @@ function Terms() {
     <h2>{text('Pilot availability', 'Upatikanaji wakati wa majaribio')}</h2>
     <p>{text('Tools marked Coming soon are not yet available. Example facility listings are test data, not real care destinations. The app is not an emergency response service.', 'Zana zilizoandikwa Zinakuja hivi karibuni bado hazipatikani. Orodha za vituo vya mfano ni taarifa za majaribio, si maeneo halisi ya kupata huduma. Programu si huduma ya kushughulikia dharura.')}</p>
     <p className="rounded-lg bg-mint p-4 text-base font-semibold">{text('In an emergency, call 112 or go to the nearest health facility.', 'Katika dharura, piga 112 au nenda kituo cha afya kilicho karibu.')}</p>
-    <h2>{text('Privacy and legal review', 'Faragha na ukaguzi wa kisheria')}</h2>
-    <p>{text('Read the privacy and data protection policies for storage and privacy controls. Final terms still need the responsible organisation’s identity and reviewed provisions for applicable law, complaints and liability.', 'Soma sera za faragha na ulinzi wa data kuhusu hifadhi na udhibiti wa faragha. Masharti ya mwisho bado yanahitaji utambulisho wa taasisi inayowajibika na vipengele vilivyokaguliwa kuhusu sheria husika, malalamiko na dhima.')}</p>
+    <h2>{text('Privacy and questions', 'Faragha na maswali')}</h2>
+    <p>{text('Read the privacy and data protection policies for how records are stored and which privacy controls you have. If a question about these terms is not answered here, contact the team.', 'Soma sera za faragha na ulinzi wa data kuhusu jinsi kumbukumbu zinavyohifadhiwa na udhibiti wa faragha unaopatikana. Ikiwa swali kuhusu masharti haya halijajibiwa hapa, wasiliana na timu.')}</p>
     <p><Link to="/privacy" className="font-semibold text-primary underline underline-offset-4">{text('Privacy policy', 'Sera ya faragha')}</Link></p>
   </InfoPage>;
 }

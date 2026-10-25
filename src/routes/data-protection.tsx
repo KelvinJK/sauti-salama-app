@@ -22,8 +22,8 @@ function DataProtection() {
     <p>{text('Device-only storage locks after five minutes in the background. Five incorrect PIN attempts trigger a 30-second wait. Quick exit clears the in-memory unlock key; it does not erase browser history or previously downloaded files.', 'Hifadhi ya kifaa hufungwa baada ya dakika tano programu ikiwa chinichini. Majaribio matano ya PIN isiyo sahihi husababisha kusubiri sekunde 30. Kutoka haraka huondoa ufunguo wa muda; hakufuti historia ya kivinjari au faili zilizopakuliwa awali.')}</p>
     <h2>{text('Your controls', 'Udhibiti wako')}</h2>
     <p>{text('Use the privacy controls in your profile to export or delete your records. Downloads are outside the protected app storage, so keep them secure. Referrals remain unavailable until a consent-based sharing process is ready.', 'Tumia udhibiti wa faragha kwenye wasifu kupakua au kufuta kumbukumbu zako. Faili zilizopakuliwa ziko nje ya hifadhi iliyolindwa ya programu, hivyo zilinde. Rufaa bado hazipatikani hadi mchakato wa kushiriki kwa idhini uwe tayari.')}</p>
-    <h2>{text('Policy review and questions', 'Ukaguzi wa sera na maswali')}</h2>
-    <p>{text('Before launch, this draft must be reviewed and completed with the responsible organisation, retention periods and a dedicated privacy contact.', 'Kabla ya uzinduzi, rasimu hii inapaswa kukaguliwa na kukamilishwa kwa kutaja taasisi inayowajibika, muda wa kuhifadhi taarifa na mawasiliano maalumu ya faragha.')}</p>
+    <h2>{text('Questions about this policy', 'Maswali kuhusu sera hii')}</h2>
+    <p>{text('If a question about how your records are protected is not answered here, contact the team.', 'Ikiwa swali kuhusu jinsi kumbukumbu zako zinavyolindwa halijajibiwa hapa, wasiliana na timu.')}</p>
     <p><Link to="/privacy" className="font-semibold text-primary underline underline-offset-4">{text('Privacy policy', 'Sera ya faragha')}</Link> · <Link to="/contact" className="font-semibold text-primary underline underline-offset-4">{text('Contact the team', 'Wasiliana na timu')}</Link></p>
   </InfoPage>;
 }
