@@ -7,6 +7,7 @@ import { ThemeToggle } from '@/components/ThemeProvider';
 import { DomainLink } from '@/components/DomainLink';
 import { Button } from '@/components/ui/button';
 import { SocialIcons } from './SocialIcons';
+import { OFFICE_MAP_URL } from '@/lib/office';
 
 export function Logo() {
   return (
@@ -121,7 +122,7 @@ function Footer() {
             <span className="text-xl font-extrabold">Sauti <span className="text-footer-accent">Salama</span></span>
           </Link>
           <p className="max-w-xs text-sm leading-relaxed text-footer-muted">{t("positioning")}</p>
-          <a href="https://maps.app.goo.gl/54UWyBLi3qX3Mhb29" target="_blank" rel="noopener noreferrer" className="inline-flex items-start gap-2 text-sm text-footer-muted hover:text-footer-foreground">
+          <a href={OFFICE_MAP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-start gap-2 text-sm text-footer-muted hover:text-footer-foreground">
             <MapPin className="mt-0.5 size-4 shrink-0 text-footer-accent" /><span>{label('Our office', 'Ofisi yetu')}<span className="mt-1 block font-semibold text-footer-foreground">Dar es Salaam, Tanzania</span></span><ArrowUpRight className="size-4" />
           </a>
           <SocialIcons />
