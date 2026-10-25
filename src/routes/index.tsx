@@ -39,7 +39,6 @@ function PhonePreview() {
         ))}
       </div>
       <div className="mt-3 rounded-2xl bg-peach p-3 text-xs font-semibold">Antenatal visit · reminder</div>
-      <p className="mt-3 text-center text-[10px] text-muted-foreground">Illustrative sample data</p>
     </div>
   );
 }
