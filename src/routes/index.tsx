@@ -26,7 +26,7 @@ export const Route = createFileRoute("/")({ staticData: { sitemap: true },
 
 function PhonePreview() {
   return (
-    <div className="relative mx-auto w-[270px] rounded-[2.5rem] border-[10px] border-plum bg-background p-4 shadow-soft">
+    <div className="relative mx-auto w-[270px] rounded-[2.5rem] border-[10px] border-plum bg-background p-4 shadow-soft dark:border-primary/40">
       <div className="flex items-center justify-between"><Logo /></div>
       <p className="mt-4 text-sm text-muted-foreground">Habari, Amina 👋</p>
       <div className="mt-3 rounded-2xl bg-gradient-brand p-4 text-primary-foreground">
@@ -38,7 +38,7 @@ function PhonePreview() {
           <div key={k} className={`grid h-16 place-items-center rounded-2xl ${b} shadow-emboss`}><I className="h-6 w-6 text-primary" /></div>
         ))}
       </div>
-      <div className="mt-3 rounded-2xl bg-peach p-3 text-xs font-semibold">Antenatal visit · reminder</div>
+      <div className="mt-3 rounded-2xl bg-peach p-3 text-xs font-semibold text-foreground">Antenatal visit · reminder</div>
       <div className="mt-4 flex items-start justify-between border-t border-border pt-3">
         {[{ i: HomeIcon, l: "Home" }, { i: BookOpen, l: "Learn" }, { i: Activity, l: "Track" }, { i: HeartHandshake, l: "Care" }, { i: MenuIcon, l: "Menu" }].map(({ i: I, l }, k) => (
           <div key={l} className="flex flex-1 flex-col items-center gap-1">
@@ -80,7 +80,7 @@ function Home() {
         <Features />
       </section>
 
-      <section id="how" className="bg-cream py-20">
+      <section id="how" className="bg-cream py-20 dark:bg-muted/40">
         <div className="container-page">
           <SectionHead title={t("how_title")} />
           <HowSteps />
@@ -88,13 +88,13 @@ function Home() {
       </section>
 
       <section className="container-page grid gap-8 py-20 md:grid-cols-2">
-        <div className="border-t-2 border-teal bg-mint p-8">
+        <div className="border-t-2 border-teal bg-mint p-8 dark:bg-mint/30">
           <MapPin className="h-8 w-8 text-teal" />
           <h2 className="mt-4 text-2xl font-extrabold">{t("care_title")}</h2>
           <p className="mt-2 text-muted-foreground">{t("care_sub")}</p>
           <Link to="/find-care" className="btn-secondary mt-6">{t("nav_care")}</Link>
         </div>
-        <div className="border-t-2 border-primary bg-lavender p-8">
+        <div className="border-t-2 border-primary bg-lavender p-8 dark:bg-lavender/30">
           <Languages className="h-8 w-8 text-primary" />
           <h2 className="mt-4 text-2xl font-extrabold">{t("lang_title")}</h2>
           <p className="mt-2 text-muted-foreground">{t("lang_sub")}</p>
@@ -102,7 +102,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="bg-plum py-20 text-plum-foreground">
+      <section className="bg-plum py-20 text-plum-foreground dark:bg-card dark:text-card-foreground">
         <div className="container-page">
           <h2 className="text-3xl font-extrabold md:text-4xl">{t("privacy_title")}</h2>
           <p className="mt-3 max-w-2xl opacity-85">{t("privacy_sub")}</p>
