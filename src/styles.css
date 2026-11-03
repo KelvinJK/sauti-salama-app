@@ -86,7 +86,6 @@
   --footer-border: oklch(0.98 0.006 290 / 0.18);
   --logo-surface: oklch(1 0 0);
 
-  /* Mood face colors (light) */
   --mood-joyful: #FFD9C2;
   --mood-calm: #CFF3E6;
   --mood-grateful: #FBD3E3;
@@ -110,32 +109,39 @@
 }
 
 .dark {
-  --background: oklch(0.18 0.045 295);
-  --foreground: oklch(0.97 0.015 300);
-  --card: oklch(0.24 0.055 295);
-  --card-foreground: oklch(0.97 0.015 300);
-  --popover: oklch(0.24 0.055 295);
-  --popover-foreground: oklch(0.97 0.015 300);
-  --primary: oklch(0.72 0.16 290);
-  --primary-foreground: oklch(0.14 0.04 295);
-  --secondary: oklch(0.75 0.16 45);
-  --secondary-foreground: oklch(0.14 0.04 295);
-  --muted: oklch(0.28 0.045 295);
-  --muted-foreground: oklch(0.78 0.03 300);
-  --accent: oklch(0.34 0.07 290);
-  --accent-foreground: oklch(0.96 0.015 300);
-  --border: oklch(1 0 0 / 14%);
-  --input: oklch(1 0 0 / 16%);
-  --ring: oklch(0.72 0.16 290);
-  --plum: oklch(0.92 0.04 290);
-  --lavender: oklch(0.42 0.08 290);
-  --pink: oklch(0.42 0.07 0);
-  --peach: oklch(0.45 0.06 50);
-  --mint: oklch(0.42 0.06 165);
-  --cream: oklch(0.26 0.035 300);
-  --site-surface: oklch(0.22 0.04 290);
+  --background: oklch(0.16 0.04 295);
+  --foreground: oklch(0.97 0.012 300);
+  --card: oklch(0.22 0.05 295);
+  --card-foreground: oklch(0.97 0.012 300);
+  --popover: oklch(0.22 0.05 295);
+  --popover-foreground: oklch(0.97 0.012 300);
+  --primary: oklch(0.74 0.15 290);
+  --primary-foreground: oklch(0.12 0.03 295);
+  --secondary: oklch(0.76 0.15 45);
+  --secondary-foreground: oklch(0.12 0.03 295);
+  --muted: oklch(0.26 0.04 295);
+  --muted-foreground: oklch(0.76 0.025 300);
+  --accent: oklch(0.32 0.06 290);
+  --accent-foreground: oklch(0.96 0.012 300);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.74 0.15 290);
+  --plum: oklch(0.94 0.03 290);
+  --plum-foreground: oklch(0.16 0.04 295);
+  --lavender: oklch(0.38 0.07 290);
+  --pink: oklch(0.38 0.06 0);
+  --peach: oklch(0.40 0.055 50);
+  --mint: oklch(0.36 0.055 165);
+  --teal: oklch(0.68 0.10 175);
+  --cream: oklch(0.20 0.03 300);
+  --site-surface: oklch(0.19 0.035 290);
+  --footer: oklch(0.13 0.04 295);
+  --footer-foreground: oklch(0.97 0.012 300);
+  --footer-muted: oklch(0.72 0.02 290);
+  --footer-accent: oklch(0.78 0.13 48);
+  --footer-border: oklch(1 0 0 / 10%);
+  --logo-surface: oklch(0.22 0.05 295);
 
-  /* Brighter, higher-contrast mood faces in dark mode */
   --mood-joyful: #FFB08A;
   --mood-calm: #8EE0C8;
   --mood-grateful: #F5A8CC;
@@ -151,16 +157,18 @@
   --mood-blush: #FF7A3D;
   --mood-mouth-fill: #1a1028;
   --mood-ink: #f5f0ff;
+
+  --gradient-soft: linear-gradient(160deg, oklch(0.28 0.06 290), oklch(0.24 0.05 0) 55%, oklch(0.26 0.04 50));
+  --shadow-soft: 0 12px 32px -16px color-mix(in oklab, var(--primary) 25%, transparent);
+  --shadow-emboss: inset 0 1px 0 oklch(1 0 0 / 0.06), 0 6px 16px -10px color-mix(in oklab, black 40%, transparent);
 }
 
-/* Mood faces inherit ink color so they stay readable in both themes */
-.mood-face {
-  color: var(--mood-ink);
-}
+.mood-face { color: var(--mood-ink); }
 
 @layer base {
   * { border-color: var(--color-border); }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; color-scheme: light; }
+  .dark { color-scheme: dark; }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -218,6 +226,9 @@
   background: color-mix(in oklab, var(--feature-tone) 32%, var(--card));
   transition: border-color 180ms ease, background-color 180ms ease;
 }
+.dark .public-site .feature-card {
+  background: color-mix(in oklab, var(--feature-tone) 40%, var(--card));
+}
 .feature-card[data-tone="lavender"] { --feature-tone: var(--lavender); }
 .feature-card[data-tone="pink"] { --feature-tone: var(--pink); }
 .feature-card[data-tone="peach"] { --feature-tone: var(--peach); }
@@ -230,6 +241,7 @@
 .feature-card:hover .feature-chevron { transform: translateX(3px); }
 .public-site .step-item { border-top: 1px solid var(--border); }
 .footer-watermark { opacity: 0.07; }
+.dark .footer-watermark { opacity: 0.04; }
 .public-site .site-page-heading h1 { overflow-wrap: anywhere; }
 @media (prefers-reduced-motion: reduce) {
   .public-site *, .public-site *::before, .public-site *::after { transition: none !important; }
