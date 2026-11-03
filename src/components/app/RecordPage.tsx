@@ -19,7 +19,6 @@ import { usePrivateRecords } from './usePrivateRecords';
 import { MoodPicker } from './MoodPicker';
 import { TrackTabs } from './TrackTabs';
 import { UrgentHelpBanner } from './Safety';
-import { ComingSoon } from './ComingSoon';
 
 export function RecordPage({ kind, title, subtitle, initialMood = '', view = 'both' }: { kind: RecordKind; title: [string,string]; subtitle: [string,string]; initialMood?: string; view?: 'both'|'list'|'form' }) {
   const text = useAppText(); const { lang } = useI18n(); const navigate = useNavigate();
@@ -49,7 +48,7 @@ export function RecordPage({ kind, title, subtitle, initialMood = '', view = 'bo
     catch { setError(text('Could not delete. Please retry.','Imeshindikana kufuta. Jaribu tena.')); }
   }
   return <>{maternal && <UrgentHelpBanner />}{(kind === 'cycle' || kind === 'journal') && <TrackTabs />}<PageTitle title={text(...title)} sub={text(...subtitle)} />
-    {maternal ? <><div className="mb-6 flex flex-wrap gap-3"><Button asChild variant="outline"><Link to="/app/antenatal">{text('Antenatal planner','Mpango wa kliniki')}</Link></Button><Button asChild variant="outline"><Link to="/app/postnatal">{text('Postnatal care','Baada ya kujifungua')}</Link></Button></div><ComingSoon /></> : <>
+    {maternal && <div className="mb-6 flex flex-wrap gap-3"><Button asChild variant="outline"><Link to="/app/antenatal">{text('Antenatal planner','Mpango wa kliniki')}</Link></Button><Button asChild variant="outline"><Link to="/app/postnatal">{text('Postnatal care','Baada ya kujifungua')}</Link></Button></div>}
     {kind === 'child' && <Button asChild variant="outline" className="mb-6"><Link to="/app/growth"><Plus />{text('Growth measurements','Vipimo vya ukuaji')}</Link></Button>}
     <p className="mb-5 flex items-center gap-2 text-sm text-muted-foreground"><LockKeyhole className="size-4" />{text(records.user ? 'Private account records' : 'Records stay on this device only',records.user ? 'Kumbukumbu binafsi za akaunti' : 'Kumbukumbu zinabaki kwenye kifaa hiki tu')}</p>
     {records.loading && <p role="status" className="mb-4">{text('Loading your private space…','Inapakia nafasi yako binafsi…')}</p>}
@@ -73,6 +72,6 @@ export function RecordPage({ kind, title, subtitle, initialMood = '', view = 'bo
       </form>
     </div>}
     {showList && <section className={showForm ? "mt-10 border-t pt-7" : ""}><h2 className="mb-5 text-xl font-bold">{text(kind === 'journal' ? 'Your entries' : 'Your records',kind === 'journal' ? 'Maingizo yako' : 'Kumbukumbu zako')}</h2>{!rows.length ? <p className="text-muted-foreground">{text(kind === 'journal' ? 'No entries yet' : 'No records yet.',kind === 'journal' ? 'Bado hakuna maingizo' : 'Bado hakuna kumbukumbu.')}</p>:<ul className="divide-y">{rows.map(r => <li key={r.id} className="flex items-start justify-between gap-4 py-5"><div className="min-w-0"><p className="text-xs text-muted-foreground">{r.record_date}</p><h3 className="mt-1 break-words font-bold">{r.title}</h3>{!!r.details['mood'] && <p className="mt-2 flex items-center gap-2 text-sm"><MoodFace mood={String(r.details['mood'])} size={28} />{moodLabel(String(r.details['mood']))}</p>}{!!r.details['weight'] && <p>{String(r.details['weight'])} kg · {String(r.details['height'])} cm</p>}{!!r.details['notes'] && <p className="mt-2 whitespace-pre-wrap break-words text-sm text-muted-foreground">{String(r.details['notes'])}</p>}</div><Button variant="ghost" size="icon" className="min-h-11 min-w-11 shrink-0" aria-label={text('Delete record','Futa kumbukumbu')} onClick={() => deleteOne(r.id)}><Trash2 className="text-destructive" /></Button></li>)}</ul>}</section>}</>}
-    </>}
+    
   </>;
 }

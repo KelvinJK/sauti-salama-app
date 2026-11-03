@@ -24,18 +24,18 @@ const ALL = 'all';
 type HubRow = { to?: '/app/pregnancy' | '/app/antenatal' | '/app/postnatal' | '/app/children' | '/app/nutrition' | '/app/find-care' | '/app/referrals' | '/app/assistant'; icon: LucideIcon; bg: string; t: [string, string]; s: [string, string]; soon?: boolean };
 const hubSections: Array<{ t: [string, string]; rows: HubRow[] }> = [
   { t: ['Maternal care', 'Huduma ya mama'], rows: [
-    { to: '/app/pregnancy', icon: Baby, bg: 'bg-peach', t: ['Pregnancy journey', 'Safari ya ujauzito'], s: ['Week-by-week information for you and baby', 'Taarifa za kila wiki kwako na mtoto'], soon: true },
-    { to: '/app/antenatal', icon: CalendarCheck, bg: 'bg-lavender', t: ['Antenatal planner', 'Mpango wa kliniki'], s: ['Plan and remember clinic visits', 'Panga na kumbuka mahudhurio ya kliniki'], soon: true },
-    { to: '/app/postnatal', icon: HeartHandshake, bg: 'bg-pink', t: ['Postnatal support', 'Msaada baada ya kujifungua'], s: ['Care for you after birth', 'Huduma kwako baada ya kujifungua'], soon: true },
+    { to: '/app/pregnancy', icon: Baby, bg: 'bg-peach', t: ['Pregnancy journey', 'Safari ya ujauzito'], s: ['Week-by-week information for you and baby', 'Taarifa za kila wiki kwako na mtoto'] },
+    { to: '/app/antenatal', icon: CalendarCheck, bg: 'bg-lavender', t: ['Antenatal planner', 'Mpango wa kliniki'], s: ['Plan and remember clinic visits', 'Panga na kumbuka mahudhurio ya kliniki'] },
+    { to: '/app/postnatal', icon: HeartHandshake, bg: 'bg-pink', t: ['Postnatal support', 'Msaada baada ya kujifungua'], s: ['Care for you after birth', 'Huduma kwako baada ya kujifungua'] },
   ] },
   { t: ['Child health', 'Afya ya mtoto'], rows: [
     { to: '/app/children', icon: Sprout, bg: 'bg-mint', t: ['Child profiles', 'Wasifu wa watoto'], s: ['Private profiles and growth measurements', 'Wasifu binafsi na vipimo vya ukuaji'] },
-    { to: '/app/nutrition', icon: Salad, bg: 'bg-peach', t: ['Nutrition library', 'Maktaba ya lishe'], s: ['Healthy meals for the family', 'Milo bora kwa familia'], soon: true },
+    { to: '/app/nutrition', icon: Salad, bg: 'bg-peach', t: ['Nutrition library', 'Maktaba ya lishe'], s: ['Healthy meals for the family', 'Milo bora kwa familia'] },
   ] },
   { t: ['Get support', 'Pata msaada'], rows: [
     { to: '/app/find-care', icon: MapPin, bg: 'bg-mint', t: ['Find care', 'Tafuta huduma'], s: ['Search facilities by district and service', 'Tafuta vituo kwa wilaya na huduma'] },
-    { to: '/app/referrals', icon: Send, bg: 'bg-lavender', t: ['My referrals', 'Rufaa zangu'], s: ['Share details only with your consent', 'Shiriki taarifa kwa idhini yako tu'], soon: true },
-    { to: '/app/assistant', icon: MessageCircle, bg: 'bg-pink', t: ['Private assistant', 'Msaidizi binafsi'], s: ['Ask health questions privately', 'Uliza maswali ya afya kwa faragha'], soon: true },
+    { to: '/app/referrals', icon: Send, bg: 'bg-lavender', t: ['My referrals', 'Rufaa zangu'], s: ['Share details only with your consent', 'Shiriki taarifa kwa idhini yako tu'] },
+    { to: '/app/assistant', icon: MessageCircle, bg: 'bg-pink', t: ['Private assistant', 'Msaidizi binafsi'], s: ['Ask health questions privately', 'Uliza maswali ya afya kwa faragha'] },
   ] },
 ];
 function CareHub() {
