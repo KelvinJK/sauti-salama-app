@@ -29,6 +29,20 @@
       "when": 1792840093541,
       "tag": "0003_facility_hours_examples",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1793742800000,
+      "tag": "0004_real_facilities",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1793742900000,
+      "tag": "0005_more_real_facilities",
+      "breakpoints": true
     }
   ]
 }
