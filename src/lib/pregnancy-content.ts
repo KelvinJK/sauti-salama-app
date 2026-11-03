@@ -36,12 +36,30 @@ export const pregnancyWeeks: WeekInfo[] = [
     }
   },
   {
+    week: 16,
+    title: { en: "Week 16: Second trimester", sw: "Wiki 16: Theluthi ya pili" },
+    summary: { en: "Many people feel better as nausea eases. Baby is moving more.", sw: "Wengi wanajisikia vizuri zaidi kichefuchefu kinapopungua. Mtoto anacheza zaidi." },
+    tips: {
+      en: ["Start gentle exercise if cleared by your provider.", "Eat iron-rich foods.", "Discuss any concerns at your next visit."],
+      sw: ["Anza mazoezi mepesi ikiwa mhudumu amekubali.", "Kula vyakula vyenye chuma.", "Jadili wasiwasi wowote kwenye ziara ijayo."]
+    }
+  },
+  {
     week: 20,
     title: { en: "Week 20: Halfway there", sw: "Wiki 20: Nusu ya njia" },
     summary: { en: "You may feel baby movements. Ultrasound often done around now.", sw: "Unaweza kuhisi mtoto akicheza. Ultrasound mara nyingi hufanywa sasa." },
     tips: {
       en: ["Note baby movements and report changes.", "Discuss birth preferences with your provider.", "Wear comfortable clothes."],
       sw: ["Angalia michezo ya mtoto na ripoti mabadiliko.", "Jadili mapendeleo ya kujifungua na mhudumu.", "Vaa nguo zenye starehe."]
+    }
+  },
+  {
+    week: 24,
+    title: { en: "Week 24: Growing stronger", sw: "Wiki 24: Anakua nguvu" },
+    summary: { en: "Baby's lungs are developing. You may notice more kicks.", sw: "Mapafu ya mtoto yanaendelea. Unaweza kugundua mikwaju zaidi." },
+    tips: {
+      en: ["Count fetal movements daily.", "Attend all scheduled visits.", "Sleep on your side when possible."],
+      sw: ["Hesabu michezo ya mtoto kila siku.", "Hudhuria ziara zote zilizopangwa.", "Lala upande unapoweza."]
     }
   },
   {
@@ -54,12 +72,30 @@ export const pregnancyWeeks: WeekInfo[] = [
     }
   },
   {
+    week: 32,
+    title: { en: "Week 32: Getting ready", sw: "Wiki 32: Kujitayarisha" },
+    summary: { en: "Baby is gaining weight and practicing breathing movements.", sw: "Mtoto anaongeza uzito na kufanya mazoezi ya kupumua." },
+    tips: {
+      en: ["Pack a hospital bag early.", "Learn signs of preterm labour.", "Stay active with short walks."],
+      sw: ["Andaa begi la hospitali mapema.", "Jifunze ishara za uchungu wa mapema.", "Endelea kuwa hai na matembezi mafupi."]
+    }
+  },
+  {
     week: 36,
     title: { en: "Week 36: Almost ready", sw: "Wiki 36: Karibu tayari" },
     summary: { en: "Baby is nearly full term. Weekly visits often start.", sw: "Mtoto ni karibu kamili. Ziara za kila wiki mara nyingi zinaanza." },
     tips: {
       en: ["Know the signs of labour.", "Pack your hospital bag.", "Discuss pain relief options."],
       sw: ["Jua ishara za uchungu.", "Andaa begi la hospitali.", "Jadili chaguo za kupunguza maumivu."]
+    }
+  },
+  {
+    week: 40,
+    title: { en: "Week 40: Due date", sw: "Wiki 40: Tarehe ya kujifungua" },
+    summary: { en: "Many babies arrive around now. Stay in touch with your care provider.", sw: "Watoto wengi huzaliwa karibu sasa. Endelea kuwasiliana na mhudumu wako." },
+    tips: {
+      en: ["Watch for regular contractions or water breaking.", "Rest and stay nourished.", "Go to the facility when advised."],
+      sw: ["Angalia mikazo ya kawaida au maji kuvunjika.", "Pumzika na kula vizuri.", "Nenda kituo unapoambiwa."]
     }
   }
 ];
