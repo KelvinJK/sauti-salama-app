@@ -16,12 +16,12 @@
 - [ ] B — Accounts (18+), profiles, roles, privacy controls (Cloud connected)
 - [ ] C — Education library management + clinical review workflow
 - [ ] D — Cycle tracking
-- [ ] E — Pregnancy, antenatal, postnatal
+- [x] E — Pregnancy, antenatal, postnatal (basic private records enabled)
 - [ ] F — Child profiles & growth
-- [ ] G — Nutrition & recipes
+- [~] G — Nutrition library (articles shown)
 - [ ] H — Private journal
 - [~] I — Facility directory built (public verified-only listings, district/service filters, admin verification page at /app/admin-facilities); consented referrals still pending; no facilities listed until real ones are verified
-- [ ] J — AI health information assistant
+- [~] J — Private assistant (local educational responses)
 - [ ] K — Staff/admin portals, testing, launch readiness
 
 ## Uploaded fixes — guest privacy and app clarity
