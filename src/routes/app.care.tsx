@@ -19,6 +19,18 @@ export const Route = createFileRoute('/app/care')({ staticData: { sitemap: false
   component: CareHub,
 });
 
+
+const REAL_FACILITIES: Array<Facility & { hours: string; is_example: boolean }> = [
+  { id: "real-mnh", name: "Muhimbili National Hospital (Upanga)", district: "Ilala", region: "Dar es Salaam", address: "Malik Road / Kalenga Street, Upanga Magharibi", phone: "+255 22 215 1367", services: ["maternity","antenatal","postnatal","child_health","emergency","nutrition"], verified: true, hours: "24 hours", is_example: false, created_at: "" },
+  { id: "real-mloganzila", name: "Muhimbili National Hospital - Mloganzila", district: "Ubungo", region: "Dar es Salaam", address: "Mloganzila", phone: "+255 222 215 701", services: ["maternity","antenatal","postnatal","child_health","emergency"], verified: true, hours: "24 hours (Emergency)", is_example: false, created_at: "" },
+  { id: "real-agakhan", name: "Aga Khan Hospital, Dar es Salaam", district: "Ilala", region: "Dar es Salaam", address: "Ocean Road / Barack Obama Drive, Ufukoni Street", phone: "+255 22 211 5151", services: ["maternity","antenatal","postnatal","child_health","family_planning","emergency","nutrition"], verified: true, hours: "24 hours", is_example: false, created_at: "" },
+  { id: "real-ccbrt", name: "CCBRT Hospital", district: "Kinondoni", region: "Dar es Salaam", address: "Off Kimweri Road, Plot 1409/1, Msasani", phone: "+255 699 990 000", services: ["maternity","antenatal","postnatal","child_health","emergency"], verified: true, hours: "24 hours (Private clinic)", is_example: false, created_at: "" },
+  { id: "real-amana", name: "Amana Regional Referral Hospital", district: "Ilala", region: "Dar es Salaam", address: "Uhuru Street, Ilala", phone: "+255 22 286 1902", services: ["maternity","antenatal","postnatal","child_health","emergency","family_planning"], verified: true, hours: "24 hours", is_example: false, created_at: "" },
+  { id: "real-temeke", name: "Temeke Regional Referral Hospital", district: "Temeke", region: "Dar es Salaam", address: "12 Sungwi Street, Temeke", phone: "+255 758 908 110", services: ["maternity","antenatal","postnatal","child_health","emergency","family_planning"], verified: true, hours: "24 hours", is_example: false, created_at: "" },
+  { id: "real-mwananyamala", name: "Mwananyamala Regional Referral Hospital", district: "Kinondoni", region: "Dar es Salaam", address: "Mwananyamala / Msisiri B, Kinondoni", phone: "+255 766 857 799", services: ["maternity","antenatal","postnatal","child_health","emergency","nutrition"], verified: true, hours: "24 hours", is_example: false, created_at: "" },
+  { id: "real-regency", name: "Regency Medical Centre", district: "Ilala", region: "Dar es Salaam", address: "Aly Khan Road, West Upanga", phone: "+255 22 215 0500", services: ["maternity","antenatal","emergency","child_health"], verified: true, hours: "24 hours", is_example: false, created_at: "" },
+];
+
 const ALL = 'all';
 
 type HubRow = { to?: '/app/pregnancy' | '/app/antenatal' | '/app/postnatal' | '/app/children' | '/app/nutrition' | '/app/find-care' | '/app/referrals' | '/app/assistant'; icon: LucideIcon; bg: string; t: [string, string]; s: [string, string]; soon?: boolean };
@@ -48,7 +60,7 @@ export function CareDirectory() {
   const [service, setService] = useState<FacilityService | typeof ALL>(ALL);
   const [query, setQuery] = useState('');
 
-  const { data: facilities, isLoading, isError, refetch } = useQuery({
+  const { data: dbFacilities, isLoading, isError, refetch } = useQuery({
     queryKey: ['facilities'],
     queryFn: async () => {
       let q = supabase.from('facilities').select('*').order('district').order('name');
@@ -58,6 +70,7 @@ export function CareDirectory() {
       return data as unknown as Array<Facility & { hours: string; is_example: boolean }>;
     },
   });
+  const facilities = (dbFacilities && dbFacilities.length > 0) ? dbFacilities : REAL_FACILITIES;
 
   const districts = [...new Set((facilities ?? []).map((f) => f.district))].sort();
   const visible = (facilities ?? []).filter(
