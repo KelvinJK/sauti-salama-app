@@ -1,0 +1,36 @@
+services:
+  sauti-salama:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: sauti-salama
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  # Optional: add Mentora Tanzania as a second service if you containerize it.
+  # Uncomment and adjust the build/image and port once Mentora has its own Dockerfile.
+  #
+  # mentora:
+  #   image: mentora-tanzania:latest   # or build: ./mentora
+  #   container_name: mentora
+  #   restart: unless-stopped
+  #   ports:
+  #     - "8080:80"
+  #   # volumes, env, etc.
+
+# Optional shared network if you want Nginx on the host or in another container to reach both
+networks:
+  default:
+    name: sauti-mentora-net
