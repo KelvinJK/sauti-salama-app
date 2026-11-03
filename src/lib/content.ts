@@ -101,6 +101,42 @@ export const articles: Article[] = [
       ],
     },
   },
+  {
+    slug: "iron-rich-foods",
+    topic: "nutrition",
+    title: { en: "Iron-rich foods for strength", sw: "Vyakula vyenye chuma kwa nguvu" },
+    summary: { en: "Foods that help prevent anaemia, especially important in pregnancy and for children.", sw: "Vyakula vinavyosaidia kuzuia upungufu wa damu, muhimu hasa katika ujauzito na kwa watoto." },
+    body: {
+      en: [
+        "Iron helps your body carry oxygen. Sources include beans, lentils, dark leafy greens, meat and fortified foods.",
+        "Vitamin C from fruits like oranges or tomatoes can help your body absorb iron better.",
+        "Speak with a health worker before taking iron supplements.",
+      ],
+      sw: [
+        "Chuma husaidia mwili kubeba oksijeni. Vyanzo ni pamoja na maharage, dengu, mboga za majani meusi, nyama na vyakula vilivyoongezwa.",
+        "Vitamin C kutoka matunda kama machungwa au nyanya inaweza kusaidia mwili kuchukua chuma vizuri zaidi.",
+        "Ongea na mhudumu wa afya kabla ya kutumia virutubisho vya chuma.",
+      ],
+    },
+  },
+  {
+    slug: "staying-hydrated",
+    topic: "nutrition",
+    title: { en: "Staying hydrated", sw: "Kubaki na maji ya kutosha" },
+    summary: { en: "Why water matters every day for energy, digestion and health.", sw: "Kwa nini maji ni muhimu kila siku kwa nguvu, usagaji na afya." },
+    body: {
+      en: [
+        "Drink clean water throughout the day. Needs increase in hot weather, during pregnancy or while breastfeeding.",
+        "Fruits and vegetables also contribute to fluid intake.",
+        "If you feel dizzy, very tired or have dark urine, increase fluids and seek care if it continues.",
+      ],
+      sw: [
+        "Kunywa maji safi siku nzima. Mahitaji huongezeka katika hali ya joto, wakati wa ujauzito au unaponyonyesha.",
+        "Matunda na mboga pia huchangia maji mwilini.",
+        "Ukihisi kizunguzungu, uchovu mwingi au mkojo mweusi, ongeza maji na tafuta huduma ikiwa inaendelea.",
+      ],
+    },
+  },
 ];
 
 export const faqs: { q: Record<Lang, string>; a: Record<Lang, string> }[] = [
