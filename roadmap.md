@@ -15,13 +15,13 @@
 - [x] A — Foundation, design system, landing page, EN/SW, public pages, install manifest
 - [ ] B — Accounts (18+), profiles, roles, privacy controls (Cloud connected)
 - [ ] C — Education library management + clinical review workflow
-- [ ] D — Cycle tracking
-- [x] E — Pregnancy, antenatal, postnatal (basic private records enabled)
-- [ ] F — Child profiles & growth
-- [~] G — Nutrition library (articles shown)
-- [ ] H — Private journal
-- [~] I — Facility directory built (public verified-only listings, district/service filters, admin verification page at /app/admin-facilities); consented referrals still pending; no facilities listed until real ones are verified
-- [~] J — Private assistant (local educational responses)
+- [ ] D — Cycle tracking (basic private records + calendar functional)
+- [x] E — Pregnancy, antenatal, postnatal (private records + week-by-week guide enabled)
+- [ ] F — Child profiles & growth (private records functional)
+- [x] G — Nutrition library (articles shown, expanded content)
+- [ ] H — Private journal (list + new entry functional)
+- [~] I — Facility directory built (public verified-only listings, district/service filters, admin verification page at /app/admin-facilities); consented referrals functional with shareable notes
+- [x] J — Private assistant (local educational responses with keyword matching and emergency detection)
 - [ ] K — Staff/admin portals, testing, launch readiness
 
 ## Uploaded fixes — guest privacy and app clarity
@@ -46,5 +46,12 @@
 - [x] Six labelled example facilities behind a feature flag (hours, verification tag, search)
 - [x] Journal list first, form at /app/journal/new
 - [x] Illustrated mood faces, wrapping/scrolling mood row
-- [x] Home tiles: chevrons, dimmed Coming soon tiles, light assistant card
+- [x] Home tiles: chevrons, dimmed Coming soon tiles, light assistant card (Coming soon banners removed; all modules now link to functional pages)
 - [x] Bleeding as single-select chips
+
+## Recent platform improvements
+- [x] Removed all Coming soon banners from Care hub and Home dashboard
+- [x] Enabled full links for pregnancy, nutrition, assistant, referrals
+- [x] Expanded week-by-week pregnancy content (weeks 4–40)
+- [x] Added more nutrition articles (iron-rich foods, hydration)
+- [x] Functional consent-based referral note generation with facility selection
