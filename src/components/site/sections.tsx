@@ -18,7 +18,7 @@ export function Features() {
     <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
       {featureList.map(({ k, d, icon: Icon, bg, to }) => (
         <Link key={k} to={to} data-tone={bg.replace('bg-', '')} className="card-soft feature-card group flex flex-col p-6">
-          <span className={`grid h-12 w-12 place-items-center rounded-lg ${bg}`}>
+          <span className={`grid h-12 w-12 place-items-center rounded-lg ${bg} dark:bg-opacity-60`}>
             <Icon className="h-7 w-7 text-primary" />
           </span>
           <div className="mt-5 flex items-start justify-between gap-3"><h3 className="text-lg font-bold">{t(k)}</h3><ChevronRight className="feature-chevron mt-1 size-5 shrink-0 text-primary" /></div>
@@ -51,7 +51,7 @@ export function PrivacyPoints() {
   return (
     <ul className="grid gap-4 sm:grid-cols-3">
       {pts.map(([k, Icon]) => (
-        <li key={k} className="flex items-center gap-3 rounded-2xl bg-card/10 p-4 font-semibold">
+        <li key={k} className="flex items-center gap-3 rounded-2xl bg-card/10 p-4 font-semibold dark:bg-background/40">
           <Icon className="h-6 w-6 shrink-0 text-secondary" /> {t(k)}
         </li>
       ))}
