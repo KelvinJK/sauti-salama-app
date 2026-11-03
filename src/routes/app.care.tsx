@@ -20,25 +20,6 @@ export const Route = createFileRoute('/app/care')({ staticData: { sitemap: false
 });
 
 
-const REAL_FACILITIES: Array<Facility & { hours: string; is_example: boolean }> = [
-  { id: "real-mnh", name: "Muhimbili National Hospital (Upanga)", district: "Ilala", region: "Dar es Salaam", address: "Malik Road / Kalenga Street, Upanga Magharibi", phone: "+255 22 215 1367", services: ["maternity","antenatal","postnatal","child_health","emergency","nutrition"], verified: true, hours: "24 hours", is_example: false, created_at: "" },
-  { id: "real-mloganzila", name: "Muhimbili National Hospital - Mloganzila", district: "Ubungo", region: "Dar es Salaam", address: "Mloganzila", phone: "+255 222 215 701", services: ["maternity","antenatal","postnatal","child_health","emergency"], verified: true, hours: "24 hours (Emergency)", is_example: false, created_at: "" },
-  { id: "real-agakhan", name: "Aga Khan Hospital, Dar es Salaam", district: "Ilala", region: "Dar es Salaam", address: "Ocean Road / Barack Obama Drive, Ufukoni Street", phone: "+255 22 211 5151", services: ["maternity","antenatal","postnatal","child_health","family_planning","emergency","nutrition"], verified: true, hours: "24 hours", is_example: false, created_at: "" },
-  { id: "real-ccbrt", name: "CCBRT Hospital", district: "Kinondoni", region: "Dar es Salaam", address: "Off Kimweri Road, Plot 1409/1, Msasani", phone: "+255 699 990 000", services: ["maternity","antenatal","postnatal","child_health","emergency"], verified: true, hours: "24 hours (Private clinic)", is_example: false, created_at: "" },
-  { id: "real-amana", name: "Amana Regional Referral Hospital", district: "Ilala", region: "Dar es Salaam", address: "Uhuru Street, Ilala", phone: "+255 22 286 1902", services: ["maternity","antenatal","postnatal","child_health","emergency","family_planning"], verified: true, hours: "24 hours", is_example: false, created_at: "" },
-  { id: "real-temeke", name: "Temeke Regional Referral Hospital", district: "Temeke", region: "Dar es Salaam", address: "12 Sungwi Street, Temeke", phone: "+255 758 908 110", services: ["maternity","antenatal","postnatal","child_health","emergency","family_planning"], verified: true, hours: "24 hours", is_example: false, created_at: "" },
-  { id: "real-mwananyamala", name: "Mwananyamala Regional Referral Hospital", district: "Kinondoni", region: "Dar es Salaam", address: "Mwananyamala / Msisiri B, Kinondoni", phone: "+255 766 857 799", services: ["maternity","antenatal","postnatal","child_health","emergency","nutrition"], verified: true, hours: "24 hours", is_example: false, created_at: "" },
-  { id: "real-regency", name: "Regency Medical Centre", district: "Ilala", region: "Dar es Salaam", address: "Aly Khan Road, West Upanga", phone: "+255 22 215 0500", services: ["maternity","antenatal","emergency","child_health"], verified: true, hours: "24 hours", is_example: false, created_at: "" },
-  { id: "real-saifee", name: "Saifee Hospital Tanzania", district: "Kinondoni", region: "Dar es Salaam", address: "Ali Hassan Mwinyi Road, Ada Estate, Oysterbay", phone: "+255 747 535 353", services: ["maternity","antenatal","postnatal","child_health","emergency","nutrition"], verified: true, hours: "24 hours", is_example: false, created_at: "" },
-  { id: "real-kairuki", name: "Kairuki Hospital", district: "Kinondoni", region: "Dar es Salaam", address: "Chwaku Street / Plot 322, Mikocheni, Regent Estate", phone: "+255 653 723 707", services: ["maternity","antenatal","postnatal","child_health","family_planning","emergency"], verified: true, hours: "24 hours", is_example: false, created_at: "" },
-  { id: "real-hindu", name: "Shree Hindu Mandal Hospital", district: "Ilala", region: "Dar es Salaam", address: "India Street / Hindu Mandal Street, Kisutu", phone: "+255 748 519 000", services: ["maternity","antenatal","postnatal","child_health","emergency","family_planning"], verified: true, hours: "24 hours", is_example: false, created_at: "" },
-  { id: "real-jkci", name: "Jakaya Kikwete Cardiac Institute (JKCI)", district: "Ilala", region: "Dar es Salaam", address: "Kalenga Street / Malik Road, Upanga", phone: "+255 22 215 1379", services: ["emergency","child_health","nutrition"], verified: true, hours: "24 hours (Specialized)", is_example: false, created_at: "" },
-  { id: "real-moi", name: "Muhimbili Orthopaedic Institute (MOI)", district: "Ilala", region: "Dar es Salaam", address: "Kalenga Street, Upanga Magharibi", phone: "+255 22 215 1298", services: ["emergency","child_health"], verified: true, hours: "24 hours (Trauma)", is_example: false, created_at: "" },
-  { id: "real-rugambwa", name: "Cardinal Rugambwa Hospital", district: "Ilala", region: "Dar es Salaam", address: "Ukonga, Mwembe Madafu", phone: "+255 22 284 3199", services: ["maternity","antenatal","postnatal","child_health","emergency","family_planning"], verified: true, hours: "24 hours", is_example: false, created_at: "" },
-  { id: "real-london", name: "London Health Centre", district: "Kinondoni", region: "Dar es Salaam", address: "Kimweri Avenue, Msasani", phone: "+255 739 542 542", services: ["maternity","antenatal","child_health","emergency","nutrition"], verified: true, hours: "24 hours", is_example: false, created_at: "" },
-  { id: "real-lugalo", name: "Lugalo Military Hospital", district: "Kinondoni", region: "Dar es Salaam", address: "Kawe / Bagamoyo Road, Ukwamani", phone: "+255 22 292 7568", services: ["maternity","antenatal","postnatal","child_health","emergency"], verified: true, hours: "24 hours", is_example: false, created_at: "" },
-];
-
 const ALL = 'all';
 
 type HubRow = { to?: '/app/pregnancy' | '/app/antenatal' | '/app/postnatal' | '/app/children' | '/app/nutrition' | '/app/find-care' | '/app/referrals' | '/app/assistant'; icon: LucideIcon; bg: string; t: [string, string]; s: [string, string]; soon?: boolean };
@@ -71,14 +52,14 @@ export function CareDirectory() {
   const { data: dbFacilities, isLoading, isError, refetch } = useQuery({
     queryKey: ['facilities'],
     queryFn: async () => {
-      let q = supabase.from('facilities').select('*').order('district').order('name');
+      let q = supabase.from('facilities').select('*').eq('verified', true).order('district').order('name');
       if (!SHOW_EXAMPLE_FACILITIES) q = q.eq('is_example', false);
       const { data, error } = await q;
       if (error) throw error;
       return data as unknown as Array<Facility & { hours: string; is_example: boolean }>;
     },
   });
-  const facilities = (dbFacilities && dbFacilities.length > 0) ? dbFacilities : REAL_FACILITIES;
+  const facilities = dbFacilities ?? [];
 
   const districts = [...new Set((facilities ?? []).map((f) => f.district))].sort();
   const visible = (facilities ?? []).filter(
