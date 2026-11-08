@@ -5,7 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { nitro } from 'nitro/vite';
 
 // Use Vercel preset on Vercel, otherwise Node for local / VPS
-const nitroPreset = process.env.VERCEL ? 'vercel' : (process.env.SERVER_PRESET || 'node');
+const nitroPreset = process.env['VERCEL'] ? 'vercel' : (process.env['SERVER_PRESET'] || 'node');
 
 export default defineConfig({
   server: {

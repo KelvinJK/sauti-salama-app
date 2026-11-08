@@ -34,7 +34,7 @@ function Referrals(){
 
   function generateNote() {
     const records = [...(journal.rows || []), ...(pregnancy.rows || [])].slice(0, 5);
-    const summary = records.map(r => `- ${r.record_date}: ${r.title}${r.details.notes ? ' - ' + String(r.details.notes).slice(0, 100) : ''}`).join('\n');
+    const summary = records.map(r => `- ${r.record_date}: ${r.title}${r.details['notes'] ? ' - ' + String(r.details['notes']).slice(0, 100) : ''}`).join('\n');
     const facilityName = facilities?.find(f => f.id === selectedFacility)?.name || 'selected facility';
     return `Referral note for ${facilityName}\nPrepared on ${new Date().toLocaleDateString()}\n\nRecent private records (shared with consent):\n${summary || 'No records selected'}\n\nThis note was prepared by the user with explicit consent.`;
   }

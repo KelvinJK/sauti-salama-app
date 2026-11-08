@@ -45,7 +45,7 @@ function Assistant(){
     // Match pregnancy weeks
     if (!matched) {
       for (const w of pregnancyWeeks) {
-        if (q.includes(`week ${w.week}`) || q.includes(`wiki ${w.week}`) || q.includes(w.title.en.toLowerCase().split(':')[0])) {
+        if (q.includes(`week ${w.week}`) || q.includes(`wiki ${w.week}`) || q.includes(w.title.en.toLowerCase().split(':')[0] ?? w.title.en.toLowerCase())) {
           response += '\n\n**' + w.title.en + '**\n' + w.summary.en + '\nTips: ' + w.tips.en.join('; ');
           matched = true;
           break;
