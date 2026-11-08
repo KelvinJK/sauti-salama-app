@@ -1,65 +1,73 @@
 # Production configuration checklist
 
-Production uses the existing **Lovable-managed Supabase project `fnilxsxzvspfjsxpvyak`**.
-Never copy values from the staging project (`ptqifqwcpnfvpbfbmwdm`) into Production.
-Work through the sections in order; do not merge PR #3 until sections 1–3 are done.
+Sauti Salama runs on infrastructure the team owns:
 
-## 1. Vercel → Settings → Environment Variables (target: Production only)
-
-Mark every variable **Sensitive**. Values come from the Lovable Cloud project
-(Supabase → Project Settings → API), never from staging.
-
-| Variable | Value | Exposed to browser? |
+| Environment | App hosting | Database / auth |
 |---|---|---|
-| `SUPABASE_URL` | `https://fnilxsxzvspfjsxpvyak.supabase.co` | No (server) |
-| `SUPABASE_PUBLISHABLE_KEY` | production `sb_publishable_…` key | No (server) |
-| `VITE_SUPABASE_URL` | `https://fnilxsxzvspfjsxpvyak.supabase.co` | Yes (public by design) |
-| `VITE_SUPABASE_PUBLISHABLE_KEY` | production `sb_publishable_…` key | Yes (public by design, RLS-protected) |
-| `VITE_SUPABASE_PROJECT_ID` | `fnilxsxzvspfjsxpvyak` | Yes (MCP OAuth issuer) |
-| `SUPABASE_SERVICE_ROLE_KEY` | production secret key | **No — server only.** Needed only for in-app account deletion. Never prefix with `VITE_`. Never add to Preview. |
+| Production | Vercel, Production environment | Supabase project `ptqifqwcpnfvpbfbmwdm` (rename it to `sauti-salama` in the dashboard) |
+| Previews (pull requests) | Vercel, Preview environment | A separate Supabase project (never production) |
+| Local development | `bun run dev` | `supabase start` (Docker on your machine) |
 
-- [ ] All six set for **Production** only
-- [ ] None of them added to Preview or Development
-- [ ] No variable contains `ptqifqwcpnfvpbfbmwdm`
+Lovable is no longer used. Never put production keys in Preview or local `.env` files.
 
-These are required because `.env` is no longer committed; without them the
-production build has no Supabase configuration and private-app saves fail.
+## 1. Vercel environment variables
 
-## 2. Production database (via Lovable Cloud)
+Settings → Environment Variables. One set for **Production**, one set for **Preview** (all branches),
+each with values from its own Supabase project (Dashboard → Project Settings → API Keys).
 
-- [ ] Compare the live schema with `drizzle/migrations/0000`–`0005` (Lovable may have changed production directly)
-- [ ] Apply `drizzle/migrations/0006_private_rls_helpers.sql` (verified on staging; rollback script available)
-- [ ] Re-run Security Advisor: the four `*_security_definer_function_executable` warnings should clear
-- [ ] Confirm `/rest/v1/rpc/has_role` and `/rest/v1/rpc/registered_adult` return 404
-- [ ] Enable leaked-password protection if the plan allows it
-- [ ] Confirm TOTP MFA is enabled
+| Variable | Value | Notes |
+|---|---|---|
+| `VITE_SUPABASE_URL` | `https://<ref>.supabase.co` | Public, compiled into the browser bundle |
+| `VITE_SUPABASE_PUBLISHABLE_KEY` | `sb_publishable_…` | Public by design; protected by row-level security |
+| `VITE_SUPABASE_PROJECT_ID` | `<ref>` | MCP OAuth issuer |
+| `SUPABASE_URL` | same as `VITE_SUPABASE_URL` | Server functions |
+| `SUPABASE_PUBLISHABLE_KEY` | same as `VITE_SUPABASE_PUBLISHABLE_KEY` | Server functions |
+| `SUPABASE_SERVICE_ROLE_KEY` | `sb_secret_…` | **Production only, Sensitive.** Only for account deletion. Never `VITE_`, never Preview |
+
+## 2. Database
+
+```bash
+supabase link --project-ref <ref>
+supabase db push            # applies any new files in supabase/migrations/
+supabase db advisors --linked --type security
+```
+
+- [ ] `supabase db push --dry-run` reports "Remote database is up to date"
+- [ ] Security Advisor shows no function or RLS warnings
+- [ ] `POST https://<ref>.supabase.co/rest/v1/rpc/has_role` returns 404
 
 ## 3. Supabase Auth (production project)
 
-- [ ] Site URL: `https://app.sautisalama.health`
-- [ ] Redirect URLs include `https://app.sautisalama.health/**` and `https://sautisalama.health/**`
-- [ ] Google provider redirect URI matches the production domain
-- [ ] OAuth server enabled (required for MCP; currently on)
-- [ ] Email confirmation stays **on** (only staging has it off)
+- [x] Site URL `https://app.sautisalama.health`
+- [x] Redirect URLs `https://app.sautisalama.health/**`, `https://sautisalama.health/**`, `https://www.sautisalama.health/**`
+- [x] Passwords: minimum 8 characters, letters and digits
+- [x] TOTP MFA enabled
+- [ ] Custom SMTP provider (Authentication → Emails → SMTP). Supabase's built-in mailer only delivers to
+      project team members, so users cannot receive confirmation or reset emails without it
+- [ ] Then turn on **Confirm email** (Authentication → Sign In / Providers → Email)
+- [ ] Google sign-in: create OAuth credentials in Google Cloud, add them under Providers → Google
+- [ ] OAuth Server on (Authentication → OAuth Server), needed for the `/mcp` endpoint
+- [ ] Leaked-password protection (paid plan)
 
-## 4. Vercel project settings
+## 4. Vercel project
 
-- [ ] Domains `app.sautisalama.health` and `sautisalama.health` attached to the Production environment
-- [ ] Deployment Protection: decide whether Production is public (it must be for real users)
-- [ ] Review/revoke the "Protection Bypass for Automation" secret created during testing
-- [ ] Remove the redundant branch-specific Preview overrides for `fix/vercel-build-kelvinjk` (project-wide Preview already points to staging)
+- [ ] Domains `app.sautisalama.health` and `sautisalama.health` on Production; DNS pointed to Vercel
+- [ ] Deployment Protection covers previews only, so production is public
+- [ ] Revoke the "Protection Bypass for Automation" secret created during testing
+- [ ] Vercel Hobby is for non-commercial use; move to Pro if the project is commercial or funded
 
-## 5. Merge and verify (after approval)
+## 5. After merging to `main`
 
-- [ ] Merge PR #3 into `main`
 - [ ] Production build succeeds
-- [ ] Client bundle references only `fnilxsxzvspfjsxpvyak.supabase.co`
-- [ ] `/.well-known/oauth-protected-resource` advertises `https://fnilxsxzvspfjsxpvyak.supabase.co/auth/v1` and resource `https://app.sautisalama.health/mcp`
-- [ ] `/mcp` returns 401 without a token
-- [ ] Sign in with a real admin-owned test account: profile save, journal save, care navigation
-- [ ] Account deletion works (requires `SUPABASE_SERVICE_ROLE_KEY`)
+- [ ] Browser bundle references only the production project
+- [ ] `/.well-known/oauth-protected-resource` shows `https://<production-ref>.supabase.co/auth/v1`; `/mcp` returns 401 without a token
+- [ ] Sign up, profile save, journal save, care navigation, data export and account deletion all work
 
-## 6. Self-hosted VPS (only if used)
+## 6. Self-hosting instead of Vercel
 
-- [ ] Add `proxy_set_header X-Forwarded-Host $host;` to `nginx/sauti-salama.conf`
-- [ ] Provide the same variables as section 1 in the server's environment
+```bash
+cp .env.example .env      # production values
+docker compose up -d --build
+```
+
+Add `proxy_set_header X-Forwarded-Host $host;` to `nginx/sauti-salama.conf`.
