@@ -4,6 +4,9 @@ import viteReact from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
 import { nitro } from 'nitro/vite';
 
+// Use Vercel preset on Vercel, otherwise Node for local / VPS
+const nitroPreset = process.env.VERCEL ? 'vercel' : (process.env.SERVER_PRESET || 'node');
+
 export default defineConfig({
   server: {
     port: 3000,
@@ -17,7 +20,7 @@ export default defineConfig({
     tanstackStart({
       server: { entry: 'server' },
     }),
-    nitro({ preset: process.env.SERVER_PRESET || 'node' }),
+    nitro({ preset: nitroPreset }),
     viteReact(),
   ],
 });
