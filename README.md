@@ -1,84 +1,93 @@
 # Sauti Salama
 
-Women’s health, motherhood and family wellbeing platform for Tanzania — bilingual (English / Kiswahili).
+Women's health, motherhood and family wellbeing for Tanzania, in English and Kiswahili.
+Sauti Salama provides health information and care navigation only. It does not diagnose or treat.
+
+Open source under the [MIT licence](LICENSE).
+
+## What it does
+
+- **Learn**: menstrual health, pregnancy week by week, antenatal and postnatal care, nutrition, family planning
+- **Track**: private cycle log, journal, mood check-ins, pregnancy, child profiles and growth
+- **Care**: verified facility directory, urgent-help guidance (emergency number 112), referrals shared only with consent
+- **Privacy**: adults only (18+), row-level security on every private table, data export and account deletion, an optional on-device PIN lock, and a device-only encrypted vault for guests
 
 ## Stack
 
-- **Frontend**: TanStack Start + React 19 + Vite + Tailwind CSS 4
-- **Backend / Auth / DB**: Supabase
-- **Private records**: Encrypted on-device vault (PIN / optional WebAuthn)
-- **Deployment**: Node.js (Nitro) — Docker or direct on VPS
+| Layer | Technology |
+|---|---|
+| App | TanStack Start, React 19, Vite, Tailwind CSS 4 |
+| Server | Nitro (Node.js); runs on Vercel or any Node/Docker host |
+| Database, auth | [Supabase](https://supabase.com) (open-source Postgres + GoTrue), self-hostable |
+| Migrations | Supabase CLI, SQL files in `supabase/migrations/` |
+| Tests | Vitest |
 
-## Local development
+## Run it on your computer
+
+Requirements: [Bun](https://bun.sh) 1.3+, [Docker](https://www.docker.com/) running, and the [Supabase CLI](https://supabase.com/docs/guides/cli).
 
 ```bash
 git clone https://github.com/KelvinJK/sauti-salama-app.git
 cd sauti-salama-app
-cp .env.example .env
-# Fill VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY
+bun install
 
-bun install          # or npm install
-bun run dev          # or npm run dev
+# Start a local Postgres + Supabase stack. All migrations and the
+# facility directory are applied automatically.
+supabase start
+supabase status          # shows API_URL and PUBLISHABLE_KEY
+
+cp .env.example .env     # paste API_URL and PUBLISHABLE_KEY into the four values
+bun run dev              # http://localhost:3000
 ```
 
-Open http://localhost:3000
+Local services use ports 54420–54429 so they can run beside other Supabase projects.
+The database UI (Studio) is at http://127.0.0.1:54423. Stop everything with `supabase stop`.
 
 ### Scripts
 
 | Command | Description |
-|---------|-------------|
-| `bun run dev` | Start development server |
-| `bun run build` | Production build |
-| `bun run start` | Run production server (`.output/server`) |
-| `bun run preview` | Preview production build |
+|---|---|
+| `bun run dev` | Development server |
+| `bun run build` | Production build (`.output/`) |
+| `bun run start` | Run the production build |
 | `bun run test` | Run tests |
+| `bun run lint` | Lint |
+| `bunx tsc --noEmit` | Type check |
 
-## Environment variables
+## Database changes
 
-See `.env.example`. Required:
-
-- `VITE_SUPABASE_URL`
-- `VITE_SUPABASE_PUBLISHABLE_KEY`
-
-## Architecture notes
-
-- File-based routing in `src/routes/`
-- Content and bilingual strings in `src/lib/`
-- Private health records stay on the device (encrypted vault)
-- Public facility directory and education content come from Supabase + local fallbacks
-- Dark mode is class-based (`dark` on `<html>`)
-
-## Deployment (Hostinger VPS or any Node host)
-
-### Docker (recommended)
+Schema lives in `supabase/migrations/` and is the single source of truth.
 
 ```bash
-cp .env.example .env
-# edit .env
+supabase migration new describe_your_change   # write SQL in the new file
+supabase db reset                              # re-apply everything locally
+supabase db push                               # apply to the linked hosted project
+```
+
+Every table holding personal data must enable row-level security with owner-only policies.
+Helper functions used by policies belong in the non-exposed `private` schema.
+
+## Deploy
+
+**Vercel (current production).** Import the repo, add the environment variables listed in
+[`docs/PRODUCTION_CHECKLIST.md`](docs/PRODUCTION_CHECKLIST.md) for Production and Preview, and push.
+
+**Any server (Hostinger VPS, etc.).** Put the variables in `.env`, then:
+
+```bash
 docker compose up -d --build
 ```
 
-Then reverse-proxy `app.sautisalama.health` to port 3000 (see `nginx/sauti-salama.conf`).
+Reverse-proxy your domain to port 3000 (example: `nginx/sauti-salama.conf`).
+The `VITE_*` values are compiled into the browser bundle at build time; the others are read at runtime.
 
-### Direct Node
+## Documentation
 
-```bash
-bun install
-bun run build
-bun run start
-```
+- [Production checklist](docs/PRODUCTION_CHECKLIST.md)
+- [Data protection and privacy](docs/DATA_PROTECTION.md)
+- [Digital Public Goods alignment](docs/DPG_ALIGNMENT.md)
+- [Contributing](CONTRIBUTING.md) · [Code of conduct](CODE_OF_CONDUCT.md) · [Security policy](SECURITY.md)
 
-Use PM2 or systemd for process management.
+## Licence
 
-## Mobile readiness
-
-The app is a Progressive Web App (manifest included). For store distribution:
-
-1. **Fastest path**: Wrap with Capacitor (iOS + Android) — reuses the existing web codebase.
-2. **Full native**: Extract shared logic and rebuild UI in React Native or Flutter.
-
-See `HANDOFF.md` for the current outsourcing checklist.
-
-## License
-
-Private — Sauti Salama / Mentora Tanzania.
+[MIT](LICENSE). Health content is informational and must be reviewed by qualified clinicians before reuse.
