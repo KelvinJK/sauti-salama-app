@@ -56,3 +56,4 @@
 - [x] Added more nutrition articles (iron-rich foods, hydration)
 - [x] Functional consent-based referral note generation with facility selection
 - [x] AI-powered on-device search (`/app/search`) ranking articles, pregnancy weeks, facilities and FAQs; header button + home entry point
+- [x] Developer README and outsourcing/mobile handoff checklist added
