@@ -20,7 +20,11 @@ export default defineConfig({
     tanstackStart({
       server: { entry: 'server' },
     }),
-    nitro({ preset: nitroPreset }),
+    nitro({
+      preset: nitroPreset,
+      // Run Vercel functions in Dublin, next to the Supabase database (eu-west-1).
+      vercel: { functions: { regions: ['dub1'] } },
+    }),
     viteReact(),
   ],
 });
