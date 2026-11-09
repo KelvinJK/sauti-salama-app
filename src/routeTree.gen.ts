@@ -45,6 +45,7 @@ import { Route as AppPostnatalRouteImport } from './routes/app.postnatal'
 import { Route as AppPregnancyRouteImport } from './routes/app.pregnancy'
 import { Route as AppProfileRouteImport } from './routes/app.profile'
 import { Route as AppReferralsRouteImport } from './routes/app.referrals'
+import { Route as AppSearchRouteImport } from './routes/app.search'
 import { Route as LearnIndexRouteImport } from './routes/learn.index'
 import { Route as LearnSlugRouteImport } from './routes/learn.$slug'
 import { Route as DotlovableOauthConsentRouteImport } from './routes/[.]lovable.oauth.consent'
@@ -232,6 +233,11 @@ const AppReferralsRoute = AppReferralsRouteImport.update({
   path: '/referrals',
   getParentRoute: () => AppRoute,
 } as any)
+const AppSearchRoute = AppSearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => AppRoute,
+} as any)
 const LearnIndexRoute = LearnIndexRouteImport.update({
   id: '/learn/',
   path: '/learn/',
@@ -294,6 +300,7 @@ export interface FileRoutesByFullPath {
   '/app/pregnancy': typeof AppPregnancyRoute
   '/app/profile': typeof AppProfileRoute
   '/app/referrals': typeof AppReferralsRoute
+  '/app/search': typeof AppSearchRoute
   '/learn/$slug': typeof LearnSlugRoute
   '/app/': typeof AppIndexRoute
   '/learn/': typeof LearnIndexRoute
@@ -336,6 +343,7 @@ export interface FileRoutesByTo {
   '/app/pregnancy': typeof AppPregnancyRoute
   '/app/profile': typeof AppProfileRoute
   '/app/referrals': typeof AppReferralsRoute
+  '/app/search': typeof AppSearchRoute
   '/learn/$slug': typeof LearnSlugRoute
   '/app': typeof AppIndexRoute
   '/learn': typeof LearnIndexRoute
@@ -380,6 +388,7 @@ export interface FileRoutesById {
   '/app/pregnancy': typeof AppPregnancyRoute
   '/app/profile': typeof AppProfileRoute
   '/app/referrals': typeof AppReferralsRoute
+  '/app/search': typeof AppSearchRoute
   '/learn/$slug': typeof LearnSlugRoute
   '/app/': typeof AppIndexRoute
   '/learn/': typeof LearnIndexRoute
@@ -425,6 +434,7 @@ export interface FileRouteTypes {
     | '/app/pregnancy'
     | '/app/profile'
     | '/app/referrals'
+    | '/app/search'
     | '/learn/$slug'
     | '/app/'
     | '/learn/'
@@ -467,6 +477,7 @@ export interface FileRouteTypes {
     | '/app/pregnancy'
     | '/app/profile'
     | '/app/referrals'
+    | '/app/search'
     | '/learn/$slug'
     | '/app'
     | '/learn'
@@ -510,6 +521,7 @@ export interface FileRouteTypes {
     | '/app/pregnancy'
     | '/app/profile'
     | '/app/referrals'
+    | '/app/search'
     | '/learn/$slug'
     | '/app/'
     | '/learn/'
@@ -796,6 +808,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppReferralsRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/search': {
+      id: '/app/search'
+      path: '/search'
+      fullPath: '/app/search'
+      preLoaderRoute: typeof AppSearchRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/learn/': {
       id: '/learn/'
       path: '/learn'
@@ -852,6 +871,7 @@ interface AppRouteChildren {
   AppPregnancyRoute: typeof AppPregnancyRoute
   AppProfileRoute: typeof AppProfileRoute
   AppReferralsRoute: typeof AppReferralsRoute
+  AppSearchRoute: typeof AppSearchRoute
   AppIndexRoute: typeof AppIndexRoute
   AppJournalNewRoute: typeof AppJournalNewRoute
   AppJournalIndexRoute: typeof AppJournalIndexRoute
@@ -875,6 +895,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppPregnancyRoute: AppPregnancyRoute,
   AppProfileRoute: AppProfileRoute,
   AppReferralsRoute: AppReferralsRoute,
+  AppSearchRoute: AppSearchRoute,
   AppIndexRoute: AppIndexRoute,
   AppJournalNewRoute: AppJournalNewRoute,
   AppJournalIndexRoute: AppJournalIndexRoute,
