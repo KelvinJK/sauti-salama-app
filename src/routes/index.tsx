@@ -7,20 +7,18 @@ import { useI18n } from "@/lib/i18n";
 import { SITE_URL } from '@/lib/domains';
 import { DomainLink } from '@/components/DomainLink';
 import { Button } from '@/components/ui/button';
+import { seo, organizationJsonLd } from "@/lib/seo";
 
 export const Route = createFileRoute("/")({ staticData: { sitemap: true },
-  head: () => ({
-    links: [{ rel: "canonical", href: `${SITE_URL}/` }],
-    meta: [
-      { title: "Sauti Salama — Your health. Your voice. Your choice." },
-      { name: "description", content: "Women's health, motherhood and family wellbeing in Kiswahili and English. Learn, track and find care in Tanzania." },
-      { property: "og:title", content: "Sauti Salama — Your health. Your voice. Your choice." },
-      { property: "og:description", content: "Women's health, motherhood and family wellbeing in Kiswahili and English." },
-      { property: "og:url", content: `${SITE_URL}/` },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
+  head: () => {
+    const head = seo(
+      "Your health. Your voice. Your choice.",
+      "Free women's health, pregnancy, motherhood and family wellbeing information in Tanzania and East Africa. Learn, track your cycle and pregnancy privately, and find verified clinics.",
+      "/",
+      { sw: "Afya ya wanawake, ujauzito, uzazi na ustawi wa familia kwa Kiswahili: jifunze, fuatilia na upate kliniki zilizothibitishwa Tanzania.", jsonLd: organizationJsonLd },
+    );
+    return { ...head, meta: [{ title: "Sauti Salama — Your health. Your voice. Your choice." }, ...head.meta.slice(1)] };
+  },
   component: Home,
 });
 

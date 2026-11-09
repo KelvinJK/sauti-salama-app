@@ -3,7 +3,8 @@ import { ArrowLeft } from "lucide-react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { articles } from "@/lib/content";
 import { useI18n } from "@/lib/i18n";
-import { seo } from "@/lib/seo";
+import { seo, SHARE_IMAGE } from "@/lib/seo";
+import { SITE_URL } from "@/lib/domains";
 
 export const Route = createFileRoute("/learn/$slug")({ staticData: { sitemap: true },
   loader: ({ params }) => {
@@ -12,7 +13,23 @@ export const Route = createFileRoute("/learn/$slug")({ staticData: { sitemap: tr
     return { article };
   },
   head: ({ loaderData }) =>
-    loaderData ? seo(loaderData.article.title.en, loaderData.article.summary.en, `/learn/${loaderData.article.slug}`) : { meta: [{ title: "Article | Sauti Salama" }, { name: "robots", content: "noindex" }] },
+    loaderData ? seo(loaderData.article.title.en, loaderData.article.summary.en, `/learn/${loaderData.article.slug}`, {
+      sw: `${loaderData.article.title.sw}: ${loaderData.article.summary.sw}`,
+      type: "article",
+      jsonLd: {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        headline: loaderData.article.title.en,
+        alternativeHeadline: loaderData.article.title.sw,
+        description: loaderData.article.summary.en,
+        inLanguage: ["en", "sw"],
+        url: `${SITE_URL}/learn/${loaderData.article.slug}`,
+        image: SHARE_IMAGE,
+        isAccessibleForFree: true,
+        audience: { "@type": "PeopleAudience", geographicArea: { "@type": "Country", name: "Tanzania" } },
+        publisher: { "@type": "Organization", name: "Sauti Salama", logo: { "@type": "ImageObject", url: `${SITE_URL}/icon-512.png` } },
+      },
+    }) : { meta: [{ title: "Article | Sauti Salama" }, { name: "robots", content: "noindex" }] },
   component: ArticlePage,
 });
 
