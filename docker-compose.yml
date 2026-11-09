@@ -10,8 +10,9 @@ services:
         VITE_SUPABASE_PROJECT_ID: ${VITE_SUPABASE_PROJECT_ID}
     container_name: sauti-salama
     restart: unless-stopped
+    # Only reachable through nginx on the same host (see nginx/sauti-salama.conf).
     ports:
-      - "3000:3000"
+      - "127.0.0.1:${HOST_PORT:-3100}:3000"
     env_file:
       - .env
     environment:
