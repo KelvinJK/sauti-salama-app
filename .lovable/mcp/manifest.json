@@ -5,6 +5,7 @@
   "auth": {
     "type": "oauth",
     "issuer": "https://fnilxsxzvspfjsxpvyak.supabase.co/auth/v1",
+    "resource": "https://app.sautisalama.health/mcp",
     "accepted_audiences": [
       "authenticated"
     ]
