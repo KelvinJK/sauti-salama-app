@@ -21,3 +21,4 @@
 - Public canonical metadata and router-derived sitemap decisions live on leaf routes; appSeo excludes every personal app page from indexing.
 - Home-screen support remains manifest-only, scoped to the app; do not introduce offline app-shell caching without an explicit offline request.
 - Public presentation refinements are scoped through the site layout; shared footer destinations and legal content routes remain separate from private app behavior.
+- Use @lovable.dev/vite-tanstack-config for the core build plugins so Lovable emits its required dist/ Worker layout while external deployments retain their own Nitro targets.

@@ -16,8 +16,6 @@ export const Route = createFileRoute("/.well-known/oauth-protected-resource")({
       ANY: createTanStackOAuthProtectedResourceMetadataHandler(mcp, {
         resourcePath: "/mcp",
         metadataPath: "/.well-known/oauth-protected-resource",
-        // X-Forwarded-Host is not trusted: nginx passes it through unmodified.
-        // X-Forwarded-Proto is overwritten by both Vercel and the nginx config.
         trustForwardedProto: true,
       }),
     },
