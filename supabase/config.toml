@@ -35,14 +35,31 @@ max_frequency = "60s"
 
 [auth.email.template.confirmation]
 subject = "Your Sauti Salama code / Msimbo wako"
-content_path = "./supabase/templates/confirmation.html"
+content_path = "./supabase/templates/confirm-signup.html"
+
+[auth.email.template.magic_link]
+subject = "Sign in to Sauti Salama / Ingia Sauti Salama"
+content_path = "./supabase/templates/magic-link.html"
 
 [auth.email.template.recovery]
-subject = "Reset your Sauti Salama password / Badilisha nenosiri"
-content_path = "./supabase/templates/recovery.html"
+subject = "Reset your Sauti Salama password / Badilisha nenosiri lako"
+content_path = "./supabase/templates/reset-password.html"
 
 [auth.email.template.email_change]
 subject = "Confirm your new email / Thibitisha barua pepe mpya"
-content_path = "./supabase/templates/email_change.html"
+content_path = "./supabase/templates/change-email.html"
 
-# Local emails are caught by Mailpit: http://127.0.0.1:54424
+[auth.email.template.invite]
+subject = "You're invited to Sauti Salama / Umealikwa Sauti Salama"
+content_path = "./supabase/templates/invite.html"
+
+[auth.email.template.reauthentication]
+subject = "Confirm it's you / Thibitisha kuwa ni wewe"
+content_path = "./supabase/templates/reauthentication.html"
+
+[auth.email.notification.password_changed]
+enabled = true
+subject = "Your password was changed / Nenosiri lako limebadilishwa"
+content_path = "./supabase/templates/password-changed.html"
+
+
