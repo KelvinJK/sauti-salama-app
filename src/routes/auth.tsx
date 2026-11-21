@@ -2,6 +2,9 @@ import { DomainLink } from '@/components/DomainLink';
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { oauthReturnPath } from '@/lib/oauth-return-path';
 import { createFileRoute, Link, useNavigate } from '@tanstack/react-router';
+import { useServerFn } from '@tanstack/react-start';
+import { saveProfile } from '@/lib/app.functions';
+import { useI18n } from '@/lib/i18n';
 import { Mail, LockKeyhole, ArrowRight } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -18,14 +21,32 @@ function Auth() {
   const { next: rawNext } = Route.useSearch();
   const next = rawNext ? oauthReturnPath(rawNext) : '';
   const returnUrl = () => next && next !== '/' ? new URL(`/auth?next=${encodeURIComponent(next)}`, window.location.origin).href : `${window.location.origin}/auth`;
-  const goOn = async () => { if (next && next !== '/') { window.location.href = next; return; } await navigate({to:'/app/profile'}); };
+  const { lang } = useI18n(); const save = useServerFn(saveProfile);
+  // The sign-up form already collects name, birth date and consent, and keeps them in the
+  // account's metadata. Once the email is confirmed, write them to the profile so the person
+  // goes straight in instead of filling the same details again. Works even if they confirm
+  // on another device, because it reads the metadata, not this page's state.
+  const completeProfile = async (): Promise<boolean> => {
+    try {
+      const { data } = await supabase.auth.getUser();
+      const m = (data.user?.user_metadata ?? {}) as { display_name?: string; birth_date?: string; language?: string; terms_accepted?: boolean };
+      if (!m.display_name || !m.birth_date || !m.terms_accepted || !isAdult(m.birth_date)) return false;
+      await save({ data: { display_name: m.display_name, birth_date: m.birth_date, language: m.language === 'sw' ? 'sw' : 'en', acceptTerms: true } });
+      return true;
+    } catch { return false; }
+  };
+  const goOn = async () => {
+    if (next && next !== '/') { window.location.href = next; return; }
+    const ready = await completeProfile();
+    await navigate({ to: ready ? '/app/home' : '/app/profile' });
+  };
   useEffect(() => { if (user && next && next !== '/') window.location.href = next; }, [user, next]);
   const [mode, setMode] = useState<'login'|'signup'|'reset'|'verify'>('login');
-  const [email,setEmail]=useState(''), [password,setPassword]=useState(''), [birth,setBirth]=useState(''), [code,setCode]=useState('');
+  const [name,setName]=useState(''), [email,setEmail]=useState(''), [password,setPassword]=useState(''), [birth,setBirth]=useState(''), [code,setCode]=useState('');
   const [accepted,setAccepted]=useState(false), [busy,setBusy]=useState(false), [message,setMessage]=useState(''), [error,setError]=useState('');
   // Which field the current error is about, so it can be highlighted and brought into view.
-  const [badField,setBadField]=useState<''|'email'|'password'|'birth'|'terms'|'code'>('');
-  const refs = { email: useRef<HTMLInputElement>(null), password: useRef<HTMLInputElement>(null), birth: useRef<HTMLSelectElement>(null), terms: useRef<HTMLInputElement>(null), code: useRef<HTMLInputElement>(null) };
+  const [badField,setBadField]=useState<''|'name'|'email'|'password'|'birth'|'terms'|'code'>('');
+  const refs = { name: useRef<HTMLInputElement>(null), email: useRef<HTMLInputElement>(null), password: useRef<HTMLInputElement>(null), birth: useRef<HTMLSelectElement>(null), terms: useRef<HTMLInputElement>(null), code: useRef<HTMLInputElement>(null) };
   const alertRef = useRef<HTMLParagraphElement>(null);
   // Bring any new error into view: on phones it is otherwise easy to miss.
   useEffect(() => { if (error) alertRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, [error]);
@@ -35,6 +56,7 @@ function Auth() {
   };
   // Our own checks replace the browser's built-in ones, which many Android browsers block silently.
   function invalid(): boolean {
+    if (mode==='signup' && !name.trim()) { fail('name','Enter your name.','Weka jina lako.'); return true; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) { fail('email','Enter a valid email address.','Weka barua pepe sahihi.'); return true; }
     if (mode==='verify' && !/^\d{6}$/.test(code)) { fail('code','Enter the 6-digit code from the email.','Weka msimbo wa tarakimu 6 kutoka kwenye barua pepe.'); return true; }
     if ((mode==='login'||mode==='signup') && password.length < 8) { fail('password','Your password needs at least 8 characters.','Nenosiri linahitaji angalau herufi 8.'); return true; }
@@ -64,7 +86,7 @@ function Auth() {
         if(error) { setError(text('That code is not valid or has expired. Check it or send a new one.', 'Msimbo huo si sahihi au umeisha muda. Hakiki au tuma mpya.')); return; }
         await goOn();
       }
-      else if(mode==='signup') { const {data,error}=await supabase.auth.signUp({email,password,options:{emailRedirectTo:returnUrl()}}); if(error) throw error; if(data.session) await goOn(); else codeSent(); }
+      else if(mode==='signup') { const {data,error}=await supabase.auth.signUp({email:email.trim(),password,options:{emailRedirectTo:returnUrl(),data:{display_name:name.trim().slice(0,80),birth_date:birth,language:lang,terms_accepted:true}}}); if(error) throw error; if(data.session) await goOn(); else codeSent(); }
       else {
         const {error}=await supabase.auth.signInWithPassword({email,password});
         if(error?.code==='email_not_confirmed') { await resendCode(); return; }
@@ -103,6 +125,10 @@ function Auth() {
     {user ? <div className="space-y-4"><p>{text('You are signed in.', 'Umeingia.')}</p><Button asChild><Link to="/app/profile">{text('Go to my profile','Nenda kwenye wasifu')}<ArrowRight /></Link></Button></div> : <>
       {/* noValidate: our own checks show a clear message instead of the browser silently blocking the tap. */}
       <form onSubmit={submit} noValidate className="space-y-5">
+        {mode==='signup' && <label className="block text-sm font-semibold">{text('Your name','Jina lako')}
+          <Input ref={refs.name} autoComplete="name" autoCapitalize="words" maxLength={80} value={name} onChange={e=>setName(e.target.value)} aria-invalid={badField==='name' || undefined} className={`mt-2 h-12 text-base ${bad('name')}`} />
+          <span className="mt-1 block text-xs font-normal text-muted-foreground">{text('How we greet you in the app. A first name or nickname is fine.','Jinsi tutakavyokusalimia kwenye programu. Jina la kwanza au la utani linatosha.')}</span>
+        </label>}
         <label className="block text-sm font-semibold">{text('Email','Barua pepe')}
           <Input ref={refs.email} type="email" inputMode="email" autoComplete="email" autoCapitalize="none" value={email} onChange={e=>setEmail(e.target.value)} aria-invalid={badField==='email' || undefined} className={`mt-2 h-12 text-base ${bad('email')}`} />
         </label>
