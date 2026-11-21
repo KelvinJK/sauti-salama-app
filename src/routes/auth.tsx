@@ -45,9 +45,11 @@ function Auth() {
   const [name,setName]=useState(''), [email,setEmail]=useState(''), [password,setPassword]=useState(''), [birth,setBirth]=useState(''), [code,setCode]=useState('');
   const [accepted,setAccepted]=useState(false), [busy,setBusy]=useState(false), [message,setMessage]=useState(''), [error,setError]=useState('');
   // Which field the current error is about, so it can be highlighted and brought into view.
+  // Set when sign-up finds the email already registered, to offer "Sign in" / "Reset password" right there.
+  const [exists,setExists]=useState(false);
   const [badField,setBadField]=useState<''|'name'|'email'|'password'|'birth'|'terms'|'code'>('');
   const refs = { name: useRef<HTMLInputElement>(null), email: useRef<HTMLInputElement>(null), password: useRef<HTMLInputElement>(null), birth: useRef<HTMLSelectElement>(null), terms: useRef<HTMLInputElement>(null), code: useRef<HTMLInputElement>(null) };
-  const alertRef = useRef<HTMLParagraphElement>(null);
+  const alertRef = useRef<HTMLDivElement>(null);
   // Bring any new error into view: on phones it is otherwise easy to miss.
   useEffect(() => { if (error) alertRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, [error]);
   const fail = (field: typeof badField, en: string, sw: string) => {
@@ -67,7 +69,7 @@ function Auth() {
     }
     return false;
   }
-  const switchMode = (next: typeof mode) => { setMode(next); setError(''); setMessage(''); setBadField(''); };
+  const switchMode = (next: typeof mode) => { setMode(next); setError(''); setMessage(''); setBadField(''); setExists(false); };
   const codeSent = () => { setCode(''); setMode('verify'); setMessage(text(`We sent a 6-digit code to ${email}. Enter it below to confirm your email.`, `Tumetuma msimbo wa tarakimu 6 kwa ${email}. Uweke hapa chini kuthibitisha barua pepe yako.`)); };
   async function resendCode() {
     setError(''); setBusy(true);
@@ -76,7 +78,7 @@ function Auth() {
     finally { setBusy(false); }
   }
   async function submit(e: FormEvent) {
-    e.preventDefault(); setMessage(''); setError(''); setBadField('');
+    e.preventDefault(); setMessage(''); setError(''); setBadField(''); setExists(false);
     if (invalid()) return;
     setBusy(true);
     try {
@@ -86,7 +88,10 @@ function Auth() {
         if(error) { setError(text('That code is not valid or has expired. Check it or send a new one.', 'Msimbo huo si sahihi au umeisha muda. Hakiki au tuma mpya.')); return; }
         await goOn();
       }
-      else if(mode==='signup') { const {data,error}=await supabase.auth.signUp({email:email.trim(),password,options:{emailRedirectTo:returnUrl(),data:{display_name:name.trim().slice(0,80),birth_date:birth,language:lang,terms_accepted:true}}}); if(error) throw error; if(data.session) await goOn(); else codeSent(); }
+      else if(mode==='signup') { const {data,error}=await supabase.auth.signUp({email:email.trim(),password,options:{emailRedirectTo:returnUrl(),data:{display_name:name.trim().slice(0,80),birth_date:birth,language:lang,terms_accepted:true}}}); if(error) throw error;
+        // With "Confirm email" on, Supabase hides existing accounts by returning a user with no identities instead of an error.
+        if(data.user && data.user.identities?.length===0) { setExists(true); setError(text('This email already has a Sauti Salama account. Sign in instead, or reset your password if you forgot it.','Barua pepe hii tayari ina akaunti ya Sauti Salama. Ingia badala yake, au badilisha nenosiri ikiwa umelisahau.')); return; }
+        if(data.session) await goOn(); else codeSent(); }
       else {
         const {error}=await supabase.auth.signInWithPassword({email,password});
         if(error?.code==='email_not_confirmed') { await resendCode(); return; }
@@ -94,7 +99,10 @@ function Auth() {
       }
     } catch (err) {
       const status = (err as { status?: number } | null)?.status;
-      if (status === 429) setError(text('Too many attempts. Wait a minute and try again.', 'Majaribio mengi mno. Subiri dakika moja ujaribu tena.'));
+      const code = (err as { code?: string } | null)?.code;
+      if (code === 'user_already_exists' || code === 'email_exists') { setExists(true); setError(text('This email already has a Sauti Salama account. Sign in instead, or reset your password if you forgot it.','Barua pepe hii tayari ina akaunti ya Sauti Salama. Ingia badala yake, au badilisha nenosiri ikiwa umelisahau.')); }
+      else if (code === 'weak_password') { fail('password','Choose a stronger password: at least 8 characters, mixing letters and numbers.','Chagua nenosiri imara zaidi: angalau herufi 8, changanya herufi na namba.'); }
+      else if (status === 429) setError(text('Too many attempts. Wait a minute and try again.', 'Majaribio mengi mno. Subiri dakika moja ujaribu tena.'));
       else setError(text('Unable to continue. Check your details and try again.', 'Imeshindikana kuendelea. Hakiki taarifa zako ujaribu tena.'));
     }
     finally{setBusy(false);}
@@ -152,7 +160,13 @@ function Auth() {
           </label>
         </>}
         {/* Errors and confirmations sit right above the button, where the person is looking. */}
-        {error && <p ref={alertRef} role="alert" className="rounded-lg border border-destructive/40 bg-destructive/10 p-3 text-sm font-medium text-destructive">{error}</p>}
+        {error && <div ref={alertRef} role="alert" className="rounded-lg border border-destructive/40 bg-destructive/10 p-3 text-sm font-medium text-destructive">
+          <p>{error}</p>
+          {exists && <div className="mt-3 flex flex-wrap gap-2">
+            <Button type="button" size="sm" onClick={()=>switchMode('login')}>{text('Sign in with this email','Ingia kwa barua pepe hii')}</Button>
+            <Button type="button" size="sm" variant="outline" onClick={()=>switchMode('reset')}>{text('Reset password','Badilisha nenosiri')}</Button>
+          </div>}
+        </div>}
         {message && <p role="status" className="rounded-lg bg-mint p-4 text-sm">{message}</p>}
         <Button type="submit" disabled={busy} className="h-12 w-full text-base"><Mail />{submitLabel}</Button>
       </form>
